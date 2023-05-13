@@ -1,0 +1,58 @@
+{
+  "name": "sideproject",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "craco start",
+    "build": "craco build",
+    "start": "serve -s build",
+    "test": "craco test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@craco/craco": "^7.1.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
+    "@types/jest": "^29.5.1",
+    "@types/node": "^20.1.3",
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "^18.2.4",
+    "craco-alias": "^3.0.1",
+    "eslint": "^8.40.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "node-sass": "^8.0.0",
+    "prettier": "^2.8.8",
+    "react-app-rewired": "^2.2.1",
+    "react-refresh": "^0.14.0",
+    "react-scripts": "^5.0.1",
+    "sass": "^1.62.1",
+    "serve": "^14.2.0",
+    "source-map-loader": "^4.0.1",
+    "typescript": "^5.0.4"
+  },
+  "eslintIgnore": [
+    "craco.config.js"
+  ]
+}
