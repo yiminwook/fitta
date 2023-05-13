@@ -1,0 +1,58 @@
+@import '@/styles/mixin';
+@import '@/styles/var.scss';
+@import '@/styles/placeholder';
+
+html,
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a,
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+li,
+input,
+label,
+button {
+  display: block;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+a,
+label,
+button {
+  background: none;
+  cursor: pointer;
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 3px solid black;
+    border-radius: 5px;
+    outline-offset: 2.5px;
+    z-index: 10;
+  }
+
+  &.active {
+    color: beige;
+    cursor: default;
+  }
+}

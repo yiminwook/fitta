@@ -1,0 +1,7 @@
+@import '@/styles/mixin';
+@import '@/styles/var.scss';
+@import '@/styles/placeholder';
+
+.app {
+  background-color: map-get($colors, white);
+}
