@@ -1,15 +1,17 @@
 import { Route, Routes } from 'react-router-dom';
-import Home from '@/pages/Home';
-import SignIn from '@/pages/SignIn';
-import Admin from '@/pages/Admin';
+import loadable from '@loadable/component';
+
+const HomePage = loadable(() => import('@/pages/Home'));
+const SignInPage = loadable(() => import('@/pages/SignIn'));
+const AdminPage = loadable(() => import('@/pages/Admin'));
 
 const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/signin" element={<SignInPage />} />
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </>
   );
