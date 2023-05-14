@@ -1,7 +1,7 @@
-import layout from '@/layout/Layout.module.scss';
+import layout from '@/components/layout/Layout.module.scss';
 
 const Footer = () => {
-  return <footer>footer</footer>;
+  return <footer className={layout['footer']} />;
 };
 
 export default Footer;
