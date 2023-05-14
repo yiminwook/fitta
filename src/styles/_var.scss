@@ -1,4 +1,6 @@
 $min-width: 300px;
+$nav-z-index: 100;
+$modal-z-index: 300;
 
 $points: (
   sm: 640px,
@@ -11,5 +13,6 @@ $points: (
 
 $colors: (
   white: #fff,
+  transparent: rgb(0, 0, 0, 0.3),
   ligthBlack: #3c3c3c,
 );

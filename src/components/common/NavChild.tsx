@@ -10,7 +10,7 @@ const NavChild = ({ to, content }: NavChildProps) => {
   return (
     <li>
       <NavLink to={to}>
-        <button>{content}</button>
+        <button tabIndex={-1}>{content}</button>
       </NavLink>
     </li>
   );

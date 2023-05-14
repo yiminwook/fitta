@@ -7,6 +7,7 @@ const Header = () => {
       <nav>
         <ul>
           <NavChild to={'/'} content={'HOME'} />
+          <NavChild to={'/admin'} content={'Admin'} />
           <NavChild to={'/signin'} content={'Sign In'} />
         </ul>
       </nav>
