@@ -3,7 +3,7 @@ import Head from '@/components/layout/Head';
 const SignIn = () => {
   return (
     <>
-      <Head title={'Fitta | Sign In'} />
+      <Head title="Sign In" />
       <section>signin</section>
     </>
   );
