@@ -54,3 +54,9 @@
   -o-user-drag: none;
   -webkit-user-drag: none;
 }
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
