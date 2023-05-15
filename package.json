@@ -38,6 +38,8 @@
   },
   "devDependencies": {
     "@craco/craco": "^7.1.0",
+    "@loadable/babel-plugin": "^5.15.3",
+    "@loadable/webpack-plugin": "^5.15.2",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
     "@types/jest": "^29.5.1",
     "@types/loadable__component": "^5.13.4",

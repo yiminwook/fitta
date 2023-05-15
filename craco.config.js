@@ -1,4 +1,5 @@
 const CracoAlias = require('craco-alias');
+const LoadablePlugin = require('@loadable/webpack-plugin');
 
 module.exports = {
   plugins: [
@@ -11,4 +12,12 @@ module.exports = {
       },
     },
   ],
+  webpack: {
+    plugins: {
+      add: [new LoadablePlugin()],
+    },
+  },
+  babel: {
+    plugins: ['@loadable/babel-plugin'],
+  },
 };
