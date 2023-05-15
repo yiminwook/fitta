@@ -12,7 +12,7 @@
     height: 3.5rem;
     width: 100%;
     background-color: map-get($colors, white);
-    @include flex-center;
+    @include flex-center();
     @include box-shadow(true);
 
     ul {
