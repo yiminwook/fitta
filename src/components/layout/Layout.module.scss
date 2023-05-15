@@ -60,6 +60,7 @@
   z-index: $modal-z-index;
   top: 0;
   left: 0;
+  min-width: $min-width;
   width: 100vw;
   height: 100vh;
   background-color: map-get($colors, transparent);
@@ -70,7 +71,6 @@
     top: 50%;
     left: 50%;
     width: 90%;
-    height: 40%;
     transform: translateX(-50%) translateY(-60%);
     border-radius: 5px;
     background-color: map-get($colors, white);
@@ -80,12 +80,14 @@
 
     @include min-width(map-get($points, sm)) {
       width: 30rem;
-      height: 20rem;
     }
 
-    .inner {
-      width: 100%;
-      padding: 1rem;
+    h1 {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-size: 1.5rem;
+      font-weight: 600;
     }
 
     .close {
@@ -100,6 +102,12 @@
         color: map-get($colors, white);
         background-color: map-get($colors, transparent);
       }
+    }
+
+    .inner {
+      width: 100%;
+      padding: 3rem 1rem 1rem 1rem;
+      margin: auto;
     }
   }
 }

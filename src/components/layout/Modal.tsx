@@ -4,15 +4,17 @@ import { CgClose } from 'react-icons/cg';
 import useStopPropagation from '@/hooks/useStopPropagation';
 
 interface ModalProps {
+  title: string;
   children: ReactNode;
   style?: CSSProperties;
   onClose: (e: MouseEvent) => void;
 }
-const Modal = ({ children, style, onClose }: ModalProps) => {
+const Modal = ({ children, style, onClose, title }: ModalProps) => {
   const { stopPropagation } = useStopPropagation();
   return (
     <div className={layout['modal']} onClick={onClose}>
       <div style={style} onClick={stopPropagation}>
+        <h1>{title}</h1>
         <button className={layout['close']} onClick={onClose}>
           <CgClose color={'inherit'} size={'2rem'} />
         </button>
