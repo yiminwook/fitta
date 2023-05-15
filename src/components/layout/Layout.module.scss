@@ -1,0 +1,93 @@
+@import '@/styles/mixin.scss';
+@import '@/styles/var.scss';
+@import '@/styles/placeholder.scss';
+
+.header {
+  position: relative;
+
+  nav {
+    min-width: $min-width;
+    position: fixed;
+    z-index: $nav-z-index;
+    height: 3.5rem;
+    width: 100%;
+    background-color: map-get($colors, white);
+    @include flex-center;
+    @include box-shadow(true);
+
+    ul {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 1rem;
+      max-width: map-get($points, xl);
+    }
+  }
+
+  .block {
+    height: 3.5rem;
+  }
+}
+
+.main {
+  min-width: $min-width;
+  min-height: calc(100vh - 3.5rem - 5rem - 1rem);
+  max-width: map-get($points, xl);
+  margin: auto;
+  padding: 0.5rem;
+  background-color: map-get($colors, white);
+}
+
+.footer {
+  height: 5rem;
+  background-color: map-get($colors, ligthBlack);
+}
+
+.modal {
+  position: fixed;
+  z-index: $modal-z-index;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: map-get($colors, transparent);
+  cursor: pointer;
+
+  & > div {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    height: 40%;
+    transform: translateX(-50%) translateY(-60%);
+    border-radius: 5px;
+    background-color: map-get($colors, white);
+    display: flex;
+    cursor: default;
+    @include box-shadow();
+
+    @include min-width(map-get($points, sm)) {
+      width: 30rem;
+      height: 20rem;
+    }
+
+    .inner {
+      width: 100%;
+      padding: 1rem;
+    }
+
+    .close {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 5px;
+
+      &:hover {
+        color: map-get($colors, white);
+        background-color: map-get($colors, transparent);
+      }
+    }
+  }
+}

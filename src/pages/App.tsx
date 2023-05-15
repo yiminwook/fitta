@@ -1,14 +1,19 @@
-import { REACT_APP_SERVER_URL } from '@/consts';
-import app from '@/pages/App.module.scss';
-import { getEnv } from '@/utils/getEnv';
+import { Route, Routes } from 'react-router-dom';
+import loadable from '@loadable/component';
+
+const HomePage = loadable(() => import('@/pages/Home'));
+const SignInPage = loadable(() => import('@/pages/SignIn'));
+const AdminPage = loadable(() => import('@/pages/Admin'));
 
 const App = () => {
-  const serverUrl = getEnv(REACT_APP_SERVER_URL);
-  console.log(serverUrl);
   return (
-    <div className={app['app']}>
-      <header className="App-header">hello</header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/signin" element={<SignInPage />} />
+        <Route path="/admin" element={<AdminPage />} />
+      </Routes>
+    </>
   );
 };
 
