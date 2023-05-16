@@ -44,7 +44,7 @@
   border: 1px solid map-get($colors, gray);
   @include box-shadow();
   max-width: map-get($points, sm);
-  margin: auto;
+  margin: 0 auto 2rem auto;
 
   @include min-width(map-get($points, sm)) {
     padding: 2rem;

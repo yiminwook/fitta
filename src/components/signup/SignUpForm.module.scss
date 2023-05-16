@@ -3,21 +3,21 @@
 @import '@/styles/placeholder.scss';
 
 .form {
-  margin: auto;
   display: grid;
-  grid-template-columns: auto 2fr;
-  flex-direction: column;
   column-gap: 0.5rem;
   row-gap: 1rem;
-
+  margin: auto;
   align-items: center;
 
-  @include min-width(map-get($points, sm)) {
+  @include min-width($min-width) {
+    grid-template-columns: auto 2fr;
     gap: 1rem;
   }
 
   label {
-    margin: auto;
+    @include min-width($min-width) {
+      margin: auto;
+    }
   }
 
   input {
@@ -26,10 +26,14 @@
   }
 
   .ageSex {
-    grid-column: span 2;
     display: grid;
     align-items: center;
     grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+
+    @include min-width($min-width) {
+      grid-column: span 2;
+    }
 
     select {
       max-width: 5rem;
@@ -46,6 +50,10 @@
     display: flex;
     gap: 0.5rem;
 
+    input {
+      width: 100%;
+    }
+
     button {
       @extend %button-black;
       padding: 0.5rem 0.5rem;
@@ -54,8 +62,11 @@
   }
 
   .footer {
-    grid-column: span 2;
     margin-top: 1rem;
+
+    @include min-width($min-width) {
+      grid-column: span 2;
+    }
     button {
       @extend %button-black;
       margin: auto;
