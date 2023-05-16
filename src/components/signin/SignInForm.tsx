@@ -2,6 +2,7 @@ import { FormEvent, useCallback, useState } from 'react';
 import signin from '@/components/signin/SignIn.module.scss';
 import { SignInBodyData } from '@/components/signin/SignInFormSection';
 import { useInput } from '@/hooks/useInput';
+import { toast } from 'react-toastify';
 
 interface SignInFormProps {
   handleSignIn: ({ email, password }: SignInBodyData) => void;
@@ -55,7 +56,14 @@ const SignInForm = ({ handleSignIn }: SignInFormProps) => {
         <p className={isShowPasswordCautionLetter ? signin['show'] : ''}>비밀번호가 입력되지 않았습니다.</p>
       </div>
       <div>
-        <button type="submit">로그인</button>
+        <button
+          type="submit"
+          onClick={() => {
+            toast.success('success!!');
+          }}
+        >
+          로그인
+        </button>
       </div>
     </form>
   );
