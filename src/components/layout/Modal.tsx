@@ -14,10 +14,12 @@ const Modal = ({ children, style, onClose, title }: ModalProps) => {
   return (
     <div className={layout['modal']} onClick={onClose}>
       <div style={style} onClick={stopPropagation}>
-        <h1>{title}</h1>
-        <button className={layout['close']} onClick={onClose}>
-          <CgClose color={'inherit'} size={'2rem'} />
-        </button>
+        <header>
+          <h1>{title}</h1>
+          <button className={layout['close']} onClick={onClose}>
+            <CgClose color={'inherit'} size={'2rem'} />
+          </button>
+        </header>
         <div className={layout['inner']}>{children}</div>
       </div>
     </div>
