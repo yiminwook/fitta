@@ -44,12 +44,9 @@
         }
 
         input {
-          font-size: 1.5rem;
-          padding: 0.5rem;
-          border: 1.5px solid map-get($colors, gray);
-          border-radius: 10px;
-          @include box-shadow();
+          @extend %input-base;
         }
+
         p {
           @extend %caution-letter;
         }
