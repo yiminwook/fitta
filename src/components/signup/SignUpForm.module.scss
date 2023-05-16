@@ -9,13 +9,13 @@
   margin: auto;
   align-items: center;
 
-  @include min-width($min-width) {
+  @include min-width(map-get($points, ss)) {
     grid-template-columns: auto 2fr;
     gap: 1rem;
   }
 
   label {
-    @include min-width($min-width) {
+    @include min-width(map-get($points, ss)) {
       margin: auto;
     }
   }
@@ -31,7 +31,7 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 0.5rem;
 
-    @include min-width($min-width) {
+    @include min-width(map-get($points, ss)) {
       grid-column: span 2;
     }
 
@@ -64,7 +64,7 @@
   .footer {
     margin-top: 1rem;
 
-    @include min-width($min-width) {
+    @include min-width(map-get($points, ss)) {
       grid-column: span 2;
     }
     button {
