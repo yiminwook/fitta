@@ -1,6 +1,8 @@
 import { FormProps } from '@/pages/SignUp';
-import { FormEvent, useRef } from 'react';
+import { FormEvent, useEffect, useRef } from 'react';
 import signUpForm from '@/components/signup/SignUpForm.module.scss';
+import { useUser } from '@/hooks/useUser';
+import { useNavigate } from 'react-router-dom';
 
 interface MemberFormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
@@ -18,6 +20,8 @@ interface MemberForm extends HTMLFormElement {
 
 const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: FormProps) => {
   const formRef = useRef<HTMLFormElement>(null);
+  const { data: userData, isLoading } = useUser();
+  const navigate = useNavigate();
 
   const onSubmit = (e: FormEvent<MemberForm>) => {
     e.preventDefault();
@@ -32,10 +36,20 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: FormProps) =
     sendSignUpData('');
   };
 
+  // useEffect(() => {
+  //   if (isLoading === false && !userData?.email) {
+  //     navigate('/signin');
+  //   }
+  // }, [isLoading, userData]);
+
+  if (isLoading) {
+    return <div>로딩중</div>;
+  }
+
   return (
     <form ref={formRef} onSubmit={onSubmit} className={signUpForm['form']}>
       <label htmlFor="email">이메일</label>
-      <input name="email" type="email" value="example@gmail.com" readOnly />
+      <input name="email" type="email" value={userData?.email} readOnly />
 
       <label htmlFor="name">이름</label>
       <input name="name" type="text" />
