@@ -1,6 +1,7 @@
-$min-width: 300px;
+$min-width: 375px;
 $nav-z-index: 100;
 $modal-z-index: 300;
+$bezier-curve: cubic-bezier(0.4, 0, 0.2, 1);
 
 $points: (
   sm: 640px,
@@ -13,6 +14,8 @@ $points: (
 
 $colors: (
   white: #fff,
+  black: #1c1c1c,
   transparent: rgb(0, 0, 0, 0.3),
   ligthBlack: #3c3c3c,
+  gray: #c0c0c0,
 );

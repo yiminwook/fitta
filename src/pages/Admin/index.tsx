@@ -11,7 +11,7 @@ const Admin = () => {
       <br />
       <button onClick={() => setIsShow(true)}>모달 오픈 버튼</button>
       {isShow ? (
-        <Modal onClose={() => setIsShow(false)}>
+        <Modal title="테스트" onClose={() => setIsShow(false)}>
           <div>모달</div>
         </Modal>
       ) : null}

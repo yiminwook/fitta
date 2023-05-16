@@ -1,7 +1,8 @@
+import 'pretendard/dist/web/variable/pretendardvariable.css';
+import '@/styles/Global.scss';
 import ReactDOM from 'react-dom/client';
 import App from '@/pages/App';
 import RootLayout from '@/components/layout/RootLayout';
-import '@/styles/Global.scss';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 

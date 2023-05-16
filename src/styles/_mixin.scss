@@ -11,7 +11,7 @@
 }
 
 @mixin check-device() {
-  @media only screen and (max-device-width: $mixin-2xl-width) {
+  @media only screen and (max-device-width: map-get($points, 2xl)) {
     @content;
   }
 }
@@ -59,4 +59,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@mixin transition($property-name, $duration, $easing-fuc, $delay: 0s) {
+  -moz-transition: $property-name $duration $easing-fuc $delay;
+  -webkit-transition: $property-name $duration $easing-fuc $delay;
+  transition: $property-name $duration $easing-fuc $delay;
 }
