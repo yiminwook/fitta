@@ -9,9 +9,10 @@ const Header = () => {
         <nav>
           <Link to="/">HOME</Link>
           <ul>
-            {/* pageLink */}
-            <NavChild to={'/admin'} content={'AdminPage'} />
-            <NavChild to={'/signin'} content={'Sign In'} className={layout['signInButton']} />
+            {/* pageLink 임시 */}
+            <NavChild to="/admin" content="Admin" />
+            <NavChild to="/signup" content="회원가입" />
+            <NavChild to="/signin" content="로그인" className={layout['signInButton']} />
           </ul>
         </nav>
       </div>
