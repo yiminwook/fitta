@@ -20,11 +20,22 @@ const Admin = () => {
         </div>
       </section>
       {/* 도넛 컴포넌트 예시 */}
-      <section style={{ display: 'flex', gap: '1rem' }}>
-        <DonutGraph data={{ percentage: 25 }} hexColor="#ee322b" />
-        <DonutGraph data={{ percentage: 50 }} hexColor="#fbb871" />
-        <DonutGraph data={{ percentage: 75 }} hexColor="#fae156" />
-        <DonutGraph data={{ percentage: 100 }} hexColor="#5bfa56" />
+      <section style={{ margin: 'auto' }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2)',
+            justifyContent: 'center',
+            gap: '1rem',
+            margin: 'auto',
+            padding: '1rem',
+          }}
+        >
+          <DonutGraph data={{ percentage: 25 }} hexColor="#ee322b" />
+          <DonutGraph data={{ percentage: 50 }} hexColor="#fbb871" />
+          <DonutGraph data={{ percentage: 75 }} hexColor="#fae156" />
+          <DonutGraph data={{ percentage: 100 }} hexColor="#5bfa56" />
+        </div>
       </section>
       {isShow ? (
         <Modal title="테스트" onClose={() => setIsShow(false)}>
