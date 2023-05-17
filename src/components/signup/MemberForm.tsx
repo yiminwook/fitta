@@ -4,7 +4,6 @@ import signUpForm from '@/components/signup/SignUpForm.module.scss';
 import { useUser } from '@/hooks/useUser';
 import { useNavigate } from 'react-router-dom';
 import SearchButton from '@/components/common/SeachButton';
-import NumberInput from '@/components/common/NumberInput';
 
 export interface MemberFormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
