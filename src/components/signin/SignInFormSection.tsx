@@ -1,6 +1,9 @@
 import { FcGoogle } from 'react-icons/fc';
 import signin from '@/components/signin/SignIn.module.scss';
 import SignInForm from '@/components/signin/SignInForm';
+import axios from 'axios';
+import { getEnv } from '@/utils/getEnv';
+import { REACT_APP_SERVER_URL } from '@/consts';
 
 export interface SignInBodyData {
   email: string;
@@ -8,9 +11,13 @@ export interface SignInBodyData {
 }
 
 const SignInFormSection = () => {
-  const handleSignIn = ({ email, password }: SignInBodyData) => {
+  const handleSignIn = async ({ email, password }: SignInBodyData) => {
     try {
       console.log(email, password);
+      const serverUrl = getEnv(REACT_APP_SERVER_URL);
+      const response = await axios.post(`${serverUrl}/members`, { email, password }, { withCredentials: true });
+      console.log('res  >>>>', response);
+      if (response) console.log('data  >>>>', response.data);
     } catch (error) {
       console.error(error);
     }

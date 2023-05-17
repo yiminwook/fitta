@@ -1,0 +1,75 @@
+@import '@/styles/mixin.scss';
+@import '@/styles/var.scss';
+@import '@/styles/placeholder.scss';
+
+.form {
+  display: grid;
+  column-gap: 0.5rem;
+  row-gap: 1rem;
+  margin: auto;
+  align-items: center;
+
+  @include min-width(map-get($points, ss)) {
+    grid-template-columns: auto 2fr;
+    gap: 1rem;
+  }
+
+  label {
+    @include min-width(map-get($points, ss)) {
+      margin: auto;
+    }
+  }
+
+  input {
+    @extend %input-base;
+    font-size: 1rem;
+  }
+
+  .ageSex {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+
+    @include min-width(map-get($points, ss)) {
+      grid-column: span 2;
+    }
+
+    select {
+      max-width: 5rem;
+      margin: auto;
+    }
+
+    input {
+      max-width: 5rem;
+      margin: auto;
+    }
+  }
+
+  .address {
+    display: flex;
+    gap: 0.5rem;
+
+    input {
+      width: 100%;
+    }
+
+    button {
+      @extend %button-black;
+      padding: 0.5rem 0.5rem;
+      height: 2.6rem;
+    }
+  }
+
+  .footer {
+    margin-top: 1rem;
+
+    @include min-width(map-get($points, ss)) {
+      grid-column: span 2;
+    }
+    button {
+      @extend %button-black;
+      margin: auto;
+    }
+  }
+}

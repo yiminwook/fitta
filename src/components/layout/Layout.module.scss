@@ -31,6 +31,7 @@
 
         .signInButton {
           @extend %button-black;
+          padding: 0.5rem 0.75rem;
         }
       }
     }
@@ -75,6 +76,7 @@
     border-radius: 5px;
     background-color: map-get($colors, white);
     display: flex;
+    flex-direction: column;
     cursor: default;
     @include box-shadow();
 
@@ -82,31 +84,32 @@
       width: 30rem;
     }
 
-    h1 {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      font-size: 1.5rem;
-      font-weight: 600;
-    }
+    header {
+      display: flex;
+      padding: 0.5rem;
+      justify-content: space-between;
+      border-bottom: 1px solid map-get($colors, gray);
 
-    .close {
-      position: absolute;
-      top: 0.5rem;
-      right: 0.5rem;
-      width: 2rem;
-      height: 2rem;
-      border-radius: 5px;
+      h1 {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
 
-      &:hover {
-        color: map-get($colors, white);
-        background-color: map-get($colors, transparent);
+      .close {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 5px;
+
+        &:hover {
+          color: map-get($colors, white);
+          background-color: map-get($colors, transparent);
+        }
       }
     }
 
     .inner {
-      width: 100%;
-      padding: 3rem 1rem 1rem 1rem;
+      width: calc(100% - 1rem);
+      padding: 0.5rem;
       margin: auto;
     }
   }
