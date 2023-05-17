@@ -7,7 +7,7 @@ const Header = () => {
     <header className={layout['header']}>
       <div>
         <nav>
-          <Link to="/">HOME</Link>
+          <Link to="/" >{<img src="/img/fitta-cutout.png" className={layout['logo']}></img>}</Link>
           <ul>
             {/* pageLink 임시 */}
             <NavChild to="/admin" content="Admin" />
