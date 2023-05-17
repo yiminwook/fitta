@@ -76,7 +76,7 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: FormProps) =
       {/* ageSex */}
       <div className={signUpForm['birthDateSex']}>
         <label htmlFor="birthDate">생년월일</label>
-        <NumberInput name="birthDate" maxLength={6} placeholder="010102" />
+        <input name="birthDate" type="date" />
         <label htmlFor="sex">성별</label>
         <select name="sex">
           <option value="">선택</option>
