@@ -3,9 +3,9 @@ import { FormEvent, useEffect, useRef } from 'react';
 import signUpForm from '@/components/signup/SignUpForm.module.scss';
 import { useUser } from '@/hooks/useUser';
 import { useNavigate } from 'react-router-dom';
-import { BiSearch } from 'react-icons/bi';
+import SearchButton from '@/components/common/SeachButton';
 
-interface MemberFormElements extends HTMLFormControlsCollection {
+export interface MemberFormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
   name: HTMLInputElement;
   age: HTMLInputElement; //value: string;
@@ -51,13 +51,11 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: FormProps) =
     <form ref={formRef} onSubmit={onSubmit} className={signUpForm['form']}>
       <label htmlFor="email">이메일</label>
       <input name="email" type="email" value={userData?.email} readOnly />
-
       <label htmlFor="name">이름</label>
       <input name="name" type="text" />
-
       <label htmlFor="occupation">직업</label>
       <input name="occupation" type="text" />
-
+      {/* address */}
       <label htmlFor="address">주소</label>
       <div className={signUpForm['address']}>
         <input
@@ -68,13 +66,11 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: FormProps) =
           readOnly
           onFocus={openPostModal}
         />
-        <button type="button" onClick={openPostModal}>
-          <BiSearch size="1.5rem" color="inherit" />
-        </button>
+        <SearchButton onClick={openPostModal} size="1.5rem" />
       </div>
       <label htmlFor="addressDetail">상세</label>
       <input name="addressDetail" type="text" placeholder="상세주소" />
-
+      {/* ageSex */}
       <div className={signUpForm['ageSex']}>
         <label htmlFor="age">나이</label>
         <input name="age" type="number" />
@@ -85,7 +81,7 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: FormProps) =
           <option value="woman">여성</option>
         </select>
       </div>
-
+      {/* footer */}
       <div className={signUpForm['footer']}>
         <button type="submit">제출</button>
       </div>
