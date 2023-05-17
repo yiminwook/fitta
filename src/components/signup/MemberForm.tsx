@@ -4,11 +4,12 @@ import signUpForm from '@/components/signup/SignUpForm.module.scss';
 import { useUser } from '@/hooks/useUser';
 import { useNavigate } from 'react-router-dom';
 import SearchButton from '@/components/common/SeachButton';
+import NumberInput from '@/components/common/NumberInput';
 
 export interface MemberFormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
   name: HTMLInputElement;
-  age: HTMLInputElement; //value: string;
+  age: HTMLInputElement;
   occupation: HTMLInputElement;
   address: HTMLInputElement;
   addressDetail: HTMLInputElement;
@@ -49,8 +50,10 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: FormProps) =
 
   return (
     <form ref={formRef} onSubmit={onSubmit} className={signUpForm['form']}>
-      <label htmlFor="email">이메일</label>
-      <input name="email" type="email" value={userData?.email} readOnly />
+      <label htmlFor="email" className={signUpForm['email']}>
+        이메일
+      </label>
+      <input name="email" type="email" value={userData?.email} readOnly tabIndex={-1} />
       <label htmlFor="name">이름</label>
       <input name="name" type="text" />
       <label htmlFor="occupation">직업</label>
@@ -68,12 +71,12 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: FormProps) =
         />
         <SearchButton onClick={openPostModal} size="1.5rem" />
       </div>
-      <label htmlFor="addressDetail">상세</label>
+      <label htmlFor="addressDetail">상세주소</label>
       <input name="addressDetail" type="text" placeholder="상세주소" />
       {/* ageSex */}
-      <div className={signUpForm['ageSex']}>
-        <label htmlFor="age">나이</label>
-        <input name="age" type="number" />
+      <div className={signUpForm['birthDateSex']}>
+        <label htmlFor="birthDate">생년월일</label>
+        <NumberInput name="birthDate" maxLength={6} placeholder="010102" />
         <label htmlFor="sex">성별</label>
         <select name="sex">
           <option value="">선택</option>

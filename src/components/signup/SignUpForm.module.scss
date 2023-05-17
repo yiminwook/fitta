@@ -11,62 +11,95 @@
 
   @include min-width(map-get($points, ss)) {
     grid-template-columns: auto 2fr;
-    gap: 1rem;
   }
 
   label {
-    @include min-width(map-get($points, ss)) {
-      margin: auto;
-    }
+    width: 5rem;
+    justify-self: start;
   }
 
   input {
     @extend %input-base;
     font-size: 1rem;
+
+    @include min-width(map-get($points, ss)) {
+      justify-self: start;
+    }
   }
 
-  .ageSex {
+  .email {
+    cursor: default;
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  .birthDateSex {
     display: grid;
-    align-items: center;
-    grid-template-columns: repeat(4, 1fr);
+    padding: 1rem 0;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'a b' 'c d';
     gap: 0.5rem;
+    width: 100%;
+    margin: auto;
 
     @include min-width(map-get($points, ss)) {
       grid-column: span 2;
     }
 
+    & > * {
+      justify-self: center;
+    }
+
+    label:nth-of-type(1) {
+      grid-area: a;
+    }
+
+    label:nth-of-type(2) {
+      grid-area: b;
+    }
+
     select {
-      max-width: 5rem;
-      margin: auto;
+      grid-area: d;
+      width: 7.5rem;
+      padding: 0.5rem;
+      border-radius: 10px;
+      border: 1px solid map-get($colors, gray);
+      @include box-shadow();
     }
 
     input {
-      max-width: 5rem;
-      margin: auto;
+      width: 7.5rem;
+      grid-area: c;
     }
   }
 
   .address {
+    position: relative;
     display: flex;
     gap: 0.5rem;
-
-    input {
-      width: 100%;
-    }
 
     button {
       @extend %button-black;
       padding: 0.5rem 0.5rem;
       height: 2.6rem;
+
+      @include min-width(map-get($points, ss)) {
+        position: absolute;
+        right: -3rem;
+        top: 50%;
+        transform: translateY(-50%);
+      }
     }
   }
 
   .footer {
     margin-top: 1rem;
-
     @include min-width(map-get($points, ss)) {
       grid-column: span 2;
     }
+
     button {
       @extend %button-black;
       margin: auto;
