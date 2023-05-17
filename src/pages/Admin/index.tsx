@@ -24,7 +24,7 @@ const Admin = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(2)',
+            gridTemplateColumns: 'repeat(2, auto)',
             justifyContent: 'center',
             gap: '1rem',
             margin: 'auto',
