@@ -1,0 +1,53 @@
+@import '@/styles/mixin.scss';
+@import '@/styles/var.scss';
+@import '@/styles/placeholder.scss';
+
+.donutGraph {
+  position: relative;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+
+  &:after {
+    position: absolute;
+    content: '';
+    /* 백그라운드 컬러로 중앙가리기 */
+    background: map-get($colors, white);
+    /* 도넛의 넓이 */
+    width: 75%;
+    height: 75%;
+    border-radius: 50%;
+    @include absoulte-center();
+  }
+
+  &:before {
+    position: absolute;
+    content: '';
+    /* 백그라운드 컬러로 중앙가리기 */
+    background: map-get($colors, gray);
+    /* 도넛의 넓이 */
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    @include absoulte-center();
+  }
+
+  .percentage {
+    z-index: 100;
+    font-size: 100%;
+    @include absoulte-center();
+
+    &::after {
+      content: '%';
+    }
+  }
+
+  .chartBar {
+    width: inherit;
+    height: inherit;
+    border-radius: 50%;
+    /* 차트 설정 deg를 동일값으로 0~360deg로 조절 */
+    @include transition(background-color, 0.3s, linear);
+    @include absoulte-center();
+  }
+}

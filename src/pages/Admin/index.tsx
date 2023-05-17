@@ -1,3 +1,4 @@
+import DonutGraph from '@/components/common/DonutGraph';
 import Loading from '@/components/common/Loading';
 import Head from '@/components/layout/Head';
 import Modal from '@/components/layout/Modal';
@@ -17,6 +18,9 @@ const Admin = () => {
         <div style={{ border: '1px solid black', height: '10rem' }}>
           <Loading style={{ height: '10rem' }} />
         </div>
+      </section>
+      <section>
+        <DonutGraph data={{ percentage: 50 }} hexColor="#fbb871" />
       </section>
       {isShow ? (
         <Modal title="테스트" onClose={() => setIsShow(false)}>

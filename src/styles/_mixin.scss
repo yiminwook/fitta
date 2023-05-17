@@ -76,6 +76,13 @@
   justify-content: center;
 }
 
+@mixin absoulte-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 @mixin transition($property-name, $duration, $easing-fuc, $delay: 0s) {
   -moz-transition: $property-name $duration $easing-fuc $delay;
   -webkit-transition: $property-name $duration $easing-fuc $delay;
