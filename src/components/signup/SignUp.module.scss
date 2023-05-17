@@ -47,7 +47,7 @@
   margin: 0 auto 2rem auto;
 
   @include min-width(map-get($points, sm)) {
-    padding: 2rem;
+    padding: 2rem 0;
   }
 
   h1 {
