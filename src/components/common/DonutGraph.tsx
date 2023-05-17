@@ -1,5 +1,5 @@
 import graph from '@/components/common/Graph.module.scss';
-import { CSSProperties, useCallback, useEffect, useState } from 'react';
+import { CSSProperties, useCallback, useEffect, useMemo, useState } from 'react';
 
 export interface ChartData {
   percentage: number;
@@ -20,6 +20,9 @@ const DonutGraph = ({ style, fontSize = '1rem', data, hexColor }: DonutGraphProp
     setPercentage((pre) => pre + 1);
   }, [percentage]);
 
+  /** 0 ~ 360deg */
+  const degree = useMemo(() => (360 * percentage) / 100, [percentage]);
+
   useEffect(() => {
     if (percentage === data.percentage) return;
     const animation = setInterval(roundGraphAnimation, 5);
@@ -33,7 +36,9 @@ const DonutGraph = ({ style, fontSize = '1rem', data, hexColor }: DonutGraphProp
       </div>
       <div
         className={graph['chartBar']}
-        style={{ background: `conic-gradient(${hexColor} ${percentage}deg, transparent ${percentage}deg)` }}
+        style={{
+          background: `conic-gradient(${hexColor} ${degree}deg, transparent ${degree}deg)`,
+        }}
       />
     </div>
   );

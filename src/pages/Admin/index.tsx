@@ -13,14 +13,18 @@ const Admin = () => {
       <br />
       <button onClick={() => setIsShow(true)}>모달 오픈 버튼</button>
       <br />
+      {/* 로딩 컴포넌트 예시 */}
       <section>
-        로딩 컴포넌트 예시
         <div style={{ border: '1px solid black', height: '10rem' }}>
           <Loading style={{ height: '10rem' }} />
         </div>
       </section>
-      <section>
+      {/* 도넛 컴포넌트 예시 */}
+      <section style={{ display: 'flex', gap: '1rem' }}>
+        <DonutGraph data={{ percentage: 25 }} hexColor="#ee322b" />
         <DonutGraph data={{ percentage: 50 }} hexColor="#fbb871" />
+        <DonutGraph data={{ percentage: 75 }} hexColor="#fae156" />
+        <DonutGraph data={{ percentage: 100 }} hexColor="#5bfa56" />
       </section>
       {isShow ? (
         <Modal title="테스트" onClose={() => setIsShow(false)}>

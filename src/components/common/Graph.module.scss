@@ -46,8 +46,7 @@
     width: inherit;
     height: inherit;
     border-radius: 50%;
-    /* 차트 설정 deg를 동일값으로 0~360deg로 조절 */
-    @include transition(background-color, 0.3s, linear);
+    // @include transition(background-color, 0.3s, linear);
     @include absoulte-center();
   }
 }
