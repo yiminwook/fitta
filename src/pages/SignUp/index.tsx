@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { Address } from 'react-daum-postcode';
 import PostModal from '@/components/signup/PostModal';
 import { MemberData, OwnerData } from '@/types/userData';
-import { useUser } from '@/hooks/useUser';
+// import { useUser } from '@/hooks/useUser';
 
 export interface FormProps {
   sendSignUpData: (data: MemberData | OwnerData) => void;
@@ -35,7 +35,6 @@ const SignUp = () => {
   };
 
   const closePostModal = () => {
-    console.log('test');
     setShowPostModal(() => false);
   };
 
