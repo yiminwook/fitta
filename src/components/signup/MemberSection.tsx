@@ -1,8 +1,7 @@
-import MemberForm from '@/components/signup/MemberForm';
+import MemberForm, { MemberFormProps } from '@/components/signup/MemberForm';
 import signup from '@/components/signup/SignUp.module.scss';
-import { FormProps } from '@/pages/SignUp';
 
-interface MemberSectionProps extends FormProps {}
+interface MemberSectionProps extends MemberFormProps {}
 
 const MemberSection = ({ sendSignUpData, openPostModal, roadAddress }: MemberSectionProps) => {
   return (

@@ -13,7 +13,7 @@ const Header = () => {
           <ul>
             {/* pageLink 임시 */}
             <NavChild to="/admin" content="Admin" />
-            <NavChild to="/signup" content={<img src="https://i.stack.imgur.com/kyKz5.png" width="100px"></img>} />
+            <NavChild to="/signup" content="회원가입" />
             <NavChild to="/signin" content="로그인" className={layout['signInButton']} />
           </ul>
         </nav>

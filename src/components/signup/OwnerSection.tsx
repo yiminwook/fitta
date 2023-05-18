@@ -1,8 +1,7 @@
-import OwnerForm from '@/components/signup/OwnerForm';
 import signup from '@/components/signup/SignUp.module.scss';
-import { FormProps } from '@/pages/SignUp';
+import OwnerForm, { OwnerFormProps } from '@/components/signup/OwnerForm';
 
-interface OwnderSectionProps extends FormProps {}
+interface OwnderSectionProps extends OwnerFormProps {}
 
 const OwnerSection = ({ sendSignUpData, openPostModal, roadAddress }: OwnderSectionProps) => {
   return (

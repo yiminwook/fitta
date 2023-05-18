@@ -1,14 +1,18 @@
-import { FormProps } from '@/pages/SignUp';
 import { FormEvent, useEffect, useRef } from 'react';
 import signUpForm from '@/components/signup/SignUpForm.module.scss';
 import { useUser } from '@/hooks/useUser';
 import { useNavigate } from 'react-router-dom';
 import SearchButton from '@/components/common/SeachButton';
+import PasswordInput from '@/components/common/PasswordInput';
+import { MemberData, OwnerData } from '@/types/userData';
+import Loading from '@/components/common/Loading';
 
 export interface MemberFormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
+  password: HTMLInputElement;
+  passwordCheck: HTMLInputElement;
   name: HTMLInputElement;
-  age: HTMLInputElement;
+  birthDate: HTMLInputElement;
   occupation: HTMLInputElement;
   address: HTMLInputElement;
   addressDetail: HTMLInputElement;
@@ -19,7 +23,13 @@ interface MemberForm extends HTMLFormElement {
   readonly elements: MemberFormElements;
 }
 
-const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: FormProps) => {
+export interface MemberFormProps {
+  sendSignUpData: (data: MemberData | OwnerData) => void;
+  openPostModal: () => void;
+  roadAddress: string;
+}
+
+const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: MemberFormProps) => {
   const formRef = useRef<HTMLFormElement>(null);
   const { data: userData, isLoading } = useUser();
   const navigate = useNavigate();
@@ -27,9 +37,12 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: FormProps) =
   const onSubmit = (e: FormEvent<MemberForm>) => {
     e.preventDefault();
     if (!e.currentTarget) return;
-    const { name, age, sex, occupation, addressDetail } = e.currentTarget.elements;
+    const { name, birthDate, sex, occupation, addressDetail, password, passwordCheck } = e.currentTarget.elements;
+
+    const passwordValue = password.value;
+    const passswordCheckValue = passwordCheck.value;
     const nameValue = name.value;
-    const ageValue = age.value;
+    const birthDateValue = birthDate.value;
     const sexValue = sex.value;
     const occupationValue = occupation.value;
     const address = (roadAddress + addressDetail.value).trim();
@@ -44,7 +57,7 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: FormProps) =
   // }, [isLoading, userData]);
 
   if (isLoading) {
-    return <div>로딩중</div>;
+    return <Loading style={{ height: '42.5rem' }} />;
   }
 
   return (
@@ -53,6 +66,7 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: FormProps) =
         이메일
       </label>
       <input name="email" type="email" value={userData?.email} readOnly tabIndex={-1} />
+      <PasswordInput passwordName="password" passwordCheckName="passwordCheck" />
       <label htmlFor="name">이름</label>
       <input name="name" type="text" />
       <label htmlFor="occupation">직업</label>

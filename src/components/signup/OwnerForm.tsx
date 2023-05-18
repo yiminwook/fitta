@@ -1,21 +1,21 @@
-import { FormProps } from '@/pages/SignUp';
 import signUpForm from '@/components/signup/SignUpForm.module.scss';
-import { MemberFormElements } from '@/components/signup/MemberForm';
+import { MemberFormElements, MemberFormProps } from '@/components/signup/MemberForm';
 import { FormEvent, useRef } from 'react';
 import { useUser } from '@/hooks/useUser';
 import { useNavigate } from 'react-router-dom';
 import SearchButton from '@/components/common/SeachButton';
-import NumberInput from '@/components/common/NumberInput';
+import PasswordInput from '@/components/common/PasswordInput';
+import Loading from '@/components/common/Loading';
 
-interface OwnerFormElements extends Omit<MemberFormElements, 'occupation'> {
-  businessRegistrationNumber: HTMLInputElement;
-}
+interface OwnerFormElements extends Omit<MemberFormElements, 'occupation'> {}
 
 interface OwnerForm extends HTMLFormElement {
   readonly elements: OwnerFormElements;
 }
 
-const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: FormProps) => {
+export interface OwnerFormProps extends MemberFormProps {}
+
+const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProps) => {
   const formRef = useRef<HTMLFormElement>(null);
   const { data: userData, isLoading } = useUser();
   const navigate = useNavigate();
@@ -23,32 +23,29 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: FormProps) =>
   const onSubmit = (e: FormEvent<OwnerForm>) => {
     e.preventDefault();
     if (!e.currentTarget) return;
-    const { name, age, sex, addressDetail, businessRegistrationNumber } = e.currentTarget.elements;
+    const { password, passwordCheck, name, birthDate, sex, addressDetail } = e.currentTarget.elements;
+
+    const passwordValue = password.value;
+    const passswordCheckValue = passwordCheck.value;
     const nameValue = name.value;
-    const ageValue = age.value;
+    const birthDateValue = birthDate.value;
     const sexValue = sex.value;
-    const businessRegistrationNumberValue = businessRegistrationNumber.value;
-    console.log(businessRegistrationNumberValue);
     const address = (roadAddress + addressDetail.value).trim();
 
     sendSignUpData('');
   };
 
+  if (isLoading) {
+    return <Loading style={{ height: '42.5rem' }} />;
+  }
+
   return (
     <form ref={formRef} onSubmit={onSubmit} className={signUpForm['form']}>
       <label htmlFor="email">이메일</label>
       <input className={signUpForm['email']} name="email" type="email" value={userData?.email} readOnly tabIndex={-1} />
+      <PasswordInput passwordName="password" passwordCheckName="passwordCheck" />
       <label htmlFor="name">이름</label>
       <input name="name" type="text" />
-      <label htmlFor="occupation">사업자명</label>
-      <input name="occupation" type="text" />
-      <label htmlFor="businessRegistrationNumber">사업자번호</label>
-      <NumberInput
-        name="businessRegistrationNumber"
-        pattern={/^(\d{3})(\d{2})(\d{5})$/}
-        maxLength={10}
-        placeholder="사업자등록번호 10자리"
-      />
       {/* address */}
       <label htmlFor="address">주소</label>
       <div className={signUpForm['address']}>

@@ -1,18 +1,12 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import MemberSection from '@/components/signup/MemberSection';
-import OwnerSection from '@/components/signup/OwnerSection';
 import NavSection from '@/components/signup/NavSection';
 import { useState } from 'react';
 import { Address } from 'react-daum-postcode';
 import PostModal from '@/components/signup/PostModal';
 import { MemberData, OwnerData } from '@/types/userData';
+import OwnerSection from '@/components/signup/OwnerSection';
+import MemberSection from '@/components/signup/MemberSection';
 // import { useUser } from '@/hooks/useUser';
-
-export interface FormProps {
-  sendSignUpData: (data: MemberData | OwnerData) => void;
-  openPostModal: () => void;
-  roadAddress: string;
-}
 
 const SignUp = () => {
   const [roadAddress, setRoadAddress] = useState('');
