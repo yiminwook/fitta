@@ -1,6 +1,5 @@
 import home from '@/components/Home/Home.module.scss';
-import Slider from "react-slick";
-
+import Slider from 'react-slick';
 
 // 여기 파일에서 작업해주세요
 const HomeSection = () => {
@@ -19,10 +18,10 @@ const HomeSection = () => {
   return (
     <section className={home['HomeSection']}>
       <Slider {...settings}>
-   <img src="../img/fitta-cutout.png"/>
-     <img src=""/>
-       <img src=""/>
- </Slider>
+        <img src="../img/fitta-cutout.png" />
+        <img src="" />
+        <img src="" />
+      </Slider>
     </section>
   );
 };
