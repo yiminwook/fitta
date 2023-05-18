@@ -64,7 +64,7 @@ const PasswordInput = ({ className = '', passwordName, passwordCheckName, placeh
           <SpeechBubble
             className={passwordInput['passwordRoule']}
             iconColor="#ffa500"
-            message="특수문자를 하나이상 포함시켜주세요"
+            message="특수문자를 포함시켜주세요"
             onClose={onCloseIncludeSpecialCharacter}
           />
         ) : null}
@@ -72,7 +72,7 @@ const PasswordInput = ({ className = '', passwordName, passwordCheckName, placeh
           <SpeechBubble
             className={passwordInput['passwordRoule']}
             iconColor="#ffa500"
-            message="비밀번호는 8글자이상이어야 합니다."
+            message="8글자이상이어야 합니다."
             onClose={onCloseUnderLength}
           />
         ) : null}
@@ -90,7 +90,7 @@ const PasswordInput = ({ className = '', passwordName, passwordCheckName, placeh
           <SpeechBubble
             className={passwordInput['misMatchMessage']}
             iconColor="#ffa500"
-            message="비밀번호가 일치하지 않습니다."
+            message="일치하지 않습니다."
             onClose={onCloseMisMatch}
           />
         ) : null}
