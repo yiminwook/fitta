@@ -3,6 +3,7 @@ import signin from '@/components/signin/SignIn.module.scss';
 import SignInForm from '@/components/signin/SignInForm';
 import axios from 'axios';
 import { envConfig } from '@/configs';
+import { toast } from 'react-toastify';
 
 const { REACT_APP_SERVER_URL } = envConfig();
 
@@ -24,8 +25,14 @@ const SignInFormSection = () => {
     }
   };
 
-  const getSignUpUrl = () => {
-    console.log('get url');
+  const getSignUpUrl = async () => {
+    try {
+      const { data } = await axios.get(`${REACT_APP_SERVER_URL}/signin`);
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+      toast.error('통신에러');
+    }
   };
 
   return (
