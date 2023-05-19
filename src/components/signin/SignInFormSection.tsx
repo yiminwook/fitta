@@ -29,7 +29,7 @@ const SignInFormSection = () => {
     try {
       const { data } = await axios({
         method: 'GET',
-        baseURL: `${REACT_APP_SERVER_URL}/signin`,
+        baseURL: `${REACT_APP_SERVER_URL}/auth/sign`,
         headers: {
           'Access-Control-Allow-Origin': REACT_APP_SERVER_URL,
           'Access-Control-Allow-Credentials': 'true',
