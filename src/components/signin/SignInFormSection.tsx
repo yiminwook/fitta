@@ -27,7 +27,7 @@ const SignInFormSection = () => {
 
   const getSignUpUrl = async () => {
     try {
-      const { data } = await axios.get(`${REACT_APP_SERVER_URL}/signin`);
+      const { data } = await axios.get(`${REACT_APP_SERVER_URL}/signin`, { withCredentials: true });
       console.log(data);
     } catch (error) {
       console.error(error);
