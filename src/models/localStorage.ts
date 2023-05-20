@@ -12,16 +12,13 @@ class LocalStorage {
   }
 
   public init() {
-    console.log('init');
     const initData = JSON.parse(localStorage.getItem(this.key) ?? '[]') as string[];
     this.data = initData;
   }
 
   public setState(newData: LocalStorageDataType) {
-    console.log('setState');
     const slicedNewData = newData.slice(0, this.maxLenth);
     this.data = slicedNewData;
-    console.log(this.data);
     localStorage.setItem(this.key, JSON.stringify(slicedNewData));
   }
 

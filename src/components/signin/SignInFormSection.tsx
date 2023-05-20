@@ -4,6 +4,7 @@ import SignInForm from '@/components/signin/SignInForm';
 import axios from 'axios';
 import { envConfig } from '@/configs';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const { REACT_APP_SERVER_URL } = envConfig();
 
@@ -13,6 +14,7 @@ export interface SignInBodyData {
 }
 
 const SignInFormSection = () => {
+  const navigate = useNavigate();
   const handleSignIn = async ({ email, password }: SignInBodyData) => {
     try {
       console.log(email, password);
@@ -36,6 +38,7 @@ const SignInFormSection = () => {
         // },
         withCredentials: true,
       });
+      navigate(data);
       console.log(data);
     } catch (error) {
       console.error(error);
