@@ -1,25 +1,28 @@
 import search from '@/components/search/Search.module.scss';
 import { searchHistoryLocalStorage } from '@/models/localStorage';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { FiDelete } from 'react-icons/fi';
 
-const SearchHistory = () => {
+interface SearchHistoryProps {}
+
+const SearchHistory = ({}: SearchHistoryProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
 
   useEffect(() => {
     const history = searchHistoryLocalStorage.Data;
-    console.log('searchHitory', history);
     setSearchHistory(() => history);
   }, [searchParams]);
 
-  const onSearch = () => {};
-
-  const onDelete = () => {};
+  const onDelete = (index: number) => {
+    searchHistoryLocalStorage.deleteOneDataByIndex(index);
+    setSearchHistory((pre) => pre.filter((_history, idx) => idx !== index));
+  };
 
   const onReset = () => {
-    setSearchHistory(() => []);
     searchHistoryLocalStorage.reset();
+    setSearchHistory(() => []);
   };
 
   return (
@@ -32,18 +35,19 @@ const SearchHistory = () => {
           </button>
         </div>
       </header>
-      <ol>
+      <ul>
         {searchHistory.map((history, index) => (
           <li key={`search-hitory-${index}`}>
-            <Link to={`/search?query=${history}`}>
-              <button type="button" tabIndex={-1}>
-                {history}
+            <div>
+              <Link to={`/search?query=${history}`}>{history}</Link>
+              <button type="button" onClick={() => onDelete(index)}>
+                <FiDelete size="1rem" color="inherit" />
               </button>
-            </Link>
+            </div>
           </li>
         ))}
-      </ol>
+      </ul>
     </section>
   );
 };
-export default SearchHistory;
+export default memo(SearchHistory);
