@@ -19,20 +19,20 @@ const PasswordInput = ({ className = '', passwordName, passwordCheckName, placeh
 
   const onChangePassoword = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
+      const value = e.target.value.replace(/\s/g, '');
       setExcludeSpecialCharacter(() => checkSpecialCharacter(value) === false);
       //8글자 이상
       setUnderLength(() => value.length < 8);
-      setPassword(() => e.target.value);
+      setPassword(() => value);
     },
     [password],
   );
 
   const onChangePasswordCheck = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      setPasswordCheck(() => e.target.value);
-      setmisMatch(() => e.target.value !== password);
-      console.log(misMatch);
+      const value = e.target.value.replace(/\s/g, '');
+      setPasswordCheck(() => value);
+      setmisMatch(() => value !== password);
     },
     [password],
   );
