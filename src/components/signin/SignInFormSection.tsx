@@ -5,6 +5,7 @@ import axios from 'axios';
 import { envConfig } from '@/configs';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { customAxios, handleAxiosError } from '@/models/customAxios';
 
 const { REACT_APP_SERVER_URL } = envConfig();
 
@@ -29,20 +30,14 @@ const SignInFormSection = () => {
 
   const getSignUpUrl = async () => {
     try {
-      const { data } = await axios({
-        method: 'GET',
-        baseURL: `${REACT_APP_SERVER_URL}/auth/sign`,
-        // headers: {
-        //   'Access-Control-Allow-Origin': REACT_APP_SERVER_URL,
-        //   'Access-Control-Allow-Credentials': 'true',
-        // },
-        withCredentials: true,
-      });
-      navigate(data);
-      console.log(data);
+      const response = await customAxios.get<{ url: string }>('/auth/sign');
+      const {
+        data: { url },
+      } = response;
+      navigate(url);
     } catch (error) {
       console.error(error);
-      toast.error('통신에러');
+      handleAxiosError(error);
     }
   };
 
