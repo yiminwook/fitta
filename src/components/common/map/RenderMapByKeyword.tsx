@@ -2,6 +2,8 @@ import { envConfig } from '@/configs';
 import { KakaoMapMarkerType } from '@/types/kakaoMap';
 import { CSSProperties, useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import MarkerInfo from '@/components/common/map/MakerInfo';
+import map from '@/components/common/map/Map.module.scss';
 
 const { REACT_APP_KAKAO_JAVASCRIPT_KEY } = envConfig();
 
@@ -31,9 +33,9 @@ const RenderMapByKeyword = ({ keyword, style }: RenderMapByKeywordProps) => {
   useEffect(() => {
     if (!(map && isLoad)) return;
     /** service libraries 사용 */
-    const ps = new kakao.maps.services.Places();
+    const places = new kakao.maps.services.Places();
 
-    ps.keywordSearch(keyword, (data, status, _pagination) => {
+    places.keywordSearch(keyword, (data, status, _pagination) => {
       if (status === kakao.maps.services.Status.OK) {
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
         // LatLngBounds 객체에 좌표를 추가합니다
@@ -56,7 +58,7 @@ const RenderMapByKeyword = ({ keyword, style }: RenderMapByKeywordProps) => {
         map.setBounds(bounds);
       }
     });
-  }, [map]);
+  }, [map, isLoad]);
 
   return (
     <div>
@@ -76,7 +78,7 @@ const RenderMapByKeyword = ({ keyword, style }: RenderMapByKeywordProps) => {
               position={marker.position}
               onClick={() => setInfo(marker)}
             >
-              {info && info.content === marker.content && <div style={{ color: '#000' }}>{marker.content}</div>}
+              {info ? <MarkerInfo info={info} /> : null}
             </MapMarker>
           ))}
         </Map>

@@ -1,8 +1,9 @@
-import gym from '@/components/gym/Gym.module.scss';
 import { envConfig } from '@/configs';
 import { KakaoMapMarkerType } from '@/types/kakaoMap';
 import { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import MarkerInfo from '@/components/common/map/MakerInfo';
+import map from '@/components/common/map/Map.module.scss';
 
 const { REACT_APP_KAKAO_JAVASCRIPT_KEY } = envConfig();
 
@@ -42,7 +43,7 @@ const RenderMap = () => {
               position={marker.position}
               onClick={() => setInfo(marker)}
             >
-              {info && info.content === marker.content && <div style={{ color: '#000' }}>{marker.content}</div>}
+              {info ? <MarkerInfo info={info} /> : null}
             </MapMarker>
           ))}
         </Map>

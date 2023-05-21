@@ -2,6 +2,7 @@ import { envConfig } from '@/configs';
 import { KakaoMapMarkerType } from '@/types/kakaoMap';
 import { CSSProperties, useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import MarkerInfo from '@/components/common/map/MakerInfo';
 
 const { REACT_APP_KAKAO_JAVASCRIPT_KEY } = envConfig();
 
@@ -19,7 +20,7 @@ interface RenderMapByAddress {
 const RenderMapByAddress = ({ gymName, address, style }: RenderMapByAddress) => {
   const [isLoad, setIsLoad] = useState(false);
   const [map, setMap] = useState<kakao.maps.Map>();
-  const [markers, setMarkers] = useState<KakaoMapMarkerType[]>([]);
+  const [marker, setMarker] = useState<KakaoMapMarkerType | null>(null);
   const [info, setInfo] = useState<KakaoMapMarkerType>();
 
   useEffect(() => {
@@ -34,31 +35,27 @@ const RenderMapByAddress = ({ gymName, address, style }: RenderMapByAddress) => 
   useEffect(() => {
     if (!(map && isLoad)) return;
     /** service libraries 사용 */
-    var geocoder = new kakao.maps.services.Geocoder();
+    const geocoder = new kakao.maps.services.Geocoder();
 
     // 주소로 좌표를 검색합니다
     geocoder.addressSearch(address, function (result, status) {
       // 정상적으로 검색이 완료됐으면
       if (status === kakao.maps.services.Status.OK) {
-        var coords = new kakao.maps.LatLng(Number(result[0].y), Number(result[0].x));
+        const { x, y } = result[0];
+        const lat = Number(y);
+        const lng = Number(x);
 
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new kakao.maps.Marker({
-          map: map,
-          position: coords,
-        });
-
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new kakao.maps.InfoWindow({
-          content: `<div style="width:150px;text-align:center;padding:6px 0;">${gymName}</div>`,
-        });
-        infowindow.open(map, marker);
+        // Marker를 셋팅
+        setMarker(() => ({
+          content: gymName,
+          position: { lat, lng },
+        }));
 
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
+        map.setCenter(new kakao.maps.LatLng(lat, lng));
       }
     });
-  }, [map]);
+  }, [map, isLoad]);
 
   return (
     <div>
@@ -72,15 +69,21 @@ const RenderMapByAddress = ({ gymName, address, style }: RenderMapByAddress) => 
           level={1}
           onCreate={(map) => setMap(map)}
         >
-          {markers.map((marker) => (
+          {marker ? (
             <MapMarker
               key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
               position={marker.position}
-              onClick={() => setInfo(marker)}
+              onClick={() => {
+                const href = `https://map.kakao.com/link/map/${marker.content},${marker.position.lat},${marker.position.lng}`;
+                window.open(href);
+              }}
+              onCreate={() => {
+                setInfo(marker);
+              }}
             >
-              {info && info.content === marker.content && <div style={{ color: '#000' }}>{marker.content}</div>}
+              {info ? <MarkerInfo info={info} /> : null}
             </MapMarker>
-          ))}
+          ) : null}
         </Map>
       ) : null}
     </div>
