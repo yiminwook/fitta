@@ -5,15 +5,18 @@ import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 const { REACT_APP_KAKAO_JAVASCRIPT_KEY } = envConfig();
 
-interface RenderMapByKeywordProps {
-  keyword: string;
+interface RenderMapByAddress {
+  gymName: string;
+  address: string;
   style: CSSProperties;
 }
+
 /**
- * @params keyword: string ex) **구 헬스장,
+ * @params gymName: string ex) **휘트니스,
+ * @params address: string ex) 도로명주소 + 상세주소,
  * @params style: { width, height } 필수,
  */
-const RenderMapByKeyword = ({ keyword, style }: RenderMapByKeywordProps) => {
+const RenderMapByAddress = ({ gymName, address, style }: RenderMapByAddress) => {
   const [isLoad, setIsLoad] = useState(false);
   const [map, setMap] = useState<kakao.maps.Map>();
   const [markers, setMarkers] = useState<KakaoMapMarkerType[]>([]);
@@ -31,29 +34,28 @@ const RenderMapByKeyword = ({ keyword, style }: RenderMapByKeywordProps) => {
   useEffect(() => {
     if (!(map && isLoad)) return;
     /** service libraries 사용 */
-    const ps = new kakao.maps.services.Places();
+    var geocoder = new kakao.maps.services.Geocoder();
 
-    ps.keywordSearch(keyword, (data, status, _pagination) => {
+    // 주소로 좌표를 검색합니다
+    geocoder.addressSearch(address, function (result, status) {
+      // 정상적으로 검색이 완료됐으면
       if (status === kakao.maps.services.Status.OK) {
-        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-        // LatLngBounds 객체에 좌표를 추가합니다
-        const bounds = new kakao.maps.LatLngBounds();
-        let markers: KakaoMapMarkerType[] = [];
-        for (var i = 0; i < data.length; i++) {
-          markers.push({
-            position: {
-              lat: Number(data[i].y),
-              lng: Number(data[i].x),
-            },
-            content: data[i].place_name,
-          });
-          // @ts-ignore
-          bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-        }
-        setMarkers(markers);
+        var coords = new kakao.maps.LatLng(Number(result[0].y), Number(result[0].x));
 
-        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-        map.setBounds(bounds);
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+          map: map,
+          position: coords,
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new kakao.maps.InfoWindow({
+          content: `<div style="width:150px;text-align:center;padding:6px 0;">${gymName}</div>`,
+        });
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
       }
     });
   }, [map]);
@@ -67,7 +69,7 @@ const RenderMapByKeyword = ({ keyword, style }: RenderMapByKeywordProps) => {
             lng: 126.9786567,
           }}
           style={{ ...style }}
-          level={3}
+          level={1}
           onCreate={(map) => setMap(map)}
         >
           {markers.map((marker) => (
@@ -85,4 +87,4 @@ const RenderMapByKeyword = ({ keyword, style }: RenderMapByKeywordProps) => {
   );
 };
 
-export default RenderMapByKeyword;
+export default RenderMapByAddress;

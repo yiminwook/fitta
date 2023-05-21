@@ -4,7 +4,7 @@ import { KakaoMapMarkerType } from '@/types/kakaoMap';
 import { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
-const { REACT_APP_JAVASCRIPT_KEY } = envConfig();
+const { REACT_APP_KAKAO_JAVASCRIPT_KEY } = envConfig();
 
 const RenderMap = () => {
   const [info, setInfo] = useState<any>();
@@ -15,7 +15,7 @@ const RenderMap = () => {
   useEffect(() => {
     const script = document.createElement('script');
     // https://apis.map.kakao.com/web/guide/#whatlibrary
-    script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${REACT_APP_JAVASCRIPT_KEY}`;
+    script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${REACT_APP_KAKAO_JAVASCRIPT_KEY}`;
     script.defer = true;
     script.addEventListener('load', () => setIsLoad(() => true));
     document.head.appendChild(script);
