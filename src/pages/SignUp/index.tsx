@@ -20,6 +20,7 @@ const SignUp = () => {
   };
 
   const handleRoadAddress = (address: Address) => {
+    console.log(address);
     setRoadAddress(() => address.roadAddress);
     closePostModal();
   };
