@@ -15,7 +15,6 @@ export interface SignInBodyData {
 }
 
 const SignInFormSection = () => {
-  const navigate = useNavigate();
   const handleSignIn = async ({ email, password }: SignInBodyData) => {
     try {
       console.log(email, password);
@@ -34,7 +33,7 @@ const SignInFormSection = () => {
       const {
         data: { url },
       } = response;
-      navigate(url);
+      window.location.href = url;
     } catch (error) {
       console.error(error);
       handleAxiosError(error);
