@@ -44,9 +44,10 @@ const SignInFormSection = () => {
 
   const sendCode = async (code: string) => {
     try {
+      console.log('CODE >>>>', code);
       const response = await customAxios.get<{ url: string }>(`/login/oauth2/code/google?code=${code}`);
       const { data } = response;
-      console.log(data);
+      console.log('DATA >>>>', data);
     } catch (error) {
       console.error(error);
       handleAxiosError(error);
