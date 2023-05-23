@@ -3,9 +3,9 @@ import signin from '@/components/signin/SignIn.module.scss';
 import SignInForm from '@/components/signin/SignInForm';
 import axios from 'axios';
 import { envConfig } from '@/configs';
-import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
 import { customAxios, handleAxiosError } from '@/models/customAxios';
+import { useSearchParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const { REACT_APP_SERVER_URL } = envConfig();
 
@@ -15,6 +15,8 @@ export interface SignInBodyData {
 }
 
 const SignInFormSection = () => {
+  const [searchParams] = useSearchParams();
+
   const handleSignIn = async ({ email, password }: SignInBodyData) => {
     try {
       console.log(email, password);
@@ -39,6 +41,23 @@ const SignInFormSection = () => {
       handleAxiosError(error);
     }
   };
+
+  const sendCode = async (code: string) => {
+    try {
+      const response = await customAxios.get<{ url: string }>(`/login/oauth2/code/google?code=${code}`);
+      const { data } = response;
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+      handleAxiosError(error);
+    }
+  };
+
+  useEffect(() => {
+    const code = searchParams.get('code');
+    if (code === undefined || code === null) return;
+    sendCode(code);
+  }, [searchParams]);
 
   return (
     <section className={signin['formSection']}>

@@ -45,7 +45,14 @@ const SearchInputSection = ({ showHistory, openHistory, closeHistory }: SearchIn
     <section className={search['searchInputSection']} onClick={closeHistory}>
       <form onSubmit={onSubmit}>
         <div>
-          <input type="text" onChange={onChangeSearchInput} value={searchInput} onClick={openHistory} />
+          <input
+            type="text"
+            onChange={onChangeSearchInput}
+            value={searchInput}
+            onClick={openHistory}
+            onFocus={() => {}}
+            onBlur={() => {}}
+          />
           {showHistory ? <SearchHistory /> : null}
           <button type="submit">
             <BiSearch size="1.5rem" color="inherit" />
