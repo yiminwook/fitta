@@ -35,17 +35,25 @@ const SignInFormSection = () => {
       const {
         data: { url },
       } = response;
-      window.location.href = url;
+      // window.location.href = url;
+      console.log(url);
     } catch (error) {
       console.error(error);
       handleAxiosError(error);
     }
   };
 
+  //localhost:3000/signin 로그인주소
+  //accounts.google.com/o/oauth2/auth/oauthchooseaccount?client_id=1066949619421-eaklsqedvp59pe0oba00a5h2qkiifhrk.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fsignin&response_type=code&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile
+
   const sendCode = async (code: string) => {
     try {
       console.log('CODE >>>>', code);
-      const response = await customAxios.get<{ url: string }>(`/login/oauth2/code/google?code=${code}`);
+      const response = await customAxios.get<{ url: string }>(
+        `/login/oauth2/code/google?code=${encodeURIComponent(
+          code,
+        )}&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fsignin`,
+      );
       const { data } = response;
       console.log('DATA >>>>', data);
     } catch (error) {
@@ -56,6 +64,7 @@ const SignInFormSection = () => {
 
   useEffect(() => {
     const code = searchParams.get('code');
+    console.log(code);
     if (code === undefined || code === null) return;
     sendCode(code);
   }, [searchParams]);

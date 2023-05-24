@@ -7,6 +7,7 @@ const SignUpPage = loadable(() => import('@/pages/SignUp'));
 const SeachPage = loadable(() => import('@/pages/Search'));
 const GymPage = loadable(() => import('@/pages/Gym'));
 const AdminPage = loadable(() => import('@/pages/Admin'));
+const NotFoundPage = loadable(() => import('@/pages/404'));
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/search" element={<SeachPage />} />
         <Route path="/gym/:id" element={<GymPage />} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
   );
