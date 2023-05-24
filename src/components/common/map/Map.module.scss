@@ -2,6 +2,8 @@
 @import '@/styles/var.scss';
 @import '@/styles/placeholder.scss';
 
-.app {
-  background-color: map-get($colors, white);
+.mapInfo {
+  width: 150px;
+  text-align: center;
+  cursor: pointer;
 }

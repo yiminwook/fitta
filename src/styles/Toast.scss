@@ -1,0 +1,72 @@
+@import '@/styles/mixin.scss';
+@import '@/styles/var.scss';
+@import '@/styles/placeholder.scss';
+
+//toast style
+.Toastify__toast {
+  // font-size: 16px;
+  // border-radius: 50px;
+  // padding: 16px 28px;
+  // color: #fff;
+  // background: rgba(107, 115, 135, 0.8);
+}
+
+@include max-width(480px) {
+  .Toastify__toast-container--top-left,
+  .Toastify__toast-container--top-center,
+  .Toastify__toast-container--top-right {
+    top: auto;
+    bottom: 0;
+  }
+}
+
+.Toastify__toast-icon {
+}
+
+.Toastify__toast--info {
+}
+
+.Toastify__toast--success {
+}
+
+.Toastify__toast--error {
+}
+
+.Toastify__progress-bar {
+  visibility: hidden;
+}
+
+.Toastify__zoom-enter {
+  animation: none;
+}
+
+.Toastify--animate {
+  animation-fill-mode: both;
+  animation-duration: 0.7s;
+}
+
+.Toastify--animate-icon {
+  // animation-fill-mode: both;
+  // animation-duration: 0.3s;
+}
+
+@keyframes Toastify__bounceOut {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes Toastify__bounceIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.Toastify__bounce-enter--top-right,
+.Toastify__bounce-enter--bottom-right {
+  animation-name: Toastify__bounceIn;
+}
+
+.Toastify__bounce-exit--top-right,
+.Toastify__bounce-exit--bottom-right {
+  animation-name: Toastify__bounceOut;
+}

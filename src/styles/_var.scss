@@ -1,4 +1,11 @@
+$min-width: 375px;
+$nav-z-index: 100;
+$modal-z-index: 300;
+$backdrop-z-index: 500;
+$bezier-curve: cubic-bezier(0.4, 0, 0.2, 1);
+
 $points: (
+  ss: 450px,
   sm: 640px,
   md: 768px,
   lg: 1024px,
@@ -8,5 +15,10 @@ $points: (
 );
 
 $colors: (
-  white: beige,
+  white: #fff,
+  black: #1c1c1c,
+  transparent: rgb(0, 0, 0, 0.3),
+  ligthBlack: #3c3c3c,
+  gray: #c0c0c0,
+  orange: #ffa500,
 );

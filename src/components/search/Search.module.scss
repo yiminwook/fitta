@@ -1,0 +1,84 @@
+@import '@/styles/mixin.scss';
+@import '@/styles/var.scss';
+@import '@/styles/placeholder.scss';
+
+.searchInputSection {
+  padding: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  form {
+    position: relative;
+    height: 5rem;
+
+    & > div {
+      position: absolute;
+      display: flex;
+      gap: 0.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      flex-direction: column;
+      border-radius: 15px;
+      border: 3px solid map-get($colors, gray);
+      width: 80%;
+      max-width: map-get($points, sm);
+      padding: 0.5rem;
+      background-color: map-get($colors, white);
+
+      input {
+        width: 100%;
+        padding: 0 1.25rem;
+        font-size: 1.5rem;
+
+        &:focus-visible {
+          outline: none;
+        }
+      }
+
+      .searchHistory {
+        display: flex;
+        flex-direction: column;
+        border-top: 2px solid map-get($colors, gray);
+        padding: 0.5rem;
+        gap: 0.5rem;
+        width: calc(100% - 1rem);
+        left: -2px;
+        top: 100%;
+
+        header {
+          display: flex;
+          justify-content: space-between;
+        }
+
+        ul {
+          li {
+            padding: 0.15rem;
+
+            &:hover {
+              background-color: map-get($colors, gray);
+            }
+
+            & > div {
+              padding: 0 1rem;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+
+              button {
+                height: 1rem;
+              }
+            }
+          }
+        }
+      }
+
+      & > button {
+        position: absolute;
+        right: 1rem;
+        top: 0.65rem;
+        color: darken(map-get($colors, gray), 10%);
+      }
+    }
+  }
+}

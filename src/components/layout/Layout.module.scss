@@ -1,0 +1,124 @@
+@import '@/styles/mixin.scss';
+@import '@/styles/var.scss';
+@import '@/styles/placeholder.scss';
+
+.header {
+  position: relative;
+
+  & > div:first-child {
+    position: fixed;
+    z-index: $nav-z-index;
+    display: flex;
+    min-width: $min-width;
+    width: 100%;
+    height: 3.5rem;
+    background-color: map-get($colors, white);
+    @include flex-center();
+    @include box-shadow(true);
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: map-get($points, xl);
+      width: 100%;
+      padding: 0 0.5rem;
+
+      .logo{
+        width: 7.5rem;
+        height: 2.5rem;
+      }
+  
+
+      ul {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+       
+
+        .signInButton {
+          @extend %button-black;
+          padding: 0.5rem 0.75rem;
+        }
+      }
+    }
+  }
+
+  .block {
+    height: 3.5rem;
+  }
+}
+
+.main {
+  min-width: $min-width;
+  min-height: calc(100vh - 3.5rem - 5rem - 1rem);
+  max-width: map-get($points, xl);
+  margin: auto;
+  padding: 0.5rem;
+  background-color: map-get($colors, white);
+}
+
+.footer {
+  height: 5rem;
+  background-color: map-get($colors, ligthBlack);
+}
+
+.modal {
+  position: fixed;
+  z-index: $modal-z-index;
+  top: 0;
+  left: 0;
+  min-width: $min-width;
+  width: 100vw;
+  height: 100vh;
+  background-color: map-get($colors, transparent);
+  cursor: pointer;
+
+  & > div {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    transform: translateX(-50%) translateY(-60%);
+    border-radius: 5px;
+    background-color: map-get($colors, white);
+    display: flex;
+    flex-direction: column;
+    cursor: default;
+    @include box-shadow();
+
+    @include min-width(map-get($points, sm)) {
+      width: 30rem;
+    }
+
+    header {
+      display: flex;
+      padding: 0.5rem;
+      justify-content: space-between;
+      border-bottom: 1px solid map-get($colors, gray);
+
+      h1 {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+
+      .close {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 5px;
+
+        &:hover {
+          color: map-get($colors, white);
+          background-color: map-get($colors, transparent);
+        }
+      }
+    }
+
+    .inner {
+      width: calc(100% - 1rem);
+      padding: 0.5rem;
+      margin: auto;
+    }
+  }
+}

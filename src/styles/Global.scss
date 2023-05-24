@@ -8,6 +8,10 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: map-get($colors, white);
+  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto,
+    'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
 }
 
 a,
@@ -16,6 +20,7 @@ h2,
 h3,
 h4,
 p,
+ol,
 ul,
 li,
 input,
@@ -35,9 +40,8 @@ button {
 }
 
 a,
-label,
 button {
-  background: none;
+  background: inherit;
   cursor: pointer;
 
   &:focus:not(:focus-visible) {
@@ -52,7 +56,8 @@ button {
   }
 
   &.active {
-    color: beige;
+    //NavLink
+    color: red;
     cursor: default;
   }
 }
