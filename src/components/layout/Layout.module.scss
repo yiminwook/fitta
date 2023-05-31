@@ -24,18 +24,31 @@
       width: 100%;
       padding: 0 0.5rem;
 
-      .logo{
-        width: 7.5rem;
-        height: 2.5rem;
+      .logo {
+        position: relative;
+        width: 150px;
+        height: auto;
+
+        span {
+          @extend %blind;
+        }
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          width: 112px;
+          height: 33px;
+          transform: translateY(-50%);
+          background-image: url('../../../public/image/logo-112px.png');
+          background-repeat: no-repeat;
+        }
       }
-  
 
       ul {
         display: flex;
         align-items: center;
         gap: 1rem;
-
-       
 
         .signInButton {
           @extend %button-black;

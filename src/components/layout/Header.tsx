@@ -8,7 +8,9 @@ const Header = () => {
       <div>
         <nav>
           <Link to="/">
-            <img src="/img/fitta-cutout.png" className={layout['logo']}></img>
+            <div className={layout['logo']}>
+              <span>logo</span>
+            </div>
           </Link>
           <ul>
             {/* pageLink 임시 */}

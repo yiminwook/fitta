@@ -1,3 +1,4 @@
+import { envConfig } from '@/configs';
 import { Helmet } from 'react-helmet-async';
 
 const DEFAULT_TITLE = 'Fitta';
@@ -12,6 +13,8 @@ interface HeadProps {
 const Head = ({ title, description }: HeadProps) => {
   const pageTitle = title ? `${title} | ${DEFAULT_TITLE}` : DEFAULT_TITLE;
   const pageDesc = description ?? DEFAULT_DESC;
+  const { REACT_APP_SITE_URL } = envConfig();
+
   return (
     <>
       <Helmet>
@@ -34,8 +37,8 @@ const Head = ({ title, description }: HeadProps) => {
         {/* default */}
         <title>{pageTitle}</title>
         <meta name="description" content="desc" />
+        <link rel="canonical" href={REACT_APP_SITE_URL} />
         {/* <meta name="keywords" content={pageKeywords} /> */}
-        {/* <link rel="canonical" href={pageURL} /> */}
       </Helmet>
     </>
   );
