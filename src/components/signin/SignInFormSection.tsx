@@ -35,8 +35,8 @@ const SignInFormSection = () => {
       const {
         data: { url },
       } = response;
-      // window.location.href = url;
       console.log(url);
+      window.location.href = url;
     } catch (error) {
       console.error(error);
       handleAxiosError(error);
