@@ -23,9 +23,9 @@ const Header = ({ userData, handleUserData }: HeaderProps) => {
 
   return (
     <header className={header['header']}>
-      <div className={header['headerInner']}>
-        <div>
-          <div>
+      <div className={header['headerWrapper']}>
+        <div className={header['headerOutter']}>
+          <div className={header['headerInner']}>
             <Link to="/">
               <div className={header['logo']}>
                 <span>logo</span>

@@ -5,18 +5,24 @@
 .header {
   position: relative;
 
-  .headerInner {
+  .headerWrapper {
     position: fixed;
     z-index: $nav-z-index;
     min-width: $min-width;
     width: 100%;
-    background-color: map-get($colors, white);
+
+    &:hover {
+      .headerNav {
+        height: 1.75rem;
+      }
+    }
 
     // header 상단
-    & > div {
+    .headerOutter {
+      background-color: map-get($colors, white);
       @include box-shadow(true);
 
-      & > div {
+      .headerInner {
         position: relative;
         display: flex;
         justify-content: space-between;
@@ -150,9 +156,10 @@
     .headerNav {
       position: relative;
       margin: auto;
-      height: 1.75rem;
+      height: 0;
       max-width: map-get($points, xl);
       overflow: hidden;
+      transition: height 0.3s ease;
 
       &::before {
         width: 100%;
@@ -188,6 +195,6 @@
   }
 
   .block {
-    height: 5.75rem; //4rem + 1.75rem
+    height: 4rem;
   }
 }
