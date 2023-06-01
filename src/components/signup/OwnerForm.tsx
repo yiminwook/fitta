@@ -23,16 +23,30 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProp
   const onSubmit = (e: FormEvent<OwnerForm>) => {
     e.preventDefault();
     if (!e.currentTarget) return;
-    const { password, passwordCheck, name, birthDate, sex, addressDetail } = e.currentTarget.elements;
+    const { email, password, passwordCheck, name, birthDate, sex, addressDetail } = e.currentTarget.elements;
 
+    const emailValue = email.value;
     const passwordValue = password.value;
     const passswordCheckValue = passwordCheck.value;
     const nameValue = name.value;
     const birthDateValue = birthDate.value;
     const sexValue = sex.value;
-    const address = (roadAddress + addressDetail.value).trim();
+    const address = (roadAddress + ' ' + addressDetail.value).trim();
 
-    sendSignUpData('');
+    sendSignUpData({
+      isOwner: true,
+      data: {
+        email: emailValue,
+        password: passwordValue,
+        passwordConfirm: passswordCheckValue, //삭제예정
+        name: nameValue,
+        phoneNumber: '01011112222',
+        businessRegistrationNumber: 'string', //삭제예정
+        birthDate: birthDateValue,
+        gender: sexValue,
+        address,
+      },
+    });
   };
 
   if (isLoading) {
@@ -42,7 +56,8 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProp
   return (
     <form ref={formRef} onSubmit={onSubmit} className={signUpForm['form']}>
       <label htmlFor="email">이메일</label>
-      <input className={signUpForm['email']} name="email" type="email" value={userData?.email} readOnly tabIndex={-1} />
+      {/* readOnly */}
+      <input className={signUpForm['email']} name="email" type="email" value={userData?.email} tabIndex={-1} />
       <PasswordInput passwordName="password" passwordCheckName="passwordCheck" />
       <label htmlFor="name">이름</label>
       <input name="name" type="text" />

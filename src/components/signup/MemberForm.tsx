@@ -24,7 +24,7 @@ interface MemberForm extends HTMLFormElement {
 }
 
 export interface MemberFormProps {
-  sendSignUpData: (data: MemberData | OwnerData) => void;
+  sendSignUpData: ({ data, isOwner }: { data: MemberData | OwnerData; isOwner: boolean }) => void;
   openPostModal: () => void;
   roadAddress: string;
 }
@@ -37,17 +37,32 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: MemberFormPr
   const onSubmit = (e: FormEvent<MemberForm>) => {
     e.preventDefault();
     if (!e.currentTarget) return;
-    const { name, birthDate, sex, occupation, addressDetail, password, passwordCheck } = e.currentTarget.elements;
+    const { email, name, birthDate, sex, occupation, addressDetail, password, passwordCheck } =
+      e.currentTarget.elements;
 
+    const emailValue = email.value;
     const passwordValue = password.value;
     const passswordCheckValue = passwordCheck.value;
     const nameValue = name.value;
     const birthDateValue = birthDate.value;
     const sexValue = sex.value;
     const occupationValue = occupation.value;
-    const address = (roadAddress + addressDetail.value).trim();
+    const address = (roadAddress + ' ' + addressDetail.value).trim();
 
-    sendSignUpData('');
+    sendSignUpData({
+      isOwner: false,
+      data: {
+        email: emailValue,
+        password: passwordValue,
+        passwordConfirm: passswordCheckValue, //제거 예정
+        name: nameValue,
+        address,
+        gender: sexValue,
+        phoneNumber: '010123445634',
+        birthDate: birthDateValue,
+        occupation: occupationValue,
+      },
+    });
   };
 
   // useEffect(() => {
@@ -65,7 +80,7 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: MemberFormPr
       <label htmlFor="email" className={signUpForm['email']}>
         이메일
       </label>
-      <input name="email" type="email" value={userData?.email} readOnly tabIndex={-1} />
+      <input name="email" type="email" value={userData?.email} tabIndex={-1} />
       <PasswordInput passwordName="password" passwordCheckName="passwordCheck" />
       <label htmlFor="name">이름</label>
       <input name="name" type="text" />

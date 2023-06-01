@@ -1,7 +1,6 @@
 import { FcGoogle } from 'react-icons/fc';
 import signin from '@/components/signin/SignIn.module.scss';
 import SignInForm from '@/components/signin/SignInForm';
-import axios from 'axios';
 import { envConfig } from '@/configs';
 import { customAxios, handleAxiosError } from '@/models/customAxios';
 import { useSearchParams } from 'react-router-dom';
@@ -20,8 +19,8 @@ const SignInFormSection = () => {
   const handleSignIn = async ({ email, password }: SignInBodyData) => {
     try {
       console.log(email, password);
-      const serverUrl = REACT_APP_SERVER_URL;
-      const response = await axios.post(`${serverUrl}/members/login`, { email, password }, { withCredentials: true });
+      // const serverUrl = REACT_APP_SERVER_URL;
+      const response = await customAxios.post(`/members/login`, { email, password });
       console.log('res  >>>>', response);
       if (response) console.log('data  >>>>', response.data);
     } catch (error) {
