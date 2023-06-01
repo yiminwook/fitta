@@ -21,7 +21,7 @@ const SignInFormSection = () => {
     try {
       console.log(email, password);
       const serverUrl = REACT_APP_SERVER_URL;
-      const response = await axios.post(`${serverUrl}/members`, { email, password }, { withCredentials: true });
+      const response = await axios.post(`${serverUrl}/members/login`, { email, password }, { withCredentials: true });
       console.log('res  >>>>', response);
       if (response) console.log('data  >>>>', response.data);
     } catch (error) {
