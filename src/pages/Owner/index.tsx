@@ -1,6 +1,7 @@
 import Head from '@/components/layout/Head';
-import { Link, Navigate, Route, Routes, useParams } from 'react-router-dom';
+import { Navigate, Route, Routes, useParams } from 'react-router-dom';
 import loadable from '@loadable/component';
+import NavChild from '@/components/common/NavChild';
 
 const OwnerHome = loadable(() => import('@/pages/Owner/Home'));
 const OwnerDetailGym = loadable(() => import('@/pages/Owner/Detail/Gym'));
@@ -16,16 +17,16 @@ const Owner = () => {
   return (
     <>
       <Head title="Owner" />
-      <div>Owbner {ownerId}</div>
+      <div>Owner {ownerId}</div>
       <aside>
         <ul>
-          <Link to={`/owner/${ownerId}`}>마이페이지</Link>
-          <Link to={`/owner/${ownerId}/detail/gym`}>헬스장 현황</Link>
-          <Link to={`/owner/${ownerId}/detail/staff`}>스태프 현황</Link>
-          <Link to={`/owner/${ownerId}/detail/member`}>멤버 현황</Link>
-          <Link to={`/owner/${ownerId}/edit/gym`}>헬스장 관리</Link>
-          <Link to={`/owner/${ownerId}/edit/staff`}>스태프 관리</Link>
-          <Link to={`/owner/${ownerId}/edit/member`}>멤버 관리</Link>
+          <NavChild to={`/owner/${ownerId}`} content="마이페이지" />
+          <NavChild to={`/owner/${ownerId}/detail/gym`} content="헬스장 현황" />
+          <NavChild to={`/owner/${ownerId}/detail/staff`} content="스태프 현황" />
+          <NavChild to={`/owner/${ownerId}/detail/member`} content="멤버 현황" />
+          <NavChild to={`/owner/${ownerId}/edit/gym`} content="헬스장 관리" />
+          <NavChild to={`/owner/${ownerId}/edit/staff`} content="스태프 관리" />
+          <NavChild to={`/owner/${ownerId}/edit/member`} content="멤버 관리" />
         </ul>
       </aside>
       <section>

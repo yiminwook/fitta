@@ -52,7 +52,7 @@ const Header = ({ userData, handleUserData }: HeaderProps) => {
           <ul>
             {/* pageLink 임시 */}
             <NavChild to="/search" content="검색" />
-            <NavChild to="/admin" content="Admin" />
+            <NavChild to="/owner/123" content="오너" />
             <NavChild to="/signup" content="가입" />
             <NavChild to="/signin" content="로그인" />
           </ul>
