@@ -1,0 +1,194 @@
+@import '@/styles/mixin.scss';
+@import '@/styles/var.scss';
+@import '@/styles/placeholder.scss';
+
+.header {
+  position: relative;
+
+  .headerInner {
+    position: fixed;
+    z-index: $nav-z-index;
+    min-width: $min-width;
+    width: 100%;
+    background-color: map-get($colors, white);
+
+    // header 상단
+    & > div {
+      @include box-shadow(true);
+
+      & > div {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: calc(map-get($points, xl) - 1rem * 2);
+        margin: auto;
+        height: 4rem;
+        padding: 0 1rem;
+
+        .logo {
+          position: relative;
+          width: 150px;
+          height: auto;
+
+          span {
+            @extend %blind;
+          }
+
+          &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 112px;
+            height: 33px;
+            transform: translateY(-50%);
+            background-image: url('../../../../public/image/logo-112px.png');
+            background-repeat: no-repeat;
+          }
+        }
+
+        ul {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+
+          .signInButton {
+            @extend %button-black;
+            padding: 0.5rem 0.75rem;
+          }
+
+          li {
+            .profile {
+              position: relative;
+              width: 6.5rem;
+              padding: 0 0.75rem;
+              height: 2.5rem;
+              gap: 0.5rem;
+              border: 2px solid map-get($colors, gray);
+              border-radius: 10px;
+              display: flex;
+              align-items: center;
+              @include box-shadow();
+
+              .profileImageWapper {
+                display: inline-block;
+                position: relative;
+                width: 30px;
+                height: 30px;
+                background-color: red;
+                border-radius: 100%;
+                overflow: hidden;
+
+                img {
+                  @include absolute-center();
+                }
+              }
+
+              & > p {
+                text-align: center;
+                width: 4rem;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                cursor: default;
+              }
+
+              .toggleMenu {
+                position: absolute;
+                z-index: 1;
+                top: calc(100% + 1rem);
+                right: 0;
+                display: flex;
+                flex-direction: column;
+                background-color: map-get($colors, white);
+                gap: 0.5rem;
+                width: 7rem;
+                padding: 0.5rem;
+                border-radius: 5px;
+                @include box-shadow();
+
+                &::after {
+                  content: '';
+                  width: 1rem;
+                  height: 1rem;
+                  position: absolute;
+                  top: -0.45rem;
+                  right: 0.75rem;
+                  z-index: 1;
+                  background-color: map-get($colors, white);
+                  transform: rotateZ(45deg);
+                }
+
+                header {
+                  display: flex;
+                  flex-direction: row-reverse;
+                }
+
+                ul {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-start;
+                  gap: 0.5rem;
+                  padding-left: 0.5rem;
+                }
+
+                footer {
+                  border-top: 1px solid black;
+                  padding-top: 0.5rem;
+
+                  button {
+                    margin: auto;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // header 하단
+    .headerNav {
+      position: relative;
+      margin: auto;
+      height: 1.75rem;
+      max-width: map-get($points, xl);
+      overflow: hidden;
+
+      &::before {
+        width: 100%;
+        content: '';
+        position: absolute;
+        background-color: map-get($colors, ligthBlack);
+        transform: skew(45deg) translate(1rem, 0px);
+        height: 1.75rem;
+        z-index: -1;
+      }
+
+      ul {
+        display: flex;
+        justify-content: end;
+        gap: 1rem;
+        padding: 0 2rem;
+
+        li {
+          a {
+            button {
+              color: map-get($colors, white);
+              font-size: 1.25rem;
+              line-height: 1.75rem;
+
+              &:hover {
+                color: map-get($colors, gray);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .block {
+    height: 5.75rem; //4rem + 1.75rem
+  }
+}

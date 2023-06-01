@@ -2,110 +2,10 @@
 @import '@/styles/var.scss';
 @import '@/styles/placeholder.scss';
 
-.header {
-  position: relative;
-
-  .headerInner {
-    position: fixed;
-    z-index: $nav-z-index;
-    min-width: $min-width;
-    width: 100%;
-    height: 4.5rem;
-    background-color: map-get($colors, white);
-
-    // header 상단
-    & > div {
-      @include box-shadow(true);
-
-      & > div {
-        position: relative;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        max-width: map-get($points, xl);
-        width: 100%;
-        margin: auto;
-        height: 3rem;
-
-        .logo {
-          position: relative;
-          width: 150px;
-          height: auto;
-
-          span {
-            @extend %blind;
-          }
-
-          &::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 112px;
-            height: 33px;
-            transform: translateY(-50%);
-            background-image: url('../../../public/image/logo-112px.png');
-            background-repeat: no-repeat;
-          }
-        }
-
-        ul {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-
-          .signInButton {
-            @extend %button-black;
-            padding: 0.5rem 0.75rem;
-          }
-        }
-      }
-    }
-
-    // header 하단
-    nav {
-      position: relative;
-      margin: auto;
-      height: 1.75rem;
-      max-width: map-get($points, xl);
-      overflow: hidden;
-
-      &::before {
-        width: 100%;
-        content: '';
-        position: absolute;
-        background-color: map-get($colors, ligthBlack);
-        transform: skew(45deg) translate(1rem, 0px);
-        height: 1.75rem;
-        z-index: -1;
-      }
-
-      ul {
-        display: flex;
-        justify-content: end;
-        gap: 1rem;
-        padding: 0 2rem;
-        li {
-          a {
-            button {
-              color: map-get($colors, white);
-              font-size: 1.25rem;
-              line-height: 1.75rem;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .block {
-    height: 4.75rem; //3rem + 1.75rem
-  }
-}
-
 .main {
   min-width: $min-width;
-  min-height: calc(100vh - 4.75rem - 5rem - 1rem);
-  max-width: map-get($points, xl);
+  min-height: calc(100vh - 5.75rem - 5rem - 1rem);
+  max-width: calc(map-get($points, xl) - 0.5rem * 2);
   margin: auto;
   padding: 0.5rem;
   background-color: map-get($colors, white);
@@ -114,6 +14,8 @@
 .footer {
   height: 5rem;
   background-color: map-get($colors, ligthBlack);
+  max-width: map-get($points, xl);
+  margin: auto;
 }
 
 .modal {
