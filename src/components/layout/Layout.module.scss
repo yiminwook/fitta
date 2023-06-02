@@ -3,7 +3,7 @@
 @import '@/styles/placeholder.scss';
 
 .main {
-  min-width: $min-width;
+  // min-width: $min-width;
   min-height: calc(100vh - 4rem - 5rem - 1rem);
   max-width: calc(map-get($points, xl) - 0.5rem * 2);
   padding: 0.5rem;
@@ -28,7 +28,7 @@
   z-index: $modal-z-index;
   top: 0;
   left: 0;
-  min-width: $min-width;
+  // min-width: $min-width;
   width: 100vw;
   height: 100vh;
   background-color: map-get($colors, transparent);
