@@ -4,6 +4,9 @@ import { handleAxiosError } from '@/models/customAxios';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Profile from '@/components/layout/header/Profile';
+import { useState } from 'react';
+import SidebarButton from '@/components/layout/header/SidebarButton';
+import Sidebar from '@/components/layout/header/Sidebar';
 
 interface HeaderProps {
   userData: any;
@@ -11,6 +14,12 @@ interface HeaderProps {
 }
 
 const Header = ({ userData, handleUserData }: HeaderProps) => {
+  const [showSidebar, setShowSidebar] = useState(false);
+
+  const toggleSidebar = () => {
+    setShowSidebar((pre) => !pre);
+  };
+
   const onClick = async () => {
     try {
       const response = await axios.get<{ userData: string }>('/userDummy.json');
@@ -28,10 +37,10 @@ const Header = ({ userData, handleUserData }: HeaderProps) => {
           <div className={header['headerInner']}>
             <Link to="/">
               <div className={header['logo']}>
-                <span>logo</span>
+                <span className="blind">logo</span>
               </div>
             </Link>
-            <ul>
+            <ul className={header['headerRight']}>
               {!userData ? (
                 <li>
                   <a>
@@ -46,6 +55,8 @@ const Header = ({ userData, handleUserData }: HeaderProps) => {
                 </li>
               )}
             </ul>
+            <SidebarButton showSidebar={showSidebar} toggleSidebar={toggleSidebar} />
+            {showSidebar ? <Sidebar /> : null}
           </div>
         </div>
         <nav className={header['headerNav']}>

@@ -37,10 +37,6 @@
           width: 7.5rem;
           height: 4rem;
 
-          span {
-            @extend %blind;
-          }
-
           &::after {
             content: '';
             position: absolute;
@@ -53,10 +49,14 @@
           }
         }
 
-        ul {
-          display: flex;
+        .headerRight {
+          display: none;
           align-items: center;
           gap: 1rem;
+
+          @include min-width(map-get($points, ss)) {
+            display: flex;
+          }
 
           .signInButton {
             @extend %button-black;
@@ -160,6 +160,11 @@
       max-width: map-get($points, xl);
       overflow: hidden;
       transition: height 0.3s ease;
+      display: none;
+
+      @include min-width(map-get($points, ss)) {
+        display: block;
+      }
 
       &::before {
         width: 100%;
