@@ -2,35 +2,31 @@ import { FcGoogle } from 'react-icons/fc';
 import signin from '@/components/signin/SignIn.module.scss';
 import SignInForm from '@/components/signin/SignInForm';
 import { envConfig } from '@/configs';
-import { customAxios, handleAxiosError } from '@/models/customAxios';
+import { handleAxiosError } from '@/models/customAxios';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import axios from 'axios';
 
 const { REACT_APP_SERVER_URL } = envConfig();
-
-export interface SignInBodyData {
-  email: string;
-  password: string;
-}
 
 const SignInFormSection = () => {
   const [searchParams] = useSearchParams();
 
-  const handleSignIn = async ({ email, password }: SignInBodyData) => {
+  const handleSignIn = async ({ email, password, isOwner }: { email: string; password: string; isOwner: boolean }) => {
     try {
-      console.log(email, password);
-      // const serverUrl = REACT_APP_SERVER_URL;
-      const response = await customAxios.post(`/members/login`, { email, password }, { withCredentials: true });
+      const serverApi = isOwner ? '/owners/signin' : '/members/signin';
+      const response = await axios.post(serverApi, { email, password });
       console.log('res  >>>>', response);
       if (response) console.log('data  >>>>', response.data);
     } catch (error) {
       console.error(error);
+      handleAxiosError(error);
     }
   };
 
   const getSignUpUrl = async () => {
     try {
-      const response = await customAxios.get<{ url: string }>('/auth/sign');
+      const response = await axios.get<{ url: string }>('/auth/sign');
       const {
         data: { url },
       } = response;
@@ -48,7 +44,7 @@ const SignInFormSection = () => {
   const sendCode = async (code: string) => {
     try {
       console.log('CODE >>>>', code);
-      const response = await customAxios.get<{ url: string }>(
+      const response = await axios.get<{ url: string }>(
         `/login/oauth2/code/google?code=${encodeURIComponent(
           code,
         )}&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fsignin`,

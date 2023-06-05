@@ -1,10 +1,9 @@
 import { FormEvent, useCallback, useState } from 'react';
 import signin from '@/components/signin/SignIn.module.scss';
-import { SignInBodyData } from '@/components/signin/SignInFormSection';
 import { useInput } from '@/hooks/useInput';
 
 interface SignInFormProps {
-  handleSignIn: ({ email, password }: SignInBodyData) => void;
+  handleSignIn: ({ email, password, isOwner }: { email: string; password: string; isOwner: boolean }) => void;
 }
 
 const SignInForm = ({ handleSignIn }: SignInFormProps) => {
@@ -12,6 +11,7 @@ const SignInForm = ({ handleSignIn }: SignInFormProps) => {
   const [passwordInputValue, _setPasswordInputValue, onChangeSetPasswordInputValue] = useInput('');
   const [isShowEmailCautionLetter, setIsShowEmailCautionLetter] = useState(false);
   const [isShowPasswordCautionLetter, setIsShowPasswordCautionLetter] = useState(false);
+  const [isOwner, setIsOwner] = useState(false);
 
   const onSubmit = useCallback(
     (e: FormEvent) => {
@@ -25,10 +25,14 @@ const SignInForm = ({ handleSignIn }: SignInFormProps) => {
       if (!email) setIsShowEmailCautionLetter(() => true);
       if (!password) setIsShowPasswordCautionLetter(() => true);
       if (!(email && password)) return;
-      handleSignIn({ email, password });
+      handleSignIn({ email, password, isOwner });
     },
-    [emailInputValue, passwordInputValue, isShowEmailCautionLetter, isShowPasswordCautionLetter],
+    [emailInputValue, passwordInputValue, isShowEmailCautionLetter, isShowPasswordCautionLetter, isOwner],
   );
+
+  const handleIsOwner = useCallback(() => {
+    setIsOwner((pre) => !pre);
+  }, [setIsOwner, isOwner]);
 
   return (
     <form onSubmit={onSubmit}>
@@ -41,7 +45,9 @@ const SignInForm = ({ handleSignIn }: SignInFormProps) => {
           value={emailInputValue}
           onChange={onChangeSetEmailInputValue}
         />
-        <p className={isShowEmailCautionLetter ? signin['show'] : ''}>이메일이 입력되지 않았습니다.</p>
+        <p className={[signin['caution'], isShowEmailCautionLetter ? signin['show'] : ''].join(' ')}>
+          이메일이 입력되지 않았습니다.
+        </p>
       </div>
       <div>
         <label htmlFor={signin['password']}>Password</label>
@@ -52,7 +58,13 @@ const SignInForm = ({ handleSignIn }: SignInFormProps) => {
           value={passwordInputValue}
           onChange={onChangeSetPasswordInputValue}
         />
-        <p className={isShowPasswordCautionLetter ? signin['show'] : ''}>비밀번호가 입력되지 않았습니다.</p>
+        <p className={[signin['caution'], isShowPasswordCautionLetter ? signin['show'] : ''].join(' ')}>
+          비밀번호가 입력되지 않았습니다.
+        </p>
+      </div>
+      <div>
+        <span>사업자로 로그인하기</span>
+        <input type="checkbox" onChange={handleIsOwner} />
       </div>
       <div>
         <button

@@ -33,7 +33,7 @@
       border: 2px solid map-get($colors, gray);
       @include box-shadow();
 
-      & > div {
+      & > div:not(:nth-of-type(3)) {
         position: relative;
         display: flex;
         flex-direction: column;
@@ -43,13 +43,20 @@
           font-size: 1.5rem;
         }
 
-        input {
+        input:not([type='checkbox']) {
           @extend %input-base;
         }
 
-        p {
+        .caution {
           @extend %caution-letter;
         }
+      }
+
+      & > div:nth-of-type(3) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
       }
 
       div:last-child {
