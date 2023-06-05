@@ -6,6 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import SearchButton from '@/components/common/SeachButton';
 import PasswordInput from '@/components/common/PasswordInput';
 import Loading from '@/components/common/Loading';
+import NumberInput from '@/components/common/NumberInput';
+import { SignUpOwnerData } from '@/types/userData';
+import { formElementValueCheck, formPasswordCheck } from '@/utils/formElementValueCheck';
+import { handleToastError } from '@/utils/handleToast';
 
 interface OwnerFormElements extends Omit<MemberFormElements, 'occupation'> {}
 
@@ -21,32 +25,38 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProp
   const navigate = useNavigate();
 
   const onSubmit = (e: FormEvent<OwnerForm>) => {
-    e.preventDefault();
-    if (!e.currentTarget) return;
-    const { email, password, passwordCheck, name, birthDate, sex, addressDetail } = e.currentTarget.elements;
+    try {
+      e.preventDefault();
+      const currentTarget = e.currentTarget;
+      if (!e.currentTarget) return;
 
-    const emailValue = email.value;
-    const passwordValue = password.value;
-    const passswordCheckValue = passwordCheck.value;
-    const nameValue = name.value;
-    const birthDateValue = birthDate.value;
-    const sexValue = sex.value;
-    const address = (roadAddress + ' ' + addressDetail.value).trim();
+      const { email, password, passwordConfirm, name, phoneNumber, birthDate, gender, addressDetail } =
+        e.currentTarget.elements;
 
-    sendSignUpData({
-      isOwner: true,
-      data: {
-        email: emailValue,
-        password: passwordValue,
-        passwordConfirm: passswordCheckValue, //삭제예정
-        name: nameValue,
-        phoneNumber: '01011112222',
+      formPasswordCheck({ currentTarget, password: password.value, passwordConfirm: passwordConfirm.value });
+
+      const address = (roadAddress + ' ' + addressDetail.value).trim();
+
+      const data: SignUpOwnerData = {
+        email: email.value,
+        password: password.value,
+        passwordConfirm: passwordConfirm.value, //삭제예정
+        name: name.value,
+        phoneNumber: phoneNumber.value,
         businessRegistrationNumber: 'string', //삭제예정
-        birthDate: birthDateValue,
-        gender: sexValue,
+        birthDate: birthDate.value,
+        gender: gender.value,
         address,
-      },
-    });
+      };
+
+      formElementValueCheck<OwnerForm, SignUpOwnerData>({ currentTarget: e.currentTarget, data });
+      sendSignUpData({
+        isOwner: true,
+        data,
+      });
+    } catch (error) {
+      handleToastError(error);
+    }
   };
 
   if (isLoading) {
@@ -57,10 +67,12 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProp
     <form ref={formRef} onSubmit={onSubmit} className={signUpForm['form']}>
       <label htmlFor="email">이메일</label>
       {/* readOnly */}
-      <input className={signUpForm['email']} name="email" type="email" value={userData?.email} tabIndex={-1} />
-      <PasswordInput passwordName="password" passwordCheckName="passwordCheck" />
+      <input className={signUpForm['email']} name="email" type="email" tabIndex={-1} />
+      <PasswordInput passwordName="password" passwordConfirmName="passwordConfirm" />
       <label htmlFor="name">이름</label>
       <input name="name" type="text" />
+      <label htmlFor="phoneNumber">연락처</label>
+      <NumberInput name="phoneNumber" maxLength={11} pattern={/(^\d{3})(\d{3,4})(\d{4}$)/} />
       {/* address */}
       <label htmlFor="address">주소</label>
       <div className={signUpForm['address']}>
@@ -80,8 +92,8 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProp
       <div className={signUpForm['birthDateSex']}>
         <label htmlFor="birthDate">생년월일</label>
         <input name="birthDate" type="date" />
-        <label htmlFor="sex">성별</label>
-        <select name="sex">
+        <label htmlFor="gender">성별</label>
+        <select name="gender">
           <option value="">선택</option>
           <option value="man">남성</option>
           <option value="woman">여성</option>
@@ -89,6 +101,7 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProp
       </div>
       {/* footer */}
       <div className={signUpForm['footer']}>
+        <p>모든 항목은 필수입니다.</p>
         <button type="submit">제출</button>
       </div>
     </form>

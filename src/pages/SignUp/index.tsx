@@ -3,33 +3,23 @@ import NavSection from '@/components/signup/NavSection';
 import { useState } from 'react';
 import { Address } from 'react-daum-postcode';
 import PostModal from '@/components/signup/PostModal';
-import { MemberData, OwnerData } from '@/types/userData';
+import { SignUpMemberData, SignUpOwnerData } from '@/types/userData';
 import OwnerSection from '@/components/signup/OwnerSection';
 import MemberSection from '@/components/signup/MemberSection';
-import { customAxios } from '@/models/customAxios';
-import { AxiosResponse } from 'axios';
-// import { useUser } from '@/hooks/useUser';
+import axios from 'axios';
+import { handleToastError } from '@/utils/handleToast';
 
 const SignUp = () => {
   const [roadAddress, setRoadAddress] = useState('');
   const [showPostModal, setShowPostModal] = useState(false);
 
-  const sendSignUpData = async ({ data, isOwner }: { data: MemberData | OwnerData; isOwner: boolean }) => {
+  const sendSignUpData = async ({ data, isOwner }: { data: SignUpMemberData | SignUpOwnerData; isOwner: boolean }) => {
     try {
-      console.log('isOwner >>>', isOwner);
-      console.log('sendedData >>>', data);
-      let response: AxiosResponse;
-      if (isOwner === true) {
-        response = await customAxios.post(`/owner`, { ...data });
-      } else {
-        response = await customAxios.post(`/members`, { ...data });
-      }
-
-      if (response) {
-        console.log('회원가입 성공', response);
-      }
+      const parsedPhoneNumber = data.phoneNumber.split('-').join('');
+      const signUpApi = isOwner ? `/owner` : `/members`;
+      await axios.post(signUpApi, { ...data, phoneNumber: parsedPhoneNumber });
     } catch (error) {
-      console.error(error);
+      handleToastError(error);
     }
   };
 

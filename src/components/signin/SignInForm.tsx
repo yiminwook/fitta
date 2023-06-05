@@ -37,9 +37,9 @@ const SignInForm = ({ handleSignIn }: SignInFormProps) => {
   return (
     <form onSubmit={onSubmit}>
       <div>
-        <label htmlFor={signin['email']}>Email</label>
+        <label htmlFor="email">Email</label>
         <input
-          id={signin['email']}
+          name="email"
           type="email"
           placeholder="구글 이메일을 입력해주세요"
           value={emailInputValue}
@@ -50,9 +50,9 @@ const SignInForm = ({ handleSignIn }: SignInFormProps) => {
         </p>
       </div>
       <div>
-        <label htmlFor={signin['password']}>Password</label>
+        <label htmlFor="password">Password</label>
         <input
-          id={signin['password']}
+          name="password"
           type="password"
           placeholder="패스워드를 입력해주세요"
           value={passwordInputValue}
