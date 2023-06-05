@@ -1,16 +1,14 @@
 import { MouseEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-interface SearchResultSectionProps {
-  closeHistory: (e: MouseEvent) => void;
-}
+interface SearchResultSectionProps {}
 
-const SearchResultSection = ({ closeHistory }: SearchResultSectionProps) => {
+const SearchResultSection = ({}: SearchResultSectionProps) => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
 
   return (
-    <section onClick={closeHistory}>
+    <section>
       <div>{query}</div>
     </section>
   );
