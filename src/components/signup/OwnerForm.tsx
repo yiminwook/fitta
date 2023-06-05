@@ -65,10 +65,11 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProp
 
   return (
     <form ref={formRef} onSubmit={onSubmit} className={signUpForm['form']}>
+      {/* email readOnly */}
       <label htmlFor="email">이메일</label>
-      {/* readOnly */}
       <input className={signUpForm['email']} name="email" type="email" tabIndex={-1} />
       <PasswordInput passwordName="password" passwordConfirmName="passwordConfirm" />
+      {/* name phone */}
       <label htmlFor="name">이름</label>
       <input name="name" type="text" />
       <label htmlFor="phoneNumber">연락처</label>
@@ -88,7 +89,7 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProp
       </div>
       <label htmlFor="addressDetail">상세주소</label>
       <input name="addressDetail" type="text" placeholder="상세주소" />
-      {/* ageSex */}
+      {/* birthDate gender */}
       <div className={signUpForm['birthDateSex']}>
         <label htmlFor="birthDate">생년월일</label>
         <input name="birthDate" type="date" />

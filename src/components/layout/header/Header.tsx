@@ -51,7 +51,7 @@ const Header = ({ handleUserData }: HeaderProps) => {
                 </li>
               ) : (
                 <li>
-                  <Profile userData={userData} />
+                  <Profile />
                 </li>
               )}
             </ul>
