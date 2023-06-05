@@ -7,7 +7,7 @@ export interface result {
 }
 
 export const useUser = () => {
-  const { data, isLoading, error } = useQuery<result, AxiosError>('userData', fetcher);
+  const { data, isLoading, error } = useQuery<result, AxiosError>('/members/testuserdata', fetcher);
 
   return { data, isLoading, error };
 };
