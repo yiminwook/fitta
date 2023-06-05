@@ -24,7 +24,7 @@ export const formPasswordCheck = <T extends HTMLFormElement>({
 
   if (password.length < PASSWORD_LENGTH) {
     currentTarget.password.classList.add('empty');
-    throw new Error(`비밀번호는 ${PASSWORD_LENGTH}자리 이상이어야 합니다.`);
+    throw new Error(`${PASSWORD_LENGTH}글자 이상이어야 합니다.`);
   }
 };
 

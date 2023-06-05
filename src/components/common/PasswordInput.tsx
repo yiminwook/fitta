@@ -11,7 +11,12 @@ interface PasswordInputProps {
   placeholder?: string;
 }
 
-const PasswordInput = ({ className = '', passwordName, passwordConfirmName, placeholder = '' }: PasswordInputProps) => {
+const PasswordInput = ({
+  className = '',
+  passwordName,
+  passwordConfirmName,
+  placeholder = `특수문자 1개 / ${PASSWORD_LENGTH}글자이상 포함`,
+}: PasswordInputProps) => {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [excludeSpecialCharacter, setExcludeSpecialCharacter] = useState(false);
@@ -59,6 +64,7 @@ const PasswordInput = ({ className = '', passwordName, passwordConfirmName, plac
           className={className}
           name={passwordName}
           onChange={onChangePassoword}
+          placeholder={placeholder}
           value={password}
         />
         {excludeSpecialCharacter ? (
@@ -73,7 +79,7 @@ const PasswordInput = ({ className = '', passwordName, passwordConfirmName, plac
           <SpeechBubble
             className={passwordInput['passwordRule']}
             iconColor="#ffa500"
-            message="8글자이상이어야 합니다."
+            message={`${PASSWORD_LENGTH}글자이상이어야 합니다.`}
             onClose={onCloseUnderLength}
           />
         ) : null}
@@ -85,7 +91,7 @@ const PasswordInput = ({ className = '', passwordName, passwordConfirmName, plac
           onChange={onChangePasswordConfirm}
           name={passwordConfirmName}
           value={passwordConfirm}
-          placeholder={placeholder}
+          // placeholder={placeholder}
         />
         {misMatch ? (
           <SpeechBubble

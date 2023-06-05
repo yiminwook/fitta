@@ -15,7 +15,7 @@ const NumberInput = ({
   pattern = '',
   name,
   maxLength,
-  placeholder = '',
+  placeholder = '010-1234-5678',
 }: NumberInputProps) => {
   const [inputValue, setInputValue] = useState('');
   const onChange = useCallback(

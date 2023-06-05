@@ -90,7 +90,7 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProp
       <label htmlFor="addressDetail">상세주소</label>
       <input name="addressDetail" type="text" placeholder="상세주소" />
       {/* birthDate gender */}
-      <div className={signUpForm['birthDateSex']}>
+      <div className={signUpForm['birthDateGender']}>
         <label htmlFor="birthDate">생년월일</label>
         <input name="birthDate" type="date" />
         <label htmlFor="gender">성별</label>
