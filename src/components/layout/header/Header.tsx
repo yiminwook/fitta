@@ -1,6 +1,5 @@
 import NavChild from '@/components/common/NavChild';
 import header from '@/components/layout/header/Header.module.scss';
-import { handleToastError } from '@/models/customAxios';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Profile from '@/components/layout/header/Profile';

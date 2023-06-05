@@ -2,10 +2,10 @@ import { FcGoogle } from 'react-icons/fc';
 import signin from '@/components/signin/SignIn.module.scss';
 import SignInForm from '@/components/signin/SignInForm';
 import { envConfig } from '@/configs';
-import { handleAxiosError } from '@/models/customAxios';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { handleToastError } from '@/utils/handleToast';
 
 const { REACT_APP_SERVER_URL } = envConfig();
 
@@ -19,8 +19,7 @@ const SignInFormSection = () => {
       console.log('res  >>>>', response);
       if (response) console.log('data  >>>>', response.data);
     } catch (error) {
-      console.error(error);
-      handleAxiosError(error);
+      handleToastError(error);
     }
   };
 
@@ -33,8 +32,7 @@ const SignInFormSection = () => {
       console.log(url);
       window.location.href = url;
     } catch (error) {
-      console.error(error);
-      handleAxiosError(error);
+      handleToastError(error);
     }
   };
 
@@ -52,8 +50,7 @@ const SignInFormSection = () => {
       const { data } = response;
       console.log('DATA >>>>', data);
     } catch (error) {
-      console.error(error);
-      handleAxiosError(error);
+      handleToastError(error);
     }
   };
 
