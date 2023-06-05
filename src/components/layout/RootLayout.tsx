@@ -12,7 +12,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
 
   return (
     <>
-      <Header handleUserData={handleUserData} userData={userData} />
+      <Header handleUserData={handleUserData} />
       <main className={layout['main']}>{children}</main>
       <Footer />
     </>

@@ -1,34 +1,35 @@
 import NavChild from '@/components/common/NavChild';
 import header from '@/components/layout/header/Header.module.scss';
-import { handleAxiosError } from '@/models/customAxios';
+import { handleToastError } from '@/models/customAxios';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Profile from '@/components/layout/header/Profile';
 import { useState } from 'react';
 import SidebarButton from '@/components/layout/header/SidebarButton';
 import Sidebar from '@/components/layout/header/Sidebar';
+import { useUser } from '@/hooks/useUser';
 
 interface HeaderProps {
-  userData: any;
   handleUserData: (data: any) => void;
 }
 
-const Header = ({ userData, handleUserData }: HeaderProps) => {
+const Header = ({ handleUserData }: HeaderProps) => {
   const [showSidebar, setShowSidebar] = useState(false);
+  const { data: userData } = useUser();
 
   const toggleSidebar = () => {
     setShowSidebar((pre) => !pre);
   };
 
-  const onClick = async () => {
-    try {
-      const response = await axios.get<{ userData: string }>('/userDummy.json');
-      handleUserData(response.data.userData);
-    } catch (error) {
-      console.error(error);
-      handleAxiosError(error);
-    }
-  };
+  // const onClick = async () => {
+  //   try {
+  //     const response = await axios.get<{ userData: string }>('/userDummy.json');
+  //     handleUserData(response.data.userData);
+  //   } catch (error) {
+  //     console.error(error);
+  //     handleAxiosError(error);
+  //   }
+  // };
 
   return (
     <header className={header['header']}>
@@ -44,7 +45,7 @@ const Header = ({ userData, handleUserData }: HeaderProps) => {
               {!userData ? (
                 <li>
                   <a>
-                    <button className={header['signInButton']} onClick={onClick}>
+                    <button className={header['signInButton']} onClick={() => {}}>
                       로그인
                     </button>
                   </a>
