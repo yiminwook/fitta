@@ -23,7 +23,7 @@ class LocalStorage {
   }
 
   public addOneData(data: string) {
-    const newData = [data, ...this.data];
+    const newData = [data, ...this.data.slice().filter((string) => string !== data)];
     this.setState(newData);
   }
 

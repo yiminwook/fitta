@@ -10,11 +10,6 @@ const SearchHistory = ({}: SearchHistoryProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
 
-  useEffect(() => {
-    const history = searchHistoryLocalStorage.Data;
-    setSearchHistory(() => history);
-  }, [searchParams]);
-
   const onDelete = (index: number) => {
     searchHistoryLocalStorage.deleteOneDataByIndex(index);
     setSearchHistory((pre) => pre.filter((_history, idx) => idx !== index));
@@ -24,6 +19,11 @@ const SearchHistory = ({}: SearchHistoryProps) => {
     searchHistoryLocalStorage.reset();
     setSearchHistory(() => []);
   };
+
+  useEffect(() => {
+    const history = searchHistoryLocalStorage.Data;
+    setSearchHistory(() => history);
+  }, [searchParams]);
 
   return (
     <section className={search['searchHistory']}>

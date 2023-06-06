@@ -1,0 +1,98 @@
+@import '@/styles/mixin.scss';
+@import '@/styles/var.scss';
+@import '@/styles/placeholder.scss';
+
+.formSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: map-get($points, ss);
+  margin: auto;
+  padding: 1rem 0;
+
+  @include min-width(map-get($points, ss)) {
+    padding: 2rem 0;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+
+    form {
+      display: flex;
+      gap: 3.5rem;
+      flex-direction: column;
+      border-radius: 10px;
+      padding: 1.5rem;
+      border: 2px solid map-get($colors, gray);
+      @include box-shadow();
+
+      & > div:not(:nth-of-type(3)) {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        label {
+          font-size: 1.5rem;
+        }
+
+        input:not([type='checkbox']) {
+          @extend %input-base;
+        }
+
+        .caution {
+          @extend %caution-letter;
+        }
+      }
+
+      & > div:nth-of-type(3) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      div:last-child {
+        button {
+          font-size: 1rem;
+          margin: auto;
+          font-weight: 600;
+          @extend %button-black;
+        }
+      }
+    }
+
+    & > div {
+      .googleSignUpButton {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        background-color: #4285f4;
+        padding: 0.5rem 1.25rem;
+        color: #ffffff;
+        margin: auto;
+        border-radius: 50px;
+        font-weight: 600;
+        @include transition(background-color, 0.1s, $bezier-curve);
+
+        &:hover {
+          background-color: #1c4991;
+        }
+
+        span {
+          width: 2rem;
+          height: 2rem;
+          background-color: #ffffff;
+          border-radius: 50% 50%;
+        }
+      }
+    }
+  }
+}

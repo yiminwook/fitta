@@ -1,0 +1,201 @@
+@import '@/styles/mixin.scss';
+@import '@/styles/var.scss';
+@import '@/styles/placeholder.scss';
+
+.header {
+  position: relative;
+
+  .headerWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: $nav-z-index;
+    // min-width: $min-width;
+    width: 100%;
+
+    &:hover {
+      .headerNav {
+        height: 1.75rem;
+      }
+    }
+
+    // header 상단
+    .headerOutter {
+      background-color: map-get($colors, white);
+      @include box-shadow(true);
+
+      .headerInner {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: calc(map-get($points, xl) - 1rem * 2);
+        margin: auto;
+        height: 4rem;
+        padding: 0 1rem;
+
+        .logo {
+          position: relative;
+          width: 7.5rem;
+          height: 4rem;
+
+          &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 120px;
+            height: 35px;
+            transform: translateY(-50%);
+            background-image: url('../../../../public/image/logo-120px.png');
+            background-repeat: no-repeat;
+          }
+        }
+
+        .headerRight {
+          display: none;
+          align-items: center;
+          gap: 1rem;
+
+          @include min-width(map-get($points, ss)) {
+            display: flex;
+          }
+
+          .signInButton {
+            @extend %button-black;
+            padding: 0.5rem 0.75rem;
+          }
+
+          li {
+            .profile {
+              position: relative;
+              width: 6.5rem;
+              padding: 0 0.75rem;
+              height: 2.5rem;
+              gap: 0.5rem;
+              border: 2px solid map-get($colors, gray);
+              border-radius: 10px;
+              display: flex;
+              align-items: center;
+              cursor: pointer;
+              @include box-shadow();
+
+              .profileImageWapper {
+                display: inline-block;
+                position: relative;
+                width: 30px;
+                height: 30px;
+                border-radius: 100%;
+                overflow: hidden;
+
+                img {
+                  @include absolute-center();
+                }
+              }
+
+              & > p {
+                text-align: center;
+                width: 4rem;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+              }
+
+              .toggleMenu {
+                position: absolute;
+                z-index: 1;
+                top: calc(100% + 1rem);
+                right: 0;
+                display: flex;
+                flex-direction: column;
+                background-color: map-get($colors, white);
+                gap: 0.5rem;
+                width: 7rem;
+                padding: 0.5rem;
+                border-radius: 5px;
+                @include box-shadow();
+
+                &::after {
+                  content: '';
+                  width: 1rem;
+                  height: 1rem;
+                  position: absolute;
+                  top: -0.45rem;
+                  right: 0.75rem;
+                  z-index: 1;
+                  background-color: map-get($colors, white);
+                  transform: rotateZ(45deg);
+                }
+
+                header {
+                  display: flex;
+                  flex-direction: row-reverse;
+                }
+
+                ul {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-start;
+                  gap: 0.5rem;
+                  padding-left: 0.5rem;
+                }
+
+                footer {
+                  border-top: 1px solid black;
+                  padding-top: 0.5rem;
+
+                  button {
+                    margin: auto;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // header 하단
+    .headerNav {
+      position: relative;
+      margin: auto;
+      height: 0;
+      max-width: map-get($points, xl);
+      overflow: hidden;
+      transition: height 0.3s ease;
+      display: none;
+
+      @include min-width(map-get($points, ss)) {
+        display: block;
+      }
+
+      &::before {
+        width: 100%;
+        content: '';
+        position: absolute;
+        background-color: map-get($colors, ligthBlack);
+        transform: skew(45deg) translate(1rem, 0px);
+        height: 1.75rem;
+        z-index: -1;
+      }
+
+      ul {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+        padding: 0 2rem;
+
+        li {
+          color: map-get($colors, white);
+          a {
+            font-size: 1.25rem;
+            line-height: 1.75rem;
+
+            &:hover {
+              color: map-get($colors, gray);
+            }
+          }
+        }
+      }
+    }
+  }
+}

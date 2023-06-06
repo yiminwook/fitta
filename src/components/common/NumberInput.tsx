@@ -15,13 +15,14 @@ const NumberInput = ({
   pattern = '',
   name,
   maxLength,
-  placeholder = '',
+  placeholder = '010-1234-5678',
 }: NumberInputProps) => {
   const [inputValue, setInputValue] = useState('');
   const onChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       if (!e.target) return;
       const value = e.target.value.replace(/[^0-9]/g, '');
+      if (value.length > maxLength) return;
       if (pattern === '') {
         return setInputValue(() => value);
       }
@@ -38,7 +39,7 @@ const NumberInput = ({
       name={name}
       onChange={onChange}
       value={inputValue}
-      maxLength={maxLength}
+      // maxLength={maxLength}
       placeholder={placeholder}
     />
   );

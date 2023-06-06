@@ -1,24 +1,24 @@
 import { useSearchParams } from 'react-router-dom';
 import search from '@/components/search/Search.module.scss';
-import { ChangeEvent, FormEvent, MouseEvent, useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react';
 import SearchHistory from '@/components/search/SeachHistory';
 import { searchHistoryLocalStorage } from '@/models/localStorage';
 import { BiSearch } from 'react-icons/bi';
 
-interface SearchInputSectionProps {
-  showHistory: boolean;
-  openHistory: (e: MouseEvent) => void;
-  closeHistory: (e: MouseEvent) => void;
-}
+interface SearchInputSectionProps {}
 
-const SearchInputSection = ({ showHistory, openHistory, closeHistory }: SearchInputSectionProps) => {
+const SearchInputSection = ({}: SearchInputSectionProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchInput, setSearchInput] = useState('');
+  const [showHistory, setShowHistory] = useState(false);
 
-  useEffect(() => {
-    const query = searchParams.get('query') ?? '';
-    setSearchInput(() => query);
-  }, [searchParams]);
+  const openHistory = useCallback(() => {
+    setShowHistory(() => true);
+  }, [showHistory]);
+
+  const closeHistory = useCallback(() => {
+    setShowHistory(() => false);
+  }, [showHistory]);
 
   const onChangeSearchInput = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -28,30 +28,30 @@ const SearchInputSection = ({ showHistory, openHistory, closeHistory }: SearchIn
     [searchInput],
   );
 
-  const onSearch = useCallback(() => {
-    searchHistoryLocalStorage.addOneData(searchInput);
-    setSearchParams(() => ({ query: searchInput }));
-  }, [searchHistoryLocalStorage, searchInput]);
-
   const onSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      onSearch();
+      searchHistoryLocalStorage.addOneData(searchInput);
+      setSearchParams(() => ({ query: searchInput }));
     },
-    [onSearch],
+    [searchHistoryLocalStorage, searchInput],
   );
 
+  useEffect(() => {
+    const query = searchParams.get('query') ?? '';
+    setSearchInput(() => query);
+  }, [searchParams]);
+
   return (
-    <section className={search['searchInputSection']} onClick={closeHistory}>
+    <section className={search['searchInputSection']}>
       <form onSubmit={onSubmit}>
         <div>
           <input
             type="text"
             onChange={onChangeSearchInput}
             value={searchInput}
-            onClick={openHistory}
-            onFocus={() => {}}
-            onBlur={() => {}}
+            onFocus={openHistory}
+            onBlur={closeHistory}
           />
           {showHistory ? <SearchHistory /> : null}
           <button type="submit">

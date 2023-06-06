@@ -1,5 +1,5 @@
 import Head from '@/components/layout/Head';
-import SignInFormSection from '@/components/signin/SignInFormSection';
+import SignInFormSection from '@/components/signIn/SignInFormSection';
 
 const SignIn = () => {
   return (

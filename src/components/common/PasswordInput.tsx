@@ -2,17 +2,23 @@ import { ChangeEvent, useCallback, useState } from 'react';
 import passwordInput from '@/components/common/PasswordInput.module.scss';
 import { checkSpecialCharacter } from '@/utils/checkSpecialCharacter';
 import SpeechBubble from '@/components/common/SpeechBubble';
+import { PASSWORD_LENGTH } from '@/consts';
 
 interface PasswordInputProps {
   className?: string;
   passwordName: string;
-  passwordCheckName: string;
+  passwordConfirmName: string;
   placeholder?: string;
 }
 
-const PasswordInput = ({ className = '', passwordName, passwordCheckName, placeholder = '' }: PasswordInputProps) => {
+const PasswordInput = ({
+  className = '',
+  passwordName,
+  passwordConfirmName,
+  placeholder = `특수문자 1개 / ${PASSWORD_LENGTH}글자이상 포함`,
+}: PasswordInputProps) => {
   const [password, setPassword] = useState('');
-  const [passwordCheck, setPasswordCheck] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
   const [excludeSpecialCharacter, setExcludeSpecialCharacter] = useState(false);
   const [underLength, setUnderLength] = useState(false);
   const [misMatch, setmisMatch] = useState(false);
@@ -22,16 +28,16 @@ const PasswordInput = ({ className = '', passwordName, passwordCheckName, placeh
       const value = e.target.value.replace(/\s/g, '');
       setExcludeSpecialCharacter(() => checkSpecialCharacter(value) === false);
       //8글자 이상
-      setUnderLength(() => value.length < 8);
+      setUnderLength(() => value.length < PASSWORD_LENGTH);
       setPassword(() => value);
     },
     [password],
   );
 
-  const onChangePasswordCheck = useCallback(
+  const onChangePasswordConfirm = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value.replace(/\s/g, '');
-      setPasswordCheck(() => value);
+      setPasswordConfirm(() => value);
       setmisMatch(() => value !== password);
     },
     [password],
@@ -58,11 +64,12 @@ const PasswordInput = ({ className = '', passwordName, passwordCheckName, placeh
           className={className}
           name={passwordName}
           onChange={onChangePassoword}
+          placeholder={placeholder}
           value={password}
         />
         {excludeSpecialCharacter ? (
           <SpeechBubble
-            className={passwordInput['passwordRoule']}
+            className={passwordInput['passwordRule']}
             iconColor="#ffa500"
             message="특수문자를 포함시켜주세요"
             onClose={onCloseIncludeSpecialCharacter}
@@ -70,21 +77,21 @@ const PasswordInput = ({ className = '', passwordName, passwordCheckName, placeh
         ) : null}
         {underLength ? (
           <SpeechBubble
-            className={passwordInput['passwordRoule']}
+            className={passwordInput['passwordRule']}
             iconColor="#ffa500"
-            message="8글자이상이어야 합니다."
+            message={`${PASSWORD_LENGTH}글자이상이어야 합니다.`}
             onClose={onCloseUnderLength}
           />
         ) : null}
       </div>
-      <label htmlFor={passwordCheckName}>비밀번호확인</label>
+      <label htmlFor={passwordConfirmName}>비밀번호확인</label>
       <div className={passwordInput['passwordWapper']}>
         <input
           type="password"
-          onChange={onChangePasswordCheck}
-          name={passwordCheckName}
-          value={passwordCheck}
-          placeholder={placeholder}
+          onChange={onChangePasswordConfirm}
+          name={passwordConfirmName}
+          value={passwordConfirm}
+          // placeholder={placeholder}
         />
         {misMatch ? (
           <SpeechBubble

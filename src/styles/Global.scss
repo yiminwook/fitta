@@ -23,6 +23,7 @@ p,
 ol,
 ul,
 li,
+span,
 input,
 label,
 button {
@@ -31,7 +32,7 @@ button {
   font-size: inherit;
   font-weight: inherit;
   color: inherit;
-  list-style: none;
+  // list-style: none;
   text-decoration: none;
   box-sizing: border-box;
   margin: 0;
@@ -60,4 +61,17 @@ button {
     color: red;
     cursor: default;
   }
+}
+
+.blind {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.empty {
+  background-color: #ffb3b3;
 }
