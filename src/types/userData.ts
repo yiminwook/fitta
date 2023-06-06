@@ -5,7 +5,7 @@ export interface SignUpDataBase {
   passwordConfirm?: string; //post 날리기전에 삭제
   name: string;
   phoneNumber: string;
-  birthDate: string;
+  birthdate: string;
   gender: string;
 }
 

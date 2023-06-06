@@ -14,7 +14,7 @@ const SignUp = () => {
   const sendSignUpData = async ({ data, isOwner }: { data: SignUpMemberData | SignUpOwnerData; isOwner: boolean }) => {
     try {
       const parsedPhoneNumber = data.phoneNumber.split('-').join('');
-      const signUpApi = isOwner ? `/owner` : `/members`;
+      const signUpApi = isOwner ? `/owners` : `/members`;
       await axios.post(signUpApi, { ...data, phoneNumber: parsedPhoneNumber });
     } catch (error) {
       handleToastError(error);

@@ -30,7 +30,7 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProp
       const currentTarget = e.currentTarget;
       if (!e.currentTarget) return;
 
-      const { email, password, passwordConfirm, name, phoneNumber, birthDate, gender, addressDetail } =
+      const { email, password, passwordConfirm, name, phoneNumber, birthdate, gender, addressDetail } =
         e.currentTarget.elements;
 
       formPasswordCheck({ currentTarget, password: password.value, passwordConfirm: passwordConfirm.value });
@@ -44,7 +44,7 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProp
         name: name.value,
         phoneNumber: phoneNumber.value,
         businessRegistrationNumber: 'string', //삭제예정
-        birthDate: birthDate.value,
+        birthdate: birthdate.value,
         gender: gender.value,
         address,
       };
@@ -90,14 +90,14 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProp
       <label htmlFor="addressDetail">상세주소</label>
       <input name="addressDetail" type="text" placeholder="상세주소" />
       {/* birthDate gender */}
-      <div className={signUpForm['birthDateGender']}>
-        <label htmlFor="birthDate">생년월일</label>
-        <input name="birthDate" type="date" />
+      <div className={signUpForm['birthdateGender']}>
+        <label htmlFor="birthdate">생년월일</label>
+        <input name="birthdate" type="date" />
         <label htmlFor="gender">성별</label>
         <select name="gender">
           <option value="">선택</option>
-          <option value="man">남성</option>
-          <option value="woman">여성</option>
+          <option value="MALE">남성</option>
+          <option value="FEMALE">여성</option>
         </select>
       </div>
       {/* footer */}

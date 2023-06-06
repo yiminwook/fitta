@@ -16,7 +16,7 @@ export interface MemberFormElementsType extends HTMLFormControlsCollection {
   passwordConfirm: HTMLInputElement;
   phoneNumber: HTMLInputElement;
   name: HTMLInputElement;
-  birthDate: HTMLInputElement;
+  birthdate: HTMLInputElement;
   occupation: HTMLInputElement;
   address: HTMLInputElement;
   addressDetail: HTMLInputElement;
@@ -44,7 +44,7 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: MemberFormPr
       const currentTarget = e.currentTarget;
       if (!currentTarget) return;
 
-      const { email, name, phoneNumber, birthDate, gender, occupation, addressDetail, password, passwordConfirm } =
+      const { email, name, phoneNumber, birthdate, gender, occupation, addressDetail, password, passwordConfirm } =
         currentTarget.elements;
 
       formPasswordCheck({ currentTarget, password: password.value, passwordConfirm: passwordConfirm.value });
@@ -59,7 +59,7 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: MemberFormPr
         phoneNumber: phoneNumber.value,
         address,
         gender: gender.value,
-        birthDate: birthDate.value,
+        birthdate: birthdate.value,
         occupation: occupation.value,
       };
 
@@ -117,14 +117,14 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: MemberFormPr
       <label htmlFor="addressDetail">상세주소</label>
       <input name="addressDetail" type="text" placeholder="상세주소" />
       {/* birthDate gender */}
-      <div className={signUpForm['birthDateGender']}>
-        <label htmlFor="birthDate">생년월일</label>
-        <input name="birthDate" type="date" />
+      <div className={signUpForm['birthdateGender']}>
+        <label htmlFor="birthdate">생년월일</label>
+        <input name="birthdate" type="date" />
         <label htmlFor="gender">성별</label>
         <select name="gender">
           <option value="">선택</option>
-          <option value="man">남성</option>
-          <option value="woman">여성</option>
+          <option value="MALE">남성</option>
+          <option value="FEMALE">여성</option>
         </select>
       </div>
       {/* footer */}
