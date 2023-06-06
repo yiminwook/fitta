@@ -11,10 +11,8 @@ interface NavChildProps {
 const NavChild = ({ to, content, className = '', onClick }: NavChildProps) => {
   return (
     <li onClick={onClick}>
-      <NavLink to={to}>
-        <button tabIndex={-1} className={className}>
-          {content}
-        </button>
+      <NavLink to={to} className={className}>
+        {content}
       </NavLink>
     </li>
   );

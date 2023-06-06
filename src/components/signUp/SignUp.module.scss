@@ -23,7 +23,7 @@
       justify-content: center;
       gap: 10%;
 
-      button {
+      a {
         @extend %navTab;
         &.active {
           color: map-get($colors, white);
