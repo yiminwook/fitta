@@ -22,6 +22,7 @@ const NumberInput = ({
     (e: ChangeEvent<HTMLInputElement>) => {
       if (!e.target) return;
       const value = e.target.value.replace(/[^0-9]/g, '');
+      if (value.length > maxLength) return;
       if (pattern === '') {
         return setInputValue(() => value);
       }
@@ -38,7 +39,7 @@ const NumberInput = ({
       name={name}
       onChange={onChange}
       value={inputValue}
-      maxLength={maxLength}
+      // maxLength={maxLength}
       placeholder={placeholder}
     />
   );

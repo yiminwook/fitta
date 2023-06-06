@@ -31,7 +31,7 @@ const Header = ({ handleUserData }: HeaderProps) => {
   // };
 
   if (userData === undefined) {
-    return <Navigate to={'/404'} />;
+    return null;
   }
 
   return (
@@ -67,7 +67,7 @@ const Header = ({ handleUserData }: HeaderProps) => {
           <ul>
             {/* pageLink 임시 */}
             <NavChild to="/search" content="검색" />
-            <NavChild to={`/owner/${userData.id}/home`} content="오너" />
+            <NavChild to={`/owner/${userData!.id}/home`} content="오너" />
             <NavChild to="/signup" content="가입" />
             <NavChild to="/signin" content="로그인" />
           </ul>
