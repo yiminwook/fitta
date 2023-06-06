@@ -1,5 +1,5 @@
 import signUpForm from '@/components/signUp/SignUpForm.module.scss';
-import { MemberFormElements, MemberFormProps } from '@/components/signUp/MemberForm';
+import { MemberFormElementsType, MemberFormProps } from '@/components/signUp/MemberForm';
 import { FormEvent, useRef } from 'react';
 import { useUser } from '@/hooks/useUser';
 import { useNavigate } from 'react-router-dom';
@@ -11,20 +11,20 @@ import { SignUpOwnerData } from '@/types/userData';
 import { formElementValueCheck, formPasswordCheck } from '@/utils/formElementValueCheck';
 import { handleToastError } from '@/utils/handleToast';
 
-interface OwnerFormElements extends Omit<MemberFormElements, 'occupation'> {}
+interface OwnerFormElements extends Omit<MemberFormElementsType, 'occupation'> {}
 
-interface OwnerForm extends HTMLFormElement {
+interface OwnerFormType extends HTMLFormElement {
   readonly elements: OwnerFormElements;
 }
 
 export interface OwnerFormProps extends MemberFormProps {}
 
 const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProps) => {
-  const formRef = useRef<HTMLFormElement>(null);
+  const ownerFormRef = useRef<OwnerFormType>(null);
   const { data: userData, isLoading } = useUser();
   const navigate = useNavigate();
 
-  const onSubmit = (e: FormEvent<OwnerForm>) => {
+  const onSubmit = (e: FormEvent<OwnerFormType>) => {
     try {
       e.preventDefault();
       const currentTarget = e.currentTarget;
@@ -49,7 +49,7 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProp
         address,
       };
 
-      formElementValueCheck<OwnerForm, SignUpOwnerData>({ currentTarget: e.currentTarget, data });
+      formElementValueCheck<OwnerFormType, SignUpOwnerData>({ currentTarget: e.currentTarget, data });
       sendSignUpData({
         isOwner: true,
         data,
@@ -64,7 +64,7 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProp
   }
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} className={signUpForm['form']}>
+    <form ref={ownerFormRef} onSubmit={onSubmit} className={signUpForm['form']}>
       {/* email readOnly */}
       <label htmlFor="email">이메일</label>
       <input className={signUpForm['email']} name="email" type="email" tabIndex={-1} />

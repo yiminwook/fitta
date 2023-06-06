@@ -10,7 +10,7 @@ import NumberInput from '@/components/common/NumberInput';
 import { toast } from 'react-toastify';
 import { formElementValueCheck, formPasswordCheck } from '@/utils/formElementValueCheck';
 
-export interface MemberFormElements extends HTMLFormControlsCollection {
+export interface MemberFormElementsType extends HTMLFormControlsCollection {
   email: HTMLInputElement;
   password: HTMLInputElement;
   passwordConfirm: HTMLInputElement;
@@ -23,8 +23,8 @@ export interface MemberFormElements extends HTMLFormControlsCollection {
   gender: HTMLSelectElement;
 }
 
-interface MemberForm extends HTMLFormElement {
-  readonly elements: MemberFormElements;
+interface MemberFormType extends HTMLFormElement {
+  readonly elements: MemberFormElementsType;
 }
 
 export interface MemberFormProps {
@@ -34,11 +34,11 @@ export interface MemberFormProps {
 }
 
 const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: MemberFormProps) => {
-  const formRef = useRef<HTMLFormElement>(null);
+  const memberFormRef = useRef<MemberFormType>(null);
   const { data: userData, isLoading } = useUser();
   const navigate = useNavigate();
 
-  const onSubmit = (e: FormEvent<MemberForm>) => {
+  const onSubmit = (e: FormEvent<MemberFormType>) => {
     try {
       e.preventDefault();
       const currentTarget = e.currentTarget;
@@ -63,7 +63,7 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: MemberFormPr
         occupation: occupation.value,
       };
 
-      formElementValueCheck<MemberForm, SignUpMemberData>({ currentTarget, data });
+      formElementValueCheck<MemberFormType, SignUpMemberData>({ currentTarget, data });
       sendSignUpData({
         isOwner: false,
         data,
@@ -87,7 +87,7 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: MemberFormPr
   }
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} className={signUpForm['form']}>
+    <form ref={memberFormRef} onSubmit={onSubmit} className={signUpForm['form']}>
       {/* email readOnly */}
       <label htmlFor="email" className={signUpForm['email']}>
         이메일
