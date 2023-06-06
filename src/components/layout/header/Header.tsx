@@ -1,7 +1,6 @@
 import NavChild from '@/components/common/NavChild';
 import header from '@/components/layout/header/Header.module.scss';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Profile from '@/components/layout/header/Profile';
 import { useState } from 'react';
 import SidebarButton from '@/components/layout/header/SidebarButton';
@@ -15,6 +14,7 @@ interface HeaderProps {
 const Header = ({ handleUserData }: HeaderProps) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const { data: userData } = useUser();
+  console.log('loginUserData >>>', userData);
 
   const toggleSidebar = () => {
     setShowSidebar((pre) => !pre);
@@ -29,6 +29,10 @@ const Header = ({ handleUserData }: HeaderProps) => {
   //     handleAxiosError(error);
   //   }
   // };
+
+  if (userData === undefined) {
+    return <Navigate to={'/404'} />;
+  }
 
   return (
     <header className={header['header']}>
@@ -63,7 +67,7 @@ const Header = ({ handleUserData }: HeaderProps) => {
           <ul>
             {/* pageLink 임시 */}
             <NavChild to="/search" content="검색" />
-            <NavChild to="/owner/123" content="오너" />
+            <NavChild to={`/owner/${userData.id}/home`} content="오너" />
             <NavChild to="/signup" content="가입" />
             <NavChild to="/signin" content="로그인" />
           </ul>
