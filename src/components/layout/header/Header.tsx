@@ -69,7 +69,7 @@ const Header = ({ handleUserData }: HeaderProps) => {
           </ul>
         </nav>
       </div>
-      <div className={header['block']} />
+      {/* <div className={header['block']} /> */}
     </header>
   );
 };

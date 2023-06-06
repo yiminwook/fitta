@@ -7,7 +7,7 @@
   min-height: calc(100vh - 4rem - 5rem - 1rem);
   max-width: calc(map-get($points, xl) - 0.5rem * 2);
   padding: 0.5rem;
-  margin: auto;
+  margin: 4rem auto 0 auto;
   background-color: map-get($colors, white);
 
   @include min-width(map-get($points, ss)) {

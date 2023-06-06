@@ -7,6 +7,8 @@
 
   .headerWrapper {
     position: fixed;
+    top: 0;
+    left: 0;
     z-index: $nav-z-index;
     // min-width: $min-width;
     width: 100%;
@@ -185,21 +187,15 @@
         li {
           color: map-get($colors, white);
           a {
-            button {
-              font-size: 1.25rem;
-              line-height: 1.75rem;
+            font-size: 1.25rem;
+            line-height: 1.75rem;
 
-              &:hover {
-                color: map-get($colors, gray);
-              }
+            &:hover {
+              color: map-get($colors, gray);
             }
           }
         }
       }
     }
-  }
-
-  .block {
-    height: 4rem;
   }
 }
