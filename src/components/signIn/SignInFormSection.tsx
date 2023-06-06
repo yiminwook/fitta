@@ -1,6 +1,6 @@
 import { FcGoogle } from 'react-icons/fc';
-import signin from '@/components/signin/SignIn.module.scss';
-import SignInForm from '@/components/signin/SignInForm';
+import signin from '@/components/signIn/SignIn.module.scss';
+import SignInForm from '@/components/signIn/SignInForm';
 import { envConfig } from '@/configs';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';

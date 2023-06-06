@@ -1,5 +1,5 @@
-import MemberForm, { MemberFormProps } from '@/components/signup/MemberForm';
-import signup from '@/components/signup/SignUp.module.scss';
+import MemberForm, { MemberFormProps } from '@/components/signUp/MemberForm';
+import signup from '@/components/signUp/SignUp.module.scss';
 
 interface MemberSectionProps extends MemberFormProps {}
 

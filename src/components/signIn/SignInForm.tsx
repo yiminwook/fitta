@@ -1,5 +1,5 @@
 import { FormEvent, useCallback, useState } from 'react';
-import signin from '@/components/signin/SignIn.module.scss';
+import signin from '@/components/signIn/SignIn.module.scss';
 import { useInput } from '@/hooks/useInput';
 
 interface SignInFormProps {

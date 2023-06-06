@@ -1,5 +1,5 @@
-import signup from '@/components/signup/SignUp.module.scss';
-import OwnerForm, { OwnerFormProps } from '@/components/signup/OwnerForm';
+import signup from '@/components/signUp/SignUp.module.scss';
+import OwnerForm, { OwnerFormProps } from '@/components/signUp/OwnerForm';
 
 interface OwnderSectionProps extends OwnerFormProps {}
 

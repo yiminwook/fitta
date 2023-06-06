@@ -1,5 +1,5 @@
 import NavChild from '@/components/common/NavChild';
-import signup from '@/components/signup/SignUp.module.scss';
+import signup from '@/components/signUp/SignUp.module.scss';
 import { useLocation } from 'react-router-dom';
 
 const NavSection = () => {

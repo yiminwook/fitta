@@ -1,63 +1,86 @@
-import signUpForm from '@/components/signup/SignUpForm.module.scss';
-import { MemberFormElements, MemberFormProps } from '@/components/signup/MemberForm';
-import { FormEvent, useRef } from 'react';
+import { FormEvent, useEffect, useRef } from 'react';
+import signUpForm from '@/components/signUp/SignUpForm.module.scss';
 import { useUser } from '@/hooks/useUser';
 import { useNavigate } from 'react-router-dom';
 import SearchButton from '@/components/common/SeachButton';
 import PasswordInput from '@/components/common/PasswordInput';
+import { SignUpMemberData, SignUpOwnerData } from '@/types/userData';
 import Loading from '@/components/common/Loading';
 import NumberInput from '@/components/common/NumberInput';
-import { SignUpOwnerData } from '@/types/userData';
+import { toast } from 'react-toastify';
 import { formElementValueCheck, formPasswordCheck } from '@/utils/formElementValueCheck';
-import { handleToastError } from '@/utils/handleToast';
 
-interface OwnerFormElements extends Omit<MemberFormElements, 'occupation'> {}
-
-interface OwnerForm extends HTMLFormElement {
-  readonly elements: OwnerFormElements;
+export interface MemberFormElements extends HTMLFormControlsCollection {
+  email: HTMLInputElement;
+  password: HTMLInputElement;
+  passwordConfirm: HTMLInputElement;
+  phoneNumber: HTMLInputElement;
+  name: HTMLInputElement;
+  birthDate: HTMLInputElement;
+  occupation: HTMLInputElement;
+  address: HTMLInputElement;
+  addressDetail: HTMLInputElement;
+  gender: HTMLSelectElement;
 }
 
-export interface OwnerFormProps extends MemberFormProps {}
+interface MemberForm extends HTMLFormElement {
+  readonly elements: MemberFormElements;
+}
 
-const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProps) => {
+export interface MemberFormProps {
+  sendSignUpData: ({ data, isOwner }: { data: SignUpMemberData | SignUpOwnerData; isOwner: boolean }) => void;
+  openPostModal: () => void;
+  roadAddress: string;
+}
+
+const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: MemberFormProps) => {
   const formRef = useRef<HTMLFormElement>(null);
   const { data: userData, isLoading } = useUser();
   const navigate = useNavigate();
 
-  const onSubmit = (e: FormEvent<OwnerForm>) => {
+  const onSubmit = (e: FormEvent<MemberForm>) => {
     try {
       e.preventDefault();
       const currentTarget = e.currentTarget;
-      if (!e.currentTarget) return;
+      if (!currentTarget) return;
 
-      const { email, password, passwordConfirm, name, phoneNumber, birthDate, gender, addressDetail } =
-        e.currentTarget.elements;
+      const { email, name, phoneNumber, birthDate, gender, occupation, addressDetail, password, passwordConfirm } =
+        currentTarget.elements;
 
       formPasswordCheck({ currentTarget, password: password.value, passwordConfirm: passwordConfirm.value });
 
       const address = (roadAddress + ' ' + addressDetail.value).trim();
 
-      const data: SignUpOwnerData = {
+      const data: SignUpMemberData = {
         email: email.value,
         password: password.value,
-        passwordConfirm: passwordConfirm.value, //삭제예정
+        passwordConfirm: passwordConfirm.value, //삭제 예정
         name: name.value,
         phoneNumber: phoneNumber.value,
-        businessRegistrationNumber: 'string', //삭제예정
-        birthDate: birthDate.value,
-        gender: gender.value,
         address,
+        gender: gender.value,
+        birthDate: birthDate.value,
+        occupation: occupation.value,
       };
 
-      formElementValueCheck<OwnerForm, SignUpOwnerData>({ currentTarget: e.currentTarget, data });
+      formElementValueCheck<MemberForm, SignUpMemberData>({ currentTarget, data });
       sendSignUpData({
-        isOwner: true,
+        isOwner: false,
         data,
       });
     } catch (error) {
-      handleToastError(error);
+      console.error(error);
+      if (error instanceof Error) {
+        toast.error(error.message);
+      }
     }
   };
+
+  // useEffect(() => {
+  //   if (isLoading === false && !userData?.email) {
+  //     navigate('/signin');
+  //   }
+  // }, [isLoading, userData]);
 
   if (isLoading) {
     return <Loading style={{ height: '42.5rem' }} />;
@@ -66,14 +89,18 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProp
   return (
     <form ref={formRef} onSubmit={onSubmit} className={signUpForm['form']}>
       {/* email readOnly */}
-      <label htmlFor="email">이메일</label>
-      <input className={signUpForm['email']} name="email" type="email" tabIndex={-1} />
+      <label htmlFor="email" className={signUpForm['email']}>
+        이메일
+      </label>
+      <input name="email" type="email" tabIndex={-1} />
       <PasswordInput passwordName="password" passwordConfirmName="passwordConfirm" />
       {/* name phone */}
       <label htmlFor="name">이름</label>
       <input name="name" type="text" />
       <label htmlFor="phoneNumber">연락처</label>
       <NumberInput name="phoneNumber" maxLength={11} pattern={/(^\d{3})(\d{3,4})(\d{4}$)/} />
+      <label htmlFor="occupation">직업</label>
+      <input name="occupation" type="text" />
       {/* address */}
       <label htmlFor="address">주소</label>
       <div className={signUpForm['address']}>
@@ -109,4 +136,4 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProp
   );
 };
 
-export default OwnerForm;
+export default MemberForm;

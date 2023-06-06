@@ -1,11 +1,11 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import NavSection from '@/components/signup/NavSection';
+import NavSection from '@/components/signUp/NavSection';
 import { useState } from 'react';
 import { Address } from 'react-daum-postcode';
-import PostModal from '@/components/signup/PostModal';
+import PostModal from '@/components/signUp/PostModal';
 import { SignUpMemberData, SignUpOwnerData } from '@/types/userData';
-import OwnerSection from '@/components/signup/OwnerSection';
-import MemberSection from '@/components/signup/MemberSection';
+import OwnerSection from '@/components/signUp/OwnerSection';
+import MemberSection from '@/components/signUp/MemberSection';
 import axios from 'axios';
 import { handleToastError } from '@/utils/handleToast';
 
