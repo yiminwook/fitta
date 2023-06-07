@@ -52,7 +52,10 @@
             font-weight: 600;
           }
 
-          p {
+          ul {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
             color: darken(map-get($colors, gray), 20);
           }
         }

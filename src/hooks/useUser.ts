@@ -1,18 +1,10 @@
 import { useQuery } from 'react-query';
 import fetcher from '@/hooks/fetcher';
 import { AxiosError } from 'axios';
-
-export interface UserData {
-  email: string;
-  name: string;
-  id: string;
-  isOwner?: boolean;
-}
+import { MyDataType } from '@/types/fittaApi';
 
 export const useUser = () => {
-  // /members/testuserdata
-  // /owners/testuserdata
-  const { data, isLoading, error } = useQuery<UserData, AxiosError>('/owners/testuserdata', fetcher);
+  const { data, isLoading, error } = useQuery<MyDataType, AxiosError>('/userdata', fetcher);
 
   return { data, isLoading, error };
 };

@@ -1,22 +1,25 @@
 import gymCard from '@/components/common/GymCard.module.scss';
 import GymCard from '@/components/common/GymCard';
-import { GYMCARD_LIST_LENGTH } from '@/consts';
 import { Link } from 'react-router-dom';
+import { GymType } from '@/types/fittaApi';
 
-interface GymCardListProps {}
+interface GymCardListProps {
+  moreLink?: boolean;
+  gymData: GymType[];
+}
 
-const GymCardList = ({}: GymCardListProps) => {
+const GymCardList = ({ gymData, moreLink = false }: GymCardListProps) => {
   return (
     <>
       <div className={gymCard['cardList']}>
         <ul>
-          {new Array(GYMCARD_LIST_LENGTH).fill(null).map((arr, index) => (
-            <li key={index}>
-              <GymCard />
+          {gymData.map(({ name, id, members, staffs, address }) => (
+            <li key={`gymCard-${id}`}>
+              <GymCard id={id} name={name} population={1 + members.length + staffs.length} address={address} />
             </li>
           ))}
         </ul>
-        <Link to="/search">+더보기</Link>
+        {moreLink ? <Link to="/search">+더보기</Link> : null}
       </div>
     </>
   );

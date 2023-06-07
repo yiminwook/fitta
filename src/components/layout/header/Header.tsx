@@ -7,14 +7,12 @@ import SidebarButton from '@/components/layout/header/SidebarButton';
 import Sidebar from '@/components/layout/header/Sidebar';
 import { useUser } from '@/hooks/useUser';
 
-interface HeaderProps {
-  handleUserData: (data: any) => void;
-}
+interface HeaderProps {}
 
-const Header = ({ handleUserData }: HeaderProps) => {
+const Header = ({}: HeaderProps) => {
   const [showSidebar, setShowSidebar] = useState(false);
-  const { data: userData } = useUser();
-  console.log('loginUserData >>>', userData);
+  const { data: myData } = useUser();
+  console.log('loginUserData >>>', myData);
 
   const toggleSidebar = () => {
     setShowSidebar((pre) => !pre);
@@ -30,7 +28,7 @@ const Header = ({ handleUserData }: HeaderProps) => {
   //   }
   // };
 
-  if (userData === undefined) {
+  if (myData === undefined) {
     return null;
   }
 
@@ -45,7 +43,7 @@ const Header = ({ handleUserData }: HeaderProps) => {
               </div>
             </Link>
             <ul className={header['headerRight']}>
-              {!userData ? (
+              {!myData ? (
                 <li>
                   <a>
                     <button className={header['signInButton']} onClick={() => {}}>
@@ -67,7 +65,7 @@ const Header = ({ handleUserData }: HeaderProps) => {
           <ul>
             {/* pageLink 임시 */}
             <NavChild to="/search" content="검색" />
-            <NavChild to={`/owner/${userData!.id}/home`} content="오너" />
+            <NavChild to={`/owner/${myData!.id}/home`} content="오너" />
             <NavChild to="/signup" content="가입" />
             <NavChild to="/signin" content="로그인" />
           </ul>

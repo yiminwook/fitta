@@ -4,7 +4,7 @@ import { useUser } from '@/hooks/useUser';
 import { useNavigate } from 'react-router-dom';
 import SearchButton from '@/components/common/SeachButton';
 import PasswordInput from '@/components/common/PasswordInput';
-import { SignUpMemberData, SignUpOwnerData } from '@/types/userData';
+import { SignUpMemberDataType, SignUpOwnerDataType } from '@/types/fittaApi';
 import Loading from '@/components/common/Loading';
 import NumberInput from '@/components/common/NumberInput';
 import { toast } from 'react-toastify';
@@ -28,7 +28,7 @@ interface MemberFormType extends HTMLFormElement {
 }
 
 export interface MemberFormProps {
-  sendSignUpData: ({ data, isOwner }: { data: SignUpMemberData | SignUpOwnerData; isOwner: boolean }) => void;
+  sendSignUpData: ({ data, isOwner }: { data: SignUpMemberDataType | SignUpOwnerDataType; isOwner: boolean }) => void;
   openPostModal: () => void;
   roadAddress: string;
 }
@@ -51,7 +51,7 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: MemberFormPr
 
       const address = (roadAddress + ' ' + addressDetail.value).trim();
 
-      const data: SignUpMemberData = {
+      const data: SignUpMemberDataType = {
         email: email.value,
         password: password.value,
         passwordConfirm: passwordConfirm.value, //삭제 예정
@@ -63,7 +63,7 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: MemberFormPr
         occupation: occupation.value,
       };
 
-      formElementValueCheck<MemberFormType, SignUpMemberData>({ currentTarget, data });
+      formElementValueCheck<MemberFormType, SignUpMemberDataType>({ currentTarget, data });
       sendSignUpData({
         isOwner: false,
         data,
