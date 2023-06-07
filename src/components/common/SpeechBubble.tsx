@@ -1,3 +1,4 @@
+import useCloseEventListener from '@/hooks/useCloseEventListener';
 import { CSSProperties, memo, useEffect } from 'react';
 import { FiAlertCircle } from 'react-icons/fi';
 
@@ -10,11 +11,7 @@ interface SpeechBubbleProps {
 }
 
 const SpeechBubble = ({ className, message, style, iconColor, onClose }: SpeechBubbleProps) => {
-  useEffect(() => {
-    const body = document.querySelector('body')!;
-    body.addEventListener('click', onClose);
-    return () => removeEventListener('close', onClose);
-  }, []);
+  useCloseEventListener(onClose);
 
   return (
     <div className={className} style={{ ...style }}>

@@ -1,0 +1,35 @@
+@import '@/styles/mixin.scss';
+@import '@/styles/var.scss';
+@import '@/styles/placeholder.scss';
+
+.slick-slider {
+  cursor: pointer;
+  .slick-list {
+    .slick-track {
+      .slick-slide {
+        // overflow: hidden;
+        // & > div {
+        //   margin: 0 1rem;
+        //   img {
+        //   }
+        // }
+      }
+    }
+  }
+
+  .slick-dots {
+    position: absolute;
+    bottom: 0.25rem;
+  }
+
+  .slick-arrow {
+    &.slick-prev {
+      z-index: 1;
+      left: 1rem;
+    }
+    &.slick-next {
+      z-index: 1;
+      right: 1rem;
+    }
+  }
+}

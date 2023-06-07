@@ -7,7 +7,7 @@ import ToggleMenu from '@/components/layout/header/ToggleMenu';
 interface ProfileProps {}
 
 const Profile = ({}: ProfileProps) => {
-  const { data: userData } = useUser();
+  const { data: myData } = useUser();
   const [toggleShow, setToggleShow] = useState(false);
 
   const handleToggle = (e: MouseEvent) => {
@@ -23,9 +23,9 @@ const Profile = ({}: ProfileProps) => {
     <>
       <div className={header['profile']} onClick={handleToggle}>
         <div className={header['profileImageWapper']}>
-          <img src={gravatar.url(userData!.email, { s: '30px', d: 'retro' })} alt="user-profile-image" />
+          <img src={gravatar.url(myData!.name, { s: '30px', d: 'retro' })} alt="user-profile-image" />
         </div>
-        <p>{userData!.name}</p>
+        <p>{myData!.name}</p>
         {toggleShow ? <ToggleMenu onClose={closeToggle} /> : null}
       </div>
     </>

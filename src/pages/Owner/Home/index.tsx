@@ -1,5 +1,11 @@
+import GymSection from '@/components/owner/home/GymSection';
+
 const OwnerHome = () => {
-  return <>OwnerHome</>;
+  return (
+    <>
+      <GymSection />
+    </>
+  );
 };
 
 export default OwnerHome;

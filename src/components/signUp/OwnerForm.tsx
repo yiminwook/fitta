@@ -7,7 +7,7 @@ import SearchButton from '@/components/common/SeachButton';
 import PasswordInput from '@/components/common/PasswordInput';
 import Loading from '@/components/common/Loading';
 import NumberInput from '@/components/common/NumberInput';
-import { SignUpOwnerData } from '@/types/userData';
+import { SignUpOwnerDataType } from '@/types/fittaApi';
 import { formElementValueCheck, formPasswordCheck } from '@/utils/formElementValueCheck';
 import { handleToastError } from '@/utils/handleToast';
 
@@ -21,7 +21,7 @@ export interface OwnerFormProps extends MemberFormProps {}
 
 const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProps) => {
   const ownerFormRef = useRef<OwnerFormType>(null);
-  const { data: userData, isLoading } = useUser();
+  const { data: myData, isLoading } = useUser();
   const navigate = useNavigate();
 
   const onSubmit = (e: FormEvent<OwnerFormType>) => {
@@ -37,7 +37,7 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProp
 
       const address = (roadAddress + ' ' + addressDetail.value).trim();
 
-      const data: SignUpOwnerData = {
+      const data: SignUpOwnerDataType = {
         email: email.value,
         password: password.value,
         passwordConfirm: passwordConfirm.value, //삭제예정
@@ -49,7 +49,7 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProp
         address,
       };
 
-      formElementValueCheck<OwnerFormType, SignUpOwnerData>({ currentTarget: e.currentTarget, data });
+      formElementValueCheck<OwnerFormType, SignUpOwnerDataType>({ currentTarget: e.currentTarget, data });
       sendSignUpData({
         isOwner: true,
         data,

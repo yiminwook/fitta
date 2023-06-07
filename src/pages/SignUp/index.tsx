@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import NavSection from '@/components/signUp/NavSection';
 import PostModal from '@/components/signUp/PostModal';
-import { SignUpMemberData, SignUpOwnerData } from '@/types/userData';
+import { SignUpMemberDataType, SignUpOwnerDataType } from '@/types/fittaApi';
 import OwnerSection from '@/components/signUp/OwnerSection';
 import MemberSection from '@/components/signUp/MemberSection';
 import axios from 'axios';
@@ -11,7 +11,13 @@ import usePostModal from '@/hooks/usePostModal';
 const SignUp = () => {
   const { showPostModal, openPostModal, closePostModal, handleRoadAddress, roadAddress } = usePostModal();
 
-  const sendSignUpData = async ({ data, isOwner }: { data: SignUpMemberData | SignUpOwnerData; isOwner: boolean }) => {
+  const sendSignUpData = async ({
+    data,
+    isOwner,
+  }: {
+    data: SignUpMemberDataType | SignUpOwnerDataType;
+    isOwner: boolean;
+  }) => {
     try {
       const parsedPhoneNumber = data.phoneNumber.split('-').join('');
       const signUpApi = isOwner ? `/owners` : `/members`;

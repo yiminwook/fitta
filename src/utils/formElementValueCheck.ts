@@ -1,5 +1,5 @@
 import { PASSWORD_LENGTH } from '@/consts';
-import { SignUpMemberData, SignUpOwnerData } from '@/types/userData';
+import { SignUpMemberDataType, SignUpOwnerDataType } from '@/types/fittaApi';
 import { checkSpecialCharacter } from './checkSpecialCharacter';
 
 export const formPasswordCheck = <T extends HTMLFormElement>({
@@ -33,7 +33,7 @@ export const formElementValueCheck = <T extends HTMLFormElement, U>({
   data,
 }: {
   currentTarget: T;
-  data: SignUpMemberData | SignUpOwnerData | any;
+  data: SignUpMemberDataType | SignUpOwnerDataType | any;
 }) => {
   Object.entries(data as unknown as Record<string, string>).forEach(([name, value]) => {
     const target = currentTarget[name] as unknown as HTMLElement;

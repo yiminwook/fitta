@@ -1,4 +1,4 @@
-import GymEditForm from '@/components/owner/GymEditForm';
+import GymEditForm from '@/components/owner/detail/GymEditForm';
 import PostModal from '@/components/signUp/PostModal';
 import usePostModal from '@/hooks/usePostModal';
 

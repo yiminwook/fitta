@@ -55,8 +55,9 @@
           li {
             padding: 0.15rem;
 
-            &:hover {
-              background-color: map-get($colors, gray);
+            &:hover,
+            &.focus {
+              background-color: lighten(map-get($colors, gray), 15%);
             }
 
             & > div {
@@ -64,6 +65,11 @@
               display: flex;
               justify-content: space-between;
               align-items: center;
+
+              a {
+                display: inline-block;
+                width: 100%;
+              }
 
               button {
                 height: 1rem;

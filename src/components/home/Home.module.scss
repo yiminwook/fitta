@@ -2,10 +2,14 @@
 @import '@/styles/var.scss';
 @import '@/styles/placeholder.scss';
 
-.HomeSection{
-    //스타일 입력
+.home {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 
-    background-color: red;
+  .topSection {
+  }
 
-    
+  .recommandSection {
+  }
 }

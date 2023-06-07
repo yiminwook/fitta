@@ -1,29 +1,43 @@
 import search from '@/components/search/Search.module.scss';
 import { searchHistoryLocalStorage } from '@/models/localStorage';
-import { memo, useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Dispatch, memo, RefObject, SetStateAction, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { FiDelete } from 'react-icons/fi';
 
-interface SearchHistoryProps {}
+interface SearchHistoryProps {
+  focusIndex: number;
+  setFocusIndex: Dispatch<SetStateAction<number>>;
+  searchHistory: string[];
+  setSearchHistory: Dispatch<SetStateAction<string[]>>;
+  searchHistoryRef: RefObject<HTMLUListElement>;
+}
 
-const SearchHistory = ({}: SearchHistoryProps) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [searchHistory, setSearchHistory] = useState<string[]>([]);
+const SearchHistory = ({
+  focusIndex,
+  setFocusIndex,
+  searchHistoryRef,
+  searchHistory,
+  setSearchHistory,
+}: SearchHistoryProps) => {
+  const onDelete = useCallback(
+    (index: number) => {
+      searchHistoryLocalStorage.deleteOneDataByIndex(index);
+      setSearchHistory((pre) => pre.filter((_history, idx) => idx !== index));
+    },
+    [searchHistoryLocalStorage, setSearchHistory],
+  );
 
-  const onDelete = (index: number) => {
-    searchHistoryLocalStorage.deleteOneDataByIndex(index);
-    setSearchHistory((pre) => pre.filter((_history, idx) => idx !== index));
-  };
-
-  const onReset = () => {
+  const onReset = useCallback(() => {
     searchHistoryLocalStorage.reset();
     setSearchHistory(() => []);
-  };
+  }, [searchHistoryLocalStorage]);
 
-  useEffect(() => {
-    const history = searchHistoryLocalStorage.Data;
-    setSearchHistory(() => history);
-  }, [searchParams]);
+  const onHover = useCallback(
+    (index: number) => {
+      setFocusIndex(() => index);
+    },
+    [focusIndex, setFocusIndex],
+  );
 
   return (
     <section className={search['searchHistory']}>
@@ -35,9 +49,13 @@ const SearchHistory = ({}: SearchHistoryProps) => {
           </button>
         </div>
       </header>
-      <ul>
+      <ul ref={searchHistoryRef}>
         {searchHistory.map((history, index) => (
-          <li key={`search-hitory-${index}`}>
+          <li
+            key={`search-hitory-${index}`}
+            className={index === focusIndex ? search['focus'] : ''}
+            onMouseEnter={() => onHover}
+          >
             <div>
               <Link to={`/search?query=${history}`}>{history}</Link>
               <button type="button" onClick={() => onDelete(index)}>
