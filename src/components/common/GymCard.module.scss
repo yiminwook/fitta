@@ -1,0 +1,73 @@
+@import '@/styles/mixin.scss';
+@import '@/styles/var.scss';
+@import '@/styles/placeholder.scss';
+
+.cardList {
+  position: relative;
+  padding: 1rem 1rem 2rem 1rem;
+  max-width: 50rem;
+  margin: auto;
+
+  ul {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(2, 50%);
+    gap: 1rem;
+
+    @include min-width(map-get($points, sm)) {
+      grid-template-columns: repeat(3, 33%);
+    }
+
+    li {
+      margin: auto;
+      width: 100%;
+
+      .card {
+        &:hover {
+          img {
+            scale: 1.1;
+          }
+        }
+
+        & > div:nth-child(1) {
+          overflow: hidden;
+          aspect-ratio: 1;
+          border-radius: 5px;
+
+          & > img {
+            width: 100%;
+            object-fit: cover;
+            transition: scale 0.2s ease;
+          }
+        }
+
+        & > div:nth-child(2) {
+          padding: 0.5rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+
+          h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+          }
+
+          p {
+            color: darken(map-get($colors, gray), 20);
+          }
+        }
+      }
+    }
+  }
+
+  & > a {
+    position: absolute;
+    color: darken(map-get($colors, gray), 30%);
+    right: 0;
+    bottom: 0;
+
+    @include min-width(map-get($points, sm)) {
+      right: 1rem;
+    }
+  }
+}

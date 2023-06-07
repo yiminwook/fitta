@@ -2,5 +2,14 @@
 @import '@/styles/var.scss';
 @import '@/styles/placeholder.scss';
 
-.HomeSection {
+.home {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .topSection {
+  }
+
+  .recommandSection {
+  }
 }

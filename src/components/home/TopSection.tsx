@@ -4,7 +4,7 @@ import '@/styles/Slick.scss';
 import home from '@/components/home/Home.module.scss';
 import Slider, { Settings } from 'react-slick';
 
-const HomeSection = () => {
+const TopSection = () => {
   const settings: Settings = {
     dots: true,
     arrows: true,
@@ -19,7 +19,7 @@ const HomeSection = () => {
   };
 
   return (
-    <section className={home['HomeSection']}>
+    <section className={home['topSection']}>
       <Slider {...settings}>
         <img src="https://placehold.co/800x150" />
         <img src="https://placehold.co/800x150" />
@@ -30,4 +30,4 @@ const HomeSection = () => {
   );
 };
 
-export default HomeSection;
+export default TopSection;
