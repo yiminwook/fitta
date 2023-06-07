@@ -4,8 +4,6 @@ import RootLayout from '@/components/layout/RootLayout';
 import 'pretendard/dist/web/variable/pretendardvariable.css';
 import 'react-toastify/dist/ReactToastify.css';
 import '@/styles/Toast.scss';
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
 import '@/styles/Global.scss';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';

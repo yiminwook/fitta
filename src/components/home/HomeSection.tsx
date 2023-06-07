@@ -1,26 +1,30 @@
-import home from '@/components/Home/Home.module.scss';
-import Slider from 'react-slick';
+import 'slick-carousel/slick/slick-theme.scss';
+import 'slick-carousel/slick/slick.scss';
+import '@/styles/Slick.scss';
+import home from '@/components/home/Home.module.scss';
+import Slider, { Settings } from 'react-slick';
 
-// 여기 파일에서 작업해주세요
 const HomeSection = () => {
-  const settings = {
+  const settings: Settings = {
     dots: true,
     arrows: true,
     infinite: true,
-    speed: 500,
+    speed: 1000,
+    initialSlide: 0,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 5000,
     pauseOnHover: true,
   };
 
   return (
     <section className={home['HomeSection']}>
       <Slider {...settings}>
-        <img src="../img/fitta-cutout.png" />
-        <img src="" />
-        <img src="" />
+        <img src="https://placehold.co/800x150" />
+        <img src="https://placehold.co/800x150" />
+        <img src="https://placehold.co/800x150" />
+        <img src="https://placehold.co/800x150" />
       </Slider>
     </section>
   );

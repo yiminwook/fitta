@@ -12,7 +12,7 @@ export interface UserData {
 export const useUser = () => {
   // /members/testuserdata
   // /owners/testuserdata
-  const { data, isLoading, error } = useQuery<UserData, AxiosError>('/members/testuserdata', fetcher);
+  const { data, isLoading, error } = useQuery<UserData, AxiosError>('/owners/testuserdata', fetcher);
 
   return { data, isLoading, error };
 };
