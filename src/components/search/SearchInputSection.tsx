@@ -1,11 +1,12 @@
 import { useSearchParams } from 'react-router-dom';
 import search from '@/components/search/Search.module.scss';
-import { ChangeEvent, FormEvent, KeyboardEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { FormEvent, KeyboardEvent, useCallback, useEffect, useRef, useState } from 'react';
 import SearchHistory from '@/components/search/SeachHistory';
 import { searchHistoryLocalStorage } from '@/models/localStorage';
 import { BiSearch } from 'react-icons/bi';
 import useStopPropagation from '@/hooks/useStopPropagation';
 import useCloseEventListener from '@/hooks/useCloseEventListener';
+import SearchInput from '@/components/search/SearchInput';
 
 interface SearchInputSectionProps {}
 
@@ -30,14 +31,6 @@ const SearchInputSection = ({}: SearchInputSectionProps) => {
     resetFocus();
     setShowHistory(() => false);
   }, [showHistory]);
-
-  const onChangeSearchInput = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      if (!e.target) return;
-      setSearchInputValue(() => e.target.value);
-    },
-    [searchInputValue],
-  );
 
   const onSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
@@ -96,12 +89,11 @@ const SearchInputSection = ({}: SearchInputSectionProps) => {
     <section className={search['searchInputSection']}>
       <form onSubmit={onSubmit} onClick={stopPropagation}>
         <div>
-          <input
-            type="text"
-            onChange={onChangeSearchInput}
-            value={searchInputValue}
-            onFocus={openHistory}
-            onKeyDown={onKeydown}
+          <SearchInput
+            searchInputValue={searchInputValue}
+            setSearchInputValue={setSearchInputValue}
+            openHistory={openHistory}
+            onKeydown={onKeydown}
           />
           {showHistory ? (
             <SearchHistory
