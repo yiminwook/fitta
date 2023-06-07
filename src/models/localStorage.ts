@@ -1,3 +1,5 @@
+import { SEARCH_HISTORY_MAX_LENGTH } from '@/consts';
+
 type LocalStorageDataType = string[];
 
 class LocalStorage {
@@ -43,4 +45,7 @@ class LocalStorage {
 
 export default LocalStorage;
 
-export const searchHistoryLocalStorage = new LocalStorage({ key: 'searchHistory', maxLength: 5 });
+export const searchHistoryLocalStorage = new LocalStorage({
+  key: 'searchHistory',
+  maxLength: SEARCH_HISTORY_MAX_LENGTH,
+});
