@@ -47,7 +47,7 @@
 .sidebar {
   position: fixed;
   z-index: $nav-z-index + 1;
-  background-color: #fff;
+  background-color: var(--fitta-background-color);
   top: 0;
   left: 0;
   width: calc(100vw - 2rem);
