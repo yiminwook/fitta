@@ -85,7 +85,6 @@ const Header = ({}: HeaderProps) => {
           </ul>
         </nav>
       </div>
-      {/* <div className={header['block']} /> */}
     </header>
   );
 };

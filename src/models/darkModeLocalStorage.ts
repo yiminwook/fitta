@@ -7,19 +7,20 @@ class DarkModeLocalStorage {
     this.init();
   }
 
+  /** os prefer color scheme 반환 */
   private getWindowColorScheme() {
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
 
-  public init() {
-    const initData: boolean =
-      this.getWindowColorScheme() || JSON.parse(localStorage.getItem(this.key) as string) || false;
-    this.data = initData;
-    this.setItem();
+  /** this.data를 localStorage에 저장 */
+  private setItem() {
+    localStorage.setItem(this.key, JSON.stringify(this.data));
   }
 
-  public toggleDarkMode() {
-    this.setState(!this.data);
+  /** window color scheme값을 우선하여 초기화 */
+  public init() {
+    const initData: boolean = this.getWindowColorScheme() || JSON.parse(localStorage.getItem(this.key) ?? 'false');
+    this.setState(initData);
   }
 
   public setState(newData: boolean) {
@@ -27,12 +28,12 @@ class DarkModeLocalStorage {
     this.setItem();
   }
 
-  private setItem() {
-    localStorage.setItem(this.key, JSON.stringify(this.data));
+  public toggleDarkMode() {
+    this.setState(!this.data);
   }
 
   public reset() {
-    this.setState(window.matchMedia('(prefers-color-scheme: dark)').matches);
+    this.setState(this.getWindowColorScheme());
   }
 
   public get Data() {
