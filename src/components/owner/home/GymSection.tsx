@@ -21,7 +21,7 @@ const GymSection = () => {
 
   return (
     <section>
-      <GymCardList moreLink={false} gymData={ownerMydata.gymList} />
+      <GymCardList moreLink={false} gymData={ownerMydata.gymList ?? []} />
     </section>
   );
 };
