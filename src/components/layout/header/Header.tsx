@@ -1,6 +1,6 @@
 import NavChild from '@/components/common/NavChild';
 import header from '@/components/layout/header/Header.module.scss';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Profile from '@/components/layout/header/Profile';
 import { useEffect, useState } from 'react';
 import SidebarButton from '@/components/layout/header/SidebarButton';
@@ -8,14 +8,18 @@ import Sidebar from '@/components/layout/header/Sidebar';
 import { useUser } from '@/hooks/useUser';
 import DarkMode from '@/components/layout/header/DarkMode';
 import { darkModeStorage } from '@/models/darkModeLocalStorage';
+import axios from 'axios';
+import { handleToastError } from '@/utils/handleToast';
+import { toast } from 'react-toastify';
 
 interface HeaderProps {}
 
 const Header = ({}: HeaderProps) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const navigate = useNavigate();
 
-  const { data: myData } = useUser();
+  const { data: myData, refetch: myDataRefetch } = useUser();
   console.log('loginUserData >>>', myData);
 
   const toggleSidebar = () => {
@@ -31,6 +35,19 @@ const Header = ({}: HeaderProps) => {
   //     handleAxiosError(error);
   //   }
   // };
+
+  const signOut = async () => {
+    try {
+      const responese = await axios.post('/signout');
+      if (responese.status === 200) {
+        navigate('/');
+        toast.success('로그아웃 성공');
+        myDataRefetch();
+      }
+    } catch (error) {
+      handleToastError(error);
+    }
+  };
 
   useEffect(() => {
     setIsDarkMode(() => darkModeStorage.Data); //os darkmode 체크
@@ -67,12 +84,12 @@ const Header = ({}: HeaderProps) => {
                 </li>
               ) : (
                 <li>
-                  <Profile />
+                  <Profile signOut={signOut} />
                 </li>
               )}
             </ul>
             <SidebarButton showSidebar={showSidebar} toggleSidebar={toggleSidebar} />
-            {showSidebar ? <Sidebar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} /> : null}
+            {showSidebar ? <Sidebar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} signOut={signOut} /> : null}
           </div>
         </div>
         <nav className={header['headerNav']}>
@@ -81,7 +98,6 @@ const Header = ({}: HeaderProps) => {
             <NavChild to="/search" content="검색" />
             <NavChild to={`/owner/${myData!.id}/home`} content="오너" />
             <NavChild to="/signup" content="가입" />
-            <NavChild to="/signin" content="로그인" />
           </ul>
         </nav>
       </div>

@@ -6,9 +6,10 @@ import { CgClose } from 'react-icons/cg';
 
 interface ToggleMenuProps {
   onClose: () => void;
+  signOut: () => void;
 }
 
-const ToggleMenu = ({ onClose }: ToggleMenuProps) => {
+const ToggleMenu = ({ onClose, signOut }: ToggleMenuProps) => {
   const { stopPropagation } = useStopPropagation();
 
   const onClick = (e: MouseEvent | globalThis.MouseEvent) => {
@@ -37,7 +38,7 @@ const ToggleMenu = ({ onClose }: ToggleMenuProps) => {
         <NavChild to="/signup" content="가입" onClick={onClick} />
       </ul>
       <footer>
-        <button>로그아웃</button>
+        <button onClick={signOut}>로그아웃</button>
       </footer>
     </div>
   );

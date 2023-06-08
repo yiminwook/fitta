@@ -4,9 +4,11 @@ import gravatar from 'gravatar';
 import { MouseEvent, useState } from 'react';
 import ToggleMenu from '@/components/layout/header/ToggleMenu';
 
-interface ProfileProps {}
+interface ProfileProps {
+  signOut: () => void;
+}
 
-const Profile = ({}: ProfileProps) => {
+const Profile = ({ signOut }: ProfileProps) => {
   const { data: myData } = useUser();
   const [toggleShow, setToggleShow] = useState(false);
 
@@ -26,7 +28,7 @@ const Profile = ({}: ProfileProps) => {
           <img src={gravatar.url(myData!.name, { s: '30px', d: 'retro' })} alt="user-profile-image" />
         </div>
         <p>{myData!.name}</p>
-        {toggleShow ? <ToggleMenu onClose={closeToggle} /> : null}
+        {toggleShow ? <ToggleMenu onClose={closeToggle} signOut={signOut} /> : null}
       </div>
     </>
   );

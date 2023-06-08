@@ -2,22 +2,29 @@ import { FcGoogle } from 'react-icons/fc';
 import signin from '@/components/signIn/SignIn.module.scss';
 import SignInForm from '@/components/signIn/SignInForm';
 import { envConfig } from '@/configs';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { handleToastError } from '@/utils/handleToast';
+import { RoleType } from '@/types/fittaApi';
+import { useUser } from '@/hooks/useUser';
 
 const { REACT_APP_SERVER_URL } = envConfig();
 
 const SignInFormSection = () => {
   const [searchParams] = useSearchParams();
+  const { data: myData, refetch: myDataRefetch } = useUser();
+  const navigate = useNavigate();
 
   const handleSignIn = async ({ email, password, isOwner }: { email: string; password: string; isOwner: boolean }) => {
     try {
-      const serverApi = isOwner ? '/owners/signin' : '/members/signin';
-      const response = await axios.post(serverApi, { email, password });
+      const role: RoleType = isOwner ? 'OWNER' : 'MEMBER';
+      const response = await axios.post('/signin', { email, password, role });
       console.log('res  >>>>', response);
-      if (response) console.log('data  >>>>', response.data);
+      if (response.status >= 200 && response.status < 300) {
+        myDataRefetch();
+        navigate('/');
+      }
     } catch (error) {
       handleToastError(error);
     }
