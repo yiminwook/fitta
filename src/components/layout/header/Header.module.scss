@@ -21,7 +21,7 @@
 
     // header 상단
     .headerOutter {
-      background-color: map-get($colors, white);
+      background-color: var(--fitta-background-color);
       @include box-shadow(true);
 
       .headerInner {

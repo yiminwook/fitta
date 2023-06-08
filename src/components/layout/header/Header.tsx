@@ -6,6 +6,7 @@ import { useState } from 'react';
 import SidebarButton from '@/components/layout/header/SidebarButton';
 import Sidebar from '@/components/layout/header/Sidebar';
 import { useUser } from '@/hooks/useUser';
+import DarkMode from './DarkMode';
 
 interface HeaderProps {}
 
@@ -43,6 +44,9 @@ const Header = ({}: HeaderProps) => {
               </div>
             </Link>
             <ul className={header['headerRight']}>
+              <li>
+                <DarkMode />
+              </li>
               {!myData ? (
                 <li>
                   <a>
