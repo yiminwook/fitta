@@ -8,7 +8,7 @@ const NotFound = () => {
   const [isShow, setIsShow] = useState(false);
   return (
     <section>
-      <h1>404</h1>
+      <h1>NotFound</h1>
       <section>
         <Calendar />
       </section>

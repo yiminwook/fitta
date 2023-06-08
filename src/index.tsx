@@ -1,4 +1,3 @@
-import ReactDOM from 'react-dom/client';
 import App from '@/pages/App';
 import RootLayout from '@/components/layout/RootLayout';
 import 'pretendard/dist/web/variable/pretendardvariable.css';
@@ -9,8 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ToastContainer } from 'react-toastify';
-
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+import { hydrate, render } from 'react-dom';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,7 +26,7 @@ const queryClient = new QueryClient({
   },
 });
 
-root.render(
+const app = (
   <>
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
@@ -40,5 +38,13 @@ root.render(
         </BrowserRouter>
       </QueryClientProvider>
     </HelmetProvider>
-  </>,
+  </>
 );
+
+const root = document.getElementById('root') as HTMLElement;
+
+if (root.hasChildNodes()) {
+  hydrate(app, root);
+} else {
+  render(app, root);
+}

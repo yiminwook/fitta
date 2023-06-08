@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "craco start",
     "build": "craco build",
+    "postbuild": "react-snap",
     "start": "serve -s build",
     "test": "craco test",
     "eject": "react-scripts eject"
@@ -72,13 +73,24 @@
     "react-app-rewired": "^2.2.1",
     "react-refresh": "^0.14.0",
     "react-scripts": "^5.0.1",
+    "react-snap": "^1.23.0",
     "sass": "^1.62.1",
     "serve": "^14.2.0",
     "source-map-loader": "^4.0.1",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "webpack-bundle-analyzer": "^4.9.0"
   },
   "eslintIgnore": [
     "craco.config.js"
   ],
+  "reactSnap": {
+    "include": [
+      "/"
+    ],
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox"
+    ]
+  },
   "proxy": "http://localhost:8081"
 }

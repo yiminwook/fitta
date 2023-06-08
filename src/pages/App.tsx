@@ -7,7 +7,7 @@ const SignUpPage = loadable(() => import('@/pages/SignUp'));
 const SeachPage = loadable(() => import('@/pages/Search'));
 const GymPage = loadable(() => import('@/pages/Gym'));
 const OwenerPage = loadable(() => import('@/pages/Owner'));
-const NotFoundPage = loadable(() => import('@/pages/404'));
+const NotFoundPage = loadable(() => import('@/pages/NotFound'));
 
 const App = () => {
   return (
