@@ -1,6 +1,7 @@
 import NavChild from '@/components/common/NavChild';
 import owner from '@/components/owner/Owner.module.scss';
 import { useUser } from '@/hooks/useAPI';
+import { Link } from 'react-router-dom';
 
 const OwnerSidebar = () => {
   const { myData } = useUser();
@@ -11,10 +12,9 @@ const OwnerSidebar = () => {
 
   return (
     <aside className={owner['ownerSidebar']}>
-      <h1>오너 사이드바</h1>
-      <h2>오너ID &gt;&gt;&gt; {myData!.id}</h2>
+      <h1 className="blind">오너 사이드바</h1>
+      <Link to={`/owner/${myData!.id}/home`}>마이페이지(오너)</Link>
       <ul>
-        <NavChild to={`/owner/${myData!.id}/home`} content="마이페이지" />
         <NavChild to={`/owner/${myData!.id}/detail/gym`} content="헬스장 현황" />
         <NavChild to={`/owner/${myData!.id}/detail/staff`} content="스태프 현황" />
         <NavChild to={`/owner/${myData!.id}/detail/member`} content="멤버 현황" />

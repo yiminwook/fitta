@@ -1,8 +1,7 @@
 import GymCardList from '@/components/common/GymCardList';
-import { useOwner, useUser } from '@/hooks/useAPI';
+import { useOwner } from '@/hooks/useAPI';
 
-const GymSection = () => {
-  const { myData } = useUser();
+const OwnerGymSection = () => {
   const { ownerMyAllData, ownerMyData } = useOwner();
 
   console.log('AllData >> ', ownerMyAllData);
@@ -17,4 +16,4 @@ const GymSection = () => {
   );
 };
 
-export default GymSection;
+export default OwnerGymSection;

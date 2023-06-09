@@ -6,18 +6,19 @@
   display: grid;
 
   @include min-width(map-get($points, ss)) {
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: minmax(auto, 10rem) auto;
   }
 
   .ownerSidebar {
+    position: relative;
     padding: 0.5rem;
-    h1 {
-      font-size: 1.5rem;
+    border-right: 1px solid map-get($colors, gray);
+
+    & > a {
       font-weight: 600;
-    }
-    h2 {
       margin-bottom: 1rem;
     }
+
     ul {
       display: flex;
       flex-direction: column;
@@ -29,8 +30,36 @@
       }
     }
   }
+
   .ownerSection {
-    margin: 0.5rem;
+    padding: 0.5rem 1rem;
+
+    .profileSection {
+      position: relative;
+      padding: 1rem;
+      border-radius: 10px;
+      border: 2px solid map-get($colors, gray);
+      margin: auto;
+      display: flex;
+      gap: 1rem;
+      @include box-shadow();
+
+      ul {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      & > div:last-child {
+        position: absolute;
+        bottom: 0.5rem;
+        right: 0.5rem;
+        button {
+          @extend %button-black;
+          padding: 0.25rem 0.75rem;
+        }
+      }
+    }
 
     .gymEditForm {
       display: flex;
