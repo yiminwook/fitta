@@ -5,7 +5,7 @@ import Profile from '@/components/layout/header/Profile';
 import { useCallback, useEffect, useState } from 'react';
 import SidebarButton from '@/components/layout/header/SidebarButton';
 import Sidebar from '@/components/layout/header/Sidebar';
-import { useUser } from '@/hooks/useUser';
+import { useUser } from '@/hooks/useAPI';
 import DarkMode from '@/components/layout/header/DarkMode';
 import { darkModeStorage } from '@/models/darkModeLocalStorage';
 
@@ -17,7 +17,7 @@ const Header = ({}: HeaderProps) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
-  const { data: myData, refetch: myDataRefetch } = useUser();
+  const { myData, refetchMyData } = useUser();
   console.log('loginUserData >>>', myData);
 
   const toggleSidebar = () => {

@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useUser } from '@/hooks/useUser';
+import { useUser } from '@/hooks/useAPI';
 import { handleToastError } from '@/utils/handleToast';
 
 export const useSignOut = () => {
   const navigate = useNavigate();
-  const { refetch: myDataRefetch } = useUser();
+  const { refetchMyData } = useUser();
 
   const signOut = async () => {
     try {
@@ -14,7 +14,7 @@ export const useSignOut = () => {
       if (responese.status === 200) {
         navigate('/');
         toast.success('로그아웃 성공');
-        myDataRefetch();
+        refetchMyData();
       }
     } catch (error) {
       handleToastError(error);

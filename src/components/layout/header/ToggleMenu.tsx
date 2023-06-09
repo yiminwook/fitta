@@ -1,6 +1,6 @@
 import NavChild from '@/components/common/NavChild';
 import toggleMenu from '@/components/layout/header/ToggleMenu.module.scss';
-import { useUser } from '@/hooks/useUser';
+import { useUser } from '@/hooks/useAPI';
 import { MouseEvent, useEffect } from 'react';
 import { CgClose } from 'react-icons/cg';
 import MenuProfile from '@/components/layout/header/MenuProfile';
@@ -10,7 +10,7 @@ interface ToggleMenuProps {
 }
 
 const ToggleMenu = ({ onClose }: ToggleMenuProps) => {
-  const { data: myData } = useUser();
+  const { myData } = useUser();
 
   const onClick = (e: MouseEvent | globalThis.MouseEvent) => {
     e.stopPropagation();

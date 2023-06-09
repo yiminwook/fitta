@@ -1,27 +1,18 @@
 import GymCardList from '@/components/common/GymCardList';
-import fetcher from '@/hooks/fetcher';
-import { useUser } from '@/hooks/useUser';
-import { OwnerMyAllDataType, OwnerMyDataType } from '@/types/fittaApi';
-import { useQuery } from 'react-query';
+import { useOwner, useUser } from '@/hooks/useAPI';
 
 const GymSection = () => {
-  const { data: myData } = useUser();
-  const { data: ownerMyAllData } = useQuery<OwnerMyAllDataType>(`/owners/${myData?.id}/all-view`, fetcher, {
-    enabled: !!myData,
-  });
-
-  const { data: ownerMydata } = useQuery<OwnerMyDataType>(`/owners/${myData?.id}`, fetcher, {
-    enabled: !!myData,
-  });
+  const { myData } = useUser();
+  const { ownerMyAllData, ownerMyData } = useOwner();
 
   console.log('AllData >> ', ownerMyAllData);
-  console.log('OwnerData >> ', ownerMydata);
+  console.log('OwnerData >> ', ownerMyData);
 
-  if (!ownerMydata) return null;
+  if (!ownerMyData) return null;
 
   return (
     <section>
-      <GymCardList moreLink={false} gymData={ownerMydata.gymList ?? []} />
+      <GymCardList moreLink={false} gymData={ownerMyData.gymList ?? []} />
     </section>
   );
 };

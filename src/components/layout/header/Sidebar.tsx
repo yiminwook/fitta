@@ -2,14 +2,14 @@ import NavChild from '@/components/common/NavChild';
 import sidebar from '@/components/layout/header/Sidebar.module.scss';
 import DarkMode, { DarkModeProps } from '@/components/layout/header/DarkMode';
 import MenuProfile from '@/components/layout/header/MenuProfile';
-import { useUser } from '@/hooks/useUser';
+import { useUser } from '@/hooks/useAPI';
 
 interface SidebarProps extends DarkModeProps {
   closeSidebar: () => void;
 }
 
 const Sidebar = ({ isDarkMode, setIsDarkMode, closeSidebar }: SidebarProps) => {
-  const { data: myData } = useUser();
+  const { myData } = useUser();
 
   return (
     <aside className={sidebar['sidebar']}>

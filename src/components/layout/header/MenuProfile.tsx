@@ -1,4 +1,4 @@
-import { useUser } from '@/hooks/useUser';
+import { useUser } from '@/hooks/useAPI';
 import profile from '@/components/layout/header/Profile.module.scss';
 import { createDefaultProfileImage } from '@/utils/createDefaultProfileImage';
 import { useSignOut } from '@/hooks/useSignOut';
@@ -6,7 +6,7 @@ import { useSignOut } from '@/hooks/useSignOut';
 interface MenuProfileProps {}
 
 const MenuProfile = ({}: MenuProfileProps) => {
-  const { data: myData } = useUser();
+  const { myData } = useUser();
   const { signOut } = useSignOut();
   return (
     <div className={profile['menuProfile']}>

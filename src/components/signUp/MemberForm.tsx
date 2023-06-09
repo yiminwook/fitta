@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useRef } from 'react';
 import signUpForm from '@/components/signUp/SignUpForm.module.scss';
-import { useUser } from '@/hooks/useUser';
+import { useUser } from '@/hooks/useAPI';
 import { useNavigate } from 'react-router-dom';
 import SearchButton from '@/components/common/SeachButton';
 import PasswordInput from '@/components/common/PasswordInput';
@@ -35,7 +35,7 @@ export interface MemberFormProps {
 
 const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: MemberFormProps) => {
   const memberFormRef = useRef<MemberFormType>(null);
-  const { data: userData, isLoading } = useUser();
+  const { myData, isLoadingMyData } = useUser();
   const navigate = useNavigate();
 
   const onSubmit = (e: FormEvent<MemberFormType>) => {
@@ -82,7 +82,7 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: MemberFormPr
   //   }
   // }, [isLoading, userData]);
 
-  if (isLoading) {
+  if (isLoadingMyData) {
     return <Loading style={{ height: '42.5rem' }} />;
   }
 

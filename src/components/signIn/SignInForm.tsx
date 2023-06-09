@@ -1,8 +1,8 @@
 import { FormEvent, useCallback, useState } from 'react';
 import signin from '@/components/signIn/SignIn.module.scss';
 import { useInput } from '@/hooks/useInput';
-import { useUser } from '@/hooks/useUser';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useUser } from '@/hooks/useAPI';
+import { Navigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 interface SignInFormProps {
@@ -10,7 +10,7 @@ interface SignInFormProps {
 }
 
 const SignInForm = ({ handleSignIn }: SignInFormProps) => {
-  const { data: myData } = useUser();
+  const { myData } = useUser();
   const [emailInputValue, _setEmailInputValue, onChangeSetEmailInputValue] = useInput('');
   const [passwordInputValue, _setPasswordInputValue, onChangeSetPasswordInputValue] = useInput('');
   const [isShowEmailCautionLetter, setIsShowEmailCautionLetter] = useState(false);

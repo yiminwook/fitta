@@ -1,9 +1,9 @@
 import NavChild from '@/components/common/NavChild';
 import owner from '@/components/owner/Owner.module.scss';
-import { useUser } from '@/hooks/useUser';
+import { useUser } from '@/hooks/useAPI';
 
 const MemberSidebar = () => {
-  const { data: myData } = useUser();
+  const { myData } = useUser();
 
   if (myData === undefined) {
     return null;

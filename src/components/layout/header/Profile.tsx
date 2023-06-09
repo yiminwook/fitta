@@ -1,5 +1,5 @@
 import profile from '@/components/layout/header/Profile.module.scss';
-import { useUser } from '@/hooks/useUser';
+import { useUser } from '@/hooks/useAPI';
 import { MouseEvent, useEffect, useState } from 'react';
 import ToggleMenu from '@/components/layout/header/ToggleMenu';
 import { createDefaultProfileImage } from '@/utils/createDefaultProfileImage';
@@ -9,7 +9,7 @@ interface ProfileProps {}
 
 const Profile = ({}: ProfileProps) => {
   const [toggleShow, setToggleShow] = useState(false);
-  const { data: myData } = useUser();
+  const { myData } = useUser();
   const { pathname } = useLocation();
 
   const handleToggle = (e: MouseEvent) => {

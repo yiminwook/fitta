@@ -7,13 +7,13 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { handleToastError } from '@/utils/handleToast';
 import { RoleType } from '@/types/fittaApi';
-import { useUser } from '@/hooks/useUser';
+import { useUser } from '@/hooks/useAPI';
 
 const { REACT_APP_SERVER_URL } = envConfig();
 
 const SignInFormSection = () => {
   const [searchParams] = useSearchParams();
-  const { data: myData, refetch: myDataRefetch } = useUser();
+  const { myData, refetchMyData } = useUser();
   const navigate = useNavigate();
 
   const handleSignIn = async ({ email, password }: { email: string; password: string }) => {
@@ -22,7 +22,7 @@ const SignInFormSection = () => {
       const response = await axios.post('/signin', { email, password });
       console.log('res  >>>>', response);
       if (response.status >= 200 && response.status < 300) {
-        myDataRefetch();
+        refetchMyData();
         navigate('/');
       }
     } catch (error) {
