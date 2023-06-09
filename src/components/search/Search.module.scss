@@ -24,7 +24,7 @@
       width: 80%;
       max-width: map-get($points, sm);
       padding: 0.5rem;
-      background-color: map-get($colors, white);
+      background-color: var(--fitta-background-color);
 
       input {
         width: 100%;
