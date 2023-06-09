@@ -1,0 +1,79 @@
+@import '@/styles/mixin.scss';
+@import '@/styles/var.scss';
+@import '@/styles/placeholder.scss';
+
+.ownerWapper {
+  display: grid;
+
+  @include min-width(map-get($points, ss)) {
+    grid-template-columns: 1fr 4fr;
+  }
+
+  .ownerSidebar {
+    padding: 0.5rem;
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    h2 {
+      margin-bottom: 1rem;
+    }
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      li {
+        a {
+        }
+      }
+    }
+  }
+  .ownerSection {
+    margin: 0.5rem;
+
+    .gymEditForm {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      border: 2px solid map-get($colors, gray);
+      margin: auto;
+      border-radius: 10px;
+      padding: 1rem;
+      @include box-shadow();
+      max-width: 30rem;
+
+      & > div {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        label {
+          font-size: 1.25rem;
+        }
+
+        input {
+          font-size: 1.25rem;
+          padding: 0.5rem;
+          border: 2px solid map-get($colors, gray);
+          border-radius: 10px;
+        }
+
+        .genderDivision {
+          display: flex;
+          padding: 0.5rem;
+          margin: auto;
+          gap: 1rem;
+        }
+      }
+
+      footer {
+        button {
+          @extend %button-black;
+          padding: 0.5rem 1rem;
+          margin: auto;
+        }
+      }
+    }
+  }
+}
