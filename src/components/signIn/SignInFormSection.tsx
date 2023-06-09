@@ -16,10 +16,10 @@ const SignInFormSection = () => {
   const { data: myData, refetch: myDataRefetch } = useUser();
   const navigate = useNavigate();
 
-  const handleSignIn = async ({ email, password, isOwner }: { email: string; password: string; isOwner: boolean }) => {
+  const handleSignIn = async ({ email, password }: { email: string; password: string }) => {
     try {
-      const role: RoleType = isOwner ? 'OWNER' : 'MEMBER';
-      const response = await axios.post('/signin', { email, password, role });
+      // const role: RoleType = isOwner ? 'OWNER' : 'MEMBER';
+      const response = await axios.post('/signin', { email, password });
       console.log('res  >>>>', response);
       if (response.status >= 200 && response.status < 300) {
         myDataRefetch();

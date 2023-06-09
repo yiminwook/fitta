@@ -3,7 +3,7 @@ import signin from '@/components/signIn/SignIn.module.scss';
 import { useInput } from '@/hooks/useInput';
 
 interface SignInFormProps {
-  handleSignIn: ({ email, password, isOwner }: { email: string; password: string; isOwner: boolean }) => void;
+  handleSignIn: ({ email, password }: { email: string; password: string }) => void;
 }
 
 const SignInForm = ({ handleSignIn }: SignInFormProps) => {
@@ -11,7 +11,7 @@ const SignInForm = ({ handleSignIn }: SignInFormProps) => {
   const [passwordInputValue, _setPasswordInputValue, onChangeSetPasswordInputValue] = useInput('');
   const [isShowEmailCautionLetter, setIsShowEmailCautionLetter] = useState(false);
   const [isShowPasswordCautionLetter, setIsShowPasswordCautionLetter] = useState(false);
-  const [isOwner, setIsOwner] = useState(false);
+  // const [isOwner, setIsOwner] = useState(false);
 
   const onSubmit = useCallback(
     (e: FormEvent) => {
@@ -25,14 +25,14 @@ const SignInForm = ({ handleSignIn }: SignInFormProps) => {
       if (!email) setIsShowEmailCautionLetter(() => true);
       if (!password) setIsShowPasswordCautionLetter(() => true);
       if (!(email && password)) return;
-      handleSignIn({ email, password, isOwner });
+      handleSignIn({ email, password });
     },
-    [emailInputValue, passwordInputValue, isShowEmailCautionLetter, isShowPasswordCautionLetter, isOwner],
+    [emailInputValue, passwordInputValue, isShowEmailCautionLetter, isShowPasswordCautionLetter],
   );
 
-  const handleIsOwner = useCallback(() => {
-    setIsOwner((pre) => !pre);
-  }, [setIsOwner, isOwner]);
+  // const handleIsOwner = useCallback(() => {
+  //   setIsOwner((pre) => !pre);
+  // }, [setIsOwner, isOwner]);
 
   return (
     <form onSubmit={onSubmit}>
@@ -62,10 +62,10 @@ const SignInForm = ({ handleSignIn }: SignInFormProps) => {
           비밀번호가 입력되지 않았습니다.
         </p>
       </div>
-      <div>
+      {/* <div>
         <span>사업자로 로그인하기</span>
         <input type="checkbox" onChange={handleIsOwner} />
-      </div>
+      </div> */}
       <div>
         <button
           type="submit"
