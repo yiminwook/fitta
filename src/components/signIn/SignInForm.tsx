@@ -1,16 +1,21 @@
 import { FormEvent, useCallback, useState } from 'react';
 import signin from '@/components/signIn/SignIn.module.scss';
 import { useInput } from '@/hooks/useInput';
+import { useUser } from '@/hooks/useUser';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 interface SignInFormProps {
   handleSignIn: ({ email, password }: { email: string; password: string }) => void;
 }
 
 const SignInForm = ({ handleSignIn }: SignInFormProps) => {
+  const { data: myData } = useUser();
   const [emailInputValue, _setEmailInputValue, onChangeSetEmailInputValue] = useInput('');
   const [passwordInputValue, _setPasswordInputValue, onChangeSetPasswordInputValue] = useInput('');
   const [isShowEmailCautionLetter, setIsShowEmailCautionLetter] = useState(false);
   const [isShowPasswordCautionLetter, setIsShowPasswordCautionLetter] = useState(false);
+
   // const [isOwner, setIsOwner] = useState(false);
 
   const onSubmit = useCallback(
@@ -33,6 +38,12 @@ const SignInForm = ({ handleSignIn }: SignInFormProps) => {
   // const handleIsOwner = useCallback(() => {
   //   setIsOwner((pre) => !pre);
   // }, [setIsOwner, isOwner]);
+
+  if (myData) {
+    //로그인 되어있으면 홈으로 보냄
+    toast.info('이미 로그인 되어있습니다.');
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <form onSubmit={onSubmit}>
