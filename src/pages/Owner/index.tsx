@@ -1,5 +1,5 @@
 import Head from '@/components/layout/Head';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useParams } from 'react-router-dom';
 import loadable from '@loadable/component';
 import OwnerSidebar from '@/components/owner/Sidebar';
 import owner from '@/components/owner/Owner.module.scss';
@@ -13,6 +13,8 @@ const OwnerEditStaff = loadable(() => import('@/pages/Owner/Edit/Staff'));
 const OwnerEditMember = loadable(() => import('@/pages/Owner/Edit/Member'));
 
 const Owner = () => {
+  const { ownerId } = useParams();
+
   return (
     <>
       <Head title="Owner" />
@@ -20,6 +22,7 @@ const Owner = () => {
         <OwnerSidebar />
         <section className={owner['ownerSection']}>
           <Routes>
+            <Route path="/" element={<Navigate to={`/owner/${ownerId}/home`} replace />} />
             <Route path="/home" element={<OwnerHome />} />
             <Route path="/detail/gym" element={<OwnerDetailGym />} />
             <Route path="/detail/staff" element={<OwnerDetailStaff />} />
