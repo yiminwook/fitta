@@ -1,3 +1,65 @@
 @import '@/styles/mixin.scss';
 @import '@/styles/var.scss';
 @import '@/styles/placeholder.scss';
+
+.profileSection {
+  position: relative;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 2px solid map-get($colors, gray);
+  margin: auto;
+  display: flex;
+  gap: 1rem;
+  @include box-shadow();
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  & > a {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    @extend %button-black;
+    padding: 0.25rem 0.75rem;
+  }
+}
+
+.ownerSummarySection {
+  padding: 1rem;
+
+  table {
+    margin: auto;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+
+    thead {
+      background-color: map-get($colors, lightBlack);
+      box-shadow: 0 4px 4px -4px var(--fitta-);
+      color: map-get($colors, white);
+      border-collapse: separate;
+
+      th {
+        padding: 0.75rem 1rem;
+      }
+    }
+
+    td {
+      position: relative;
+      padding: 0.75rem 1rem;
+      font-size: 1.5rem;
+
+      &:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        height: 50%;
+        background-color: map-get($colors, gray);
+        width: 1.5px;
+        right: 0;
+      }
+    }
+  }
+}

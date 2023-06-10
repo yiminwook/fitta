@@ -89,7 +89,7 @@
         width: 100%;
         content: '';
         position: absolute;
-        background-color: map-get($colors, ligthBlack);
+        background-color: map-get($colors, lightBlack);
         transform: skew(45deg) translate(1rem, 0px);
         height: 1.75rem;
         z-index: -1;

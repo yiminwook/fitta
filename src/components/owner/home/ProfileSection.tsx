@@ -1,6 +1,7 @@
 import { useOwner, useUser } from '@/hooks/useAPI';
 import { createDefaultProfileImage } from '@/utils/createDefaultProfileImage';
-import owner from '@/components/owner/Owner.module.scss';
+import ownerHome from '@/components/owner/home/Home.module.scss';
+import { Link } from 'react-router-dom';
 
 const OwnerProfileSection = () => {
   const { myData } = useUser();
@@ -14,7 +15,7 @@ const OwnerProfileSection = () => {
   const { phoneNumber, email } = ownerMyData;
 
   return (
-    <section className={owner['profileSection']}>
+    <section className={ownerHome['profileSection']}>
       <div>
         <img src={createDefaultProfileImage({ key: name, size: '100px' })} alt="user-profile-image" />
       </div>
@@ -23,9 +24,7 @@ const OwnerProfileSection = () => {
         <li>{email}</li>
         <li>{phoneNumber}</li>
       </ul>
-      <div>
-        <button>+ 내정보 수정하기</button>
-      </div>
+      <Link to={`/owner/${myData.id}/home`}>+ 내정보 수정하기</Link>
     </section>
   );
 };

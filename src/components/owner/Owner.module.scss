@@ -34,33 +34,6 @@
   .ownerSection {
     padding: 0.5rem 1rem;
 
-    .profileSection {
-      position: relative;
-      padding: 1rem;
-      border-radius: 10px;
-      border: 2px solid map-get($colors, gray);
-      margin: auto;
-      display: flex;
-      gap: 1rem;
-      @include box-shadow();
-
-      ul {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-
-      & > div:last-child {
-        position: absolute;
-        bottom: 0.5rem;
-        right: 0.5rem;
-        button {
-          @extend %button-black;
-          padding: 0.25rem 0.75rem;
-        }
-      }
-    }
-
     .gymEditForm {
       display: flex;
       flex-direction: column;

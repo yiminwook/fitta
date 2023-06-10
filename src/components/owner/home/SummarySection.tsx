@@ -1,4 +1,5 @@
 import { useOwner } from '@/hooks/useAPI';
+import ownerHome from '@/components/owner/home/Home.module.scss';
 
 const OwnerSummarySection = () => {
   const { ownerMyAllData, ownerMyData } = useOwner();
@@ -11,23 +12,19 @@ const OwnerSummarySection = () => {
   const { gymCount, memberCount, teamCount } = allgymCount;
 
   return (
-    <section>
+    <section className={ownerHome['ownerSummarySection']}>
       <table>
         <thead>
-          <td>
-            <tr>전체 체육관갯수</tr>
-          </td>
-          <td>
-            <tr>전체 회원수</tr>
-          </td>
+          <tr>
+            <th>전체 체육관갯수</th>
+            <th>전체 회원수</th>
+          </tr>
         </thead>
         <tbody>
-          <td>
-            <tr>{gymCount}</tr>
-          </td>
-          <td>
-            <tr>{memberCount}</tr>
-          </td>
+          <tr>
+            <td>{gymCount}</td>
+            <td>{memberCount}</td>
+          </tr>
         </tbody>
       </table>
     </section>

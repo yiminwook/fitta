@@ -2,7 +2,7 @@ import GymCardList from '@/components/common/GymCardList';
 import fetcher from '@/hooks/fetcher';
 import { useUser } from '@/hooks/useAPI';
 import { OwnerMyAllDataType, OwnerMyDataType } from '@/types/fittaApi';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 const GymSection = () => {
   const { myData } = useUser();

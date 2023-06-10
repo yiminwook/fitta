@@ -7,7 +7,8 @@ import '@/styles/Toast.scss';
 import '@/styles/Global.scss';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ToastContainer } from 'react-toastify';
 
 const queryClient = new QueryClient({
@@ -38,6 +39,7 @@ const app = (
           </RootLayout>
           <ToastContainer position="top-right" autoClose={700} limit={3} />
         </BrowserRouter>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </HelmetProvider>
   </>

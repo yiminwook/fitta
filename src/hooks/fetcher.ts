@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { QueryFunctionContext } from 'react-query';
+import { QueryFunctionContext } from '@tanstack/react-query';
 
 const fetcher = async (context: QueryFunctionContext) => {
   try {
