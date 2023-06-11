@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import loadable from '@loadable/component';
 
 const HomePage = loadable(() => import('@/pages/Home'));
-const SignInPage = loadable(() => import('@/pages/SignIn'));
+const SignInPage = loadable(() => import('@/pages/Search/SignIn'));
 const SignUpPage = loadable(() => import('@/pages/SignUp'));
 const SeachPage = loadable(() => import('@/pages/Search'));
 const GymPage = loadable(() => import('@/pages/Gym'));
