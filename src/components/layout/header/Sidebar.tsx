@@ -8,14 +8,14 @@ interface SidebarProps extends DarkModeProps {
   closeSidebar: () => void;
 }
 
-const Sidebar = ({ isDarkMode, setIsDarkMode, closeSidebar }: SidebarProps) => {
+const Sidebar = ({ closeSidebar }: SidebarProps) => {
   const { myData } = useUser();
 
   return (
     <aside className={sidebar['sidebar']}>
       <header>
         <h1 className="blind">사이드바</h1>
-        <DarkMode isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+        <DarkMode />
       </header>
       {myData ? <MenuProfile /> : null}
       <ul>

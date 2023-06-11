@@ -7,16 +7,12 @@ import SidebarButton from '@/components/layout/header/SidebarButton';
 import Sidebar from '@/components/layout/header/Sidebar';
 import { useUser } from '@/hooks/useAPI';
 import DarkMode from '@/components/layout/header/DarkMode';
-import { darkModeStorage } from '@/models/darkModeLocalStorage';
-
 interface HeaderProps {}
 
 const Header = ({}: HeaderProps) => {
   const [showSidebar, setShowSidebar] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const { pathname } = useLocation();
   const navigate = useNavigate();
-
   const { myData, refetchMyData } = useUser();
   console.log('loginUserData >>>', myData);
 
@@ -32,15 +28,6 @@ const Header = ({}: HeaderProps) => {
     closeSidebar();
   }, [myData, pathname]);
 
-  useEffect(() => {
-    setIsDarkMode(() => darkModeStorage.Data); //os darkmode 체크
-  }, []);
-
-  useEffect(() => {
-    darkModeStorage.setState(isDarkMode);
-    document.documentElement.setAttribute('color-mode', isDarkMode ? 'dark' : 'light');
-  }, [isDarkMode]);
-
   return (
     <header className={header['header']}>
       <div className={header['headerWrapper']}>
@@ -53,7 +40,7 @@ const Header = ({}: HeaderProps) => {
             </Link>
             <ul className={header['headerRight']}>
               <li>
-                <DarkMode isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+                <DarkMode />
               </li>
               {!myData ? (
                 <li>
@@ -68,9 +55,7 @@ const Header = ({}: HeaderProps) => {
               )}
             </ul>
             <SidebarButton showSidebar={showSidebar} toggleSidebar={toggleSidebar} />
-            {showSidebar ? (
-              <Sidebar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} closeSidebar={closeSidebar} />
-            ) : null}
+            {showSidebar ? <Sidebar closeSidebar={closeSidebar} /> : null}
           </div>
         </div>
         <nav className={header['headerNav']}>

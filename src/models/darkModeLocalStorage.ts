@@ -25,6 +25,7 @@ class DarkModeLocalStorage {
 
   public setState(newData: boolean) {
     this.data = newData;
+    document.documentElement.setAttribute('color-mode', this.data ? 'dark' : 'light');
     this.setItem();
   }
 
