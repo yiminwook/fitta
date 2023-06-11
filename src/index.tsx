@@ -10,6 +10,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ToastContainer } from 'react-toastify';
+import axios from 'axios';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,6 +29,12 @@ const queryClient = new QueryClient({
     },
   },
 });
+
+if (process.env.NODE_ENV === 'production') {
+  console.log('SETUP MODE', process.env.NODE_ENV);
+  axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL;
+  axios.defaults.withCredentials = true;
+}
 
 const app = (
   <>
