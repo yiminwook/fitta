@@ -3,33 +3,28 @@ import { searchHistoryLocalStorage } from '@/models/localStorage';
 import { Dispatch, memo, RefObject, SetStateAction, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { FiDelete } from 'react-icons/fi';
+import { useSearchLocalStorage } from '@/hooks/useLocalStorage';
 
 interface SearchHistoryProps {
   focusIndex: number;
   setFocusIndex: Dispatch<SetStateAction<number>>;
-  searchHistory: string[];
-  setSearchHistory: Dispatch<SetStateAction<string[]>>;
   searchHistoryRef: RefObject<HTMLUListElement>;
 }
 
-const SearchHistory = ({
-  focusIndex,
-  setFocusIndex,
-  searchHistoryRef,
-  searchHistory,
-  setSearchHistory,
-}: SearchHistoryProps) => {
+const SearchHistory = ({ focusIndex, setFocusIndex, searchHistoryRef }: SearchHistoryProps) => {
+  const { searchHistoryData, refetchSearchHistoryData } = useSearchLocalStorage();
+
   const onDelete = useCallback(
     (index: number) => {
       searchHistoryLocalStorage.deleteOneDataByIndex(index);
-      setSearchHistory((pre) => pre.filter((_history, idx) => idx !== index));
+      refetchSearchHistoryData();
     },
-    [searchHistoryLocalStorage, setSearchHistory],
+    [searchHistoryLocalStorage, searchHistoryData],
   );
 
   const onReset = useCallback(() => {
     searchHistoryLocalStorage.reset();
-    setSearchHistory(() => []);
+    refetchSearchHistoryData();
   }, [searchHistoryLocalStorage]);
 
   const onHover = useCallback(
@@ -50,7 +45,7 @@ const SearchHistory = ({
         </div>
       </header>
       <ul ref={searchHistoryRef}>
-        {searchHistory.map((history, index) => (
+        {searchHistoryData.map((history, index) => (
           <li
             key={`search-hitory-${index}`}
             className={index === focusIndex ? search['focus'] : ''}

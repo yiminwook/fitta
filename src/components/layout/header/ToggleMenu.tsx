@@ -1,15 +1,16 @@
 import NavChild from '@/components/common/NavChild';
-import header from '@/components/layout/header/Header.module.scss';
-import useStopPropagation from '@/hooks/useStopPropagation';
+import toggleMenu from '@/components/layout/header/ToggleMenu.module.scss';
+import { useUser } from '@/hooks/useAPI';
 import { MouseEvent, useEffect } from 'react';
 import { CgClose } from 'react-icons/cg';
+import MenuProfile from '@/components/layout/header/MenuProfile';
 
 interface ToggleMenuProps {
   onClose: () => void;
 }
 
 const ToggleMenu = ({ onClose }: ToggleMenuProps) => {
-  const { stopPropagation } = useStopPropagation();
+  const { myData } = useUser();
 
   const onClick = (e: MouseEvent | globalThis.MouseEvent) => {
     e.stopPropagation();
@@ -23,22 +24,24 @@ const ToggleMenu = ({ onClose }: ToggleMenuProps) => {
     return () => body.removeEventListener('click', onClick);
   }, []);
 
+  const renderMyPageLink = () => {
+    if (!myData) return null;
+    const { role, id } = myData;
+    return <NavChild to={`${role.toLocaleLowerCase()}/${id}/home`} content="마이페이지" />;
+  };
+
   return (
-    <div className={header['toggleMenu']} onClick={stopPropagation}>
+    <div className={toggleMenu['toggleMenu']}>
       <header>
-        <button onClick={onClick}>
+        <button>
           <CgClose color="inherit" size="1rem" />
         </button>
       </header>
+      {myData ? <MenuProfile /> : null}
       <ul>
         {/* pageLink 임시 */}
-        <NavChild to="/search" content="검색" onClick={onClick} />
-        <NavChild to="/admin" content="Admin" onClick={onClick} />
-        <NavChild to="/signup" content="가입" onClick={onClick} />
+        {renderMyPageLink()}
       </ul>
-      <footer>
-        <button>로그아웃</button>
-      </footer>
     </div>
   );
 };

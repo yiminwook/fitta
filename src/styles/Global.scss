@@ -2,16 +2,35 @@
 @import '@/styles/var.scss';
 @import '@/styles/placeholder.scss';
 
+:root {
+  --fitta-text-color-default: #1c1c1c;
+  --fitta-text-color-light: #c0c0c0;
+  --fitta-background-color: #fff;
+  --fitta-box-shadow-color: #7c7c7c;
+}
+
+:root[color-mode='dark'] {
+  --fitta-text-color-default: #fff;
+  --fitta-text-color-light: #c0c0c0;
+  --fitta-background-color: #5c5c5c;
+  --fitta-box-shadow-color: #fff;
+}
+
 html,
 body {
   overflow-x: hidden;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: map-get($colors, white);
+  color: var(--fitta-text-color-default);
+  background-color: var(--fitta-background-color);
   font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto,
     'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+}
+
+body {
+  transition: all 0.3s ease;
 }
 
 a,
@@ -61,6 +80,10 @@ button {
     color: red;
     cursor: default;
   }
+}
+
+input {
+  background-color: var(--fitta-background-color);
 }
 
 .blind {

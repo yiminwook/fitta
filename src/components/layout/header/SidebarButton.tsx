@@ -7,7 +7,10 @@ interface SidebarButtonProps {
 
 const SidebarButton = ({ showSidebar, toggleSidebar }: SidebarButtonProps) => {
   return (
-    <div className={[sidebar['toggleButton'], showSidebar ? sidebar['active'] : ''].join(' ')} onClick={toggleSidebar}>
+    <div
+      className={[sidebar['sidebarToggleButton'], showSidebar ? sidebar['active'] : ''].join(' ')}
+      onClick={toggleSidebar}
+    >
       <span />
       <span />
       <span />

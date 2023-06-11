@@ -1,17 +1,22 @@
 import { FormEvent, useCallback, useState } from 'react';
 import signin from '@/components/signIn/SignIn.module.scss';
 import { useInput } from '@/hooks/useInput';
+import { useUser } from '@/hooks/useAPI';
+import { Navigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 interface SignInFormProps {
-  handleSignIn: ({ email, password, isOwner }: { email: string; password: string; isOwner: boolean }) => void;
+  handleSignIn: ({ email, password }: { email: string; password: string }) => void;
 }
 
 const SignInForm = ({ handleSignIn }: SignInFormProps) => {
+  const { myData } = useUser();
   const [emailInputValue, _setEmailInputValue, onChangeSetEmailInputValue] = useInput('');
   const [passwordInputValue, _setPasswordInputValue, onChangeSetPasswordInputValue] = useInput('');
   const [isShowEmailCautionLetter, setIsShowEmailCautionLetter] = useState(false);
   const [isShowPasswordCautionLetter, setIsShowPasswordCautionLetter] = useState(false);
-  const [isOwner, setIsOwner] = useState(false);
+
+  // const [isOwner, setIsOwner] = useState(false);
 
   const onSubmit = useCallback(
     (e: FormEvent) => {
@@ -25,14 +30,20 @@ const SignInForm = ({ handleSignIn }: SignInFormProps) => {
       if (!email) setIsShowEmailCautionLetter(() => true);
       if (!password) setIsShowPasswordCautionLetter(() => true);
       if (!(email && password)) return;
-      handleSignIn({ email, password, isOwner });
+      handleSignIn({ email, password });
     },
-    [emailInputValue, passwordInputValue, isShowEmailCautionLetter, isShowPasswordCautionLetter, isOwner],
+    [emailInputValue, passwordInputValue, isShowEmailCautionLetter, isShowPasswordCautionLetter],
   );
 
-  const handleIsOwner = useCallback(() => {
-    setIsOwner((pre) => !pre);
-  }, [setIsOwner, isOwner]);
+  // const handleIsOwner = useCallback(() => {
+  //   setIsOwner((pre) => !pre);
+  // }, [setIsOwner, isOwner]);
+
+  if (myData) {
+    //로그인 되어있으면 홈으로 보냄
+    toast.info('이미 로그인 되어있습니다.');
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <form onSubmit={onSubmit}>
@@ -62,10 +73,10 @@ const SignInForm = ({ handleSignIn }: SignInFormProps) => {
           비밀번호가 입력되지 않았습니다.
         </p>
       </div>
-      <div>
+      {/* <div>
         <span>사업자로 로그인하기</span>
         <input type="checkbox" onChange={handleIsOwner} />
-      </div>
+      </div> */}
       <div>
         <button
           type="submit"

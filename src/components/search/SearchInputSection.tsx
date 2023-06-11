@@ -7,6 +7,7 @@ import { BiSearch } from 'react-icons/bi';
 import useStopPropagation from '@/hooks/useStopPropagation';
 import useCloseEventListener from '@/hooks/useCloseEventListener';
 import SearchInput from '@/components/search/SearchInput';
+import { useSearchLocalStorage } from '@/hooks/useLocalStorage';
 
 interface SearchInputSectionProps {}
 
@@ -15,9 +16,9 @@ const SearchInputSection = ({}: SearchInputSectionProps) => {
   const [searchInputValue, setSearchInputValue] = useState('');
   const [showHistory, setShowHistory] = useState(false);
   const [focusIndex, setFocusIndex] = useState(-1);
-  const [searchHistory, setSearchHistory] = useState<string[]>([]);
   const searchHistoryRef = useRef<HTMLUListElement>(null);
   const { stopPropagation } = useStopPropagation();
+  const { searchHistoryData } = useSearchLocalStorage();
 
   const resetFocus = useCallback(() => {
     setFocusIndex(() => -1);
@@ -46,13 +47,13 @@ const SearchInputSection = ({}: SearchInputSectionProps) => {
       if (showHistory === false) openHistory(); //입력시 최근검색창이 열림
 
       if (e.key === 'ArrowDown') {
-        return setFocusIndex((prev) => (prev + 1) % searchHistory.length);
+        return setFocusIndex((prev) => (prev + 1) % searchHistoryData.length);
       }
 
       if (e.key === 'ArrowUp') {
         if (focusIndex === -1) return; //focus가 없을때 작동x
         if (focusIndex === 0) return resetFocus(); //0일때는 focus 해제
-        return setFocusIndex((prev) => (prev - 1 + searchHistory.length) % searchHistory.length);
+        return setFocusIndex((prev) => (prev - 1 + searchHistoryData.length) % searchHistoryData.length);
       }
 
       if (e.key === 'Escape') {
@@ -62,7 +63,7 @@ const SearchInputSection = ({}: SearchInputSectionProps) => {
       if (
         e.key === 'Enter' &&
         showHistory && //최근검색어가 켜져있을때만
-        searchHistory.length > 0 &&
+        searchHistoryData.length > 0 &&
         focusIndex >= 0 &&
         searchHistoryRef.current !== null
       ) {
@@ -71,7 +72,7 @@ const SearchInputSection = ({}: SearchInputSectionProps) => {
 
       resetFocus(); //ArrowDown ArrowUp Esc Enter 외 입력시 focus 해제
     },
-    [focusIndex, showHistory, searchHistoryRef, searchHistory],
+    [focusIndex, showHistory, searchHistoryRef, searchHistoryData],
   );
 
   useEffect(() => {
@@ -79,8 +80,6 @@ const SearchInputSection = ({}: SearchInputSectionProps) => {
     closeHistory();
     const query = searchParams.get('query') ?? '';
     setSearchInputValue(() => query);
-    const history = searchHistoryLocalStorage.Data;
-    setSearchHistory(() => history);
   }, [searchParams]);
 
   useCloseEventListener(closeHistory);
@@ -96,13 +95,7 @@ const SearchInputSection = ({}: SearchInputSectionProps) => {
             onKeydown={onKeydown}
           />
           {showHistory ? (
-            <SearchHistory
-              focusIndex={focusIndex}
-              setFocusIndex={setFocusIndex}
-              searchHistory={searchHistory}
-              setSearchHistory={setSearchHistory}
-              searchHistoryRef={searchHistoryRef}
-            />
+            <SearchHistory focusIndex={focusIndex} setFocusIndex={setFocusIndex} searchHistoryRef={searchHistoryRef} />
           ) : null}
           <button type="submit">
             <BiSearch size="1.5rem" color="inherit" />

@@ -2,12 +2,13 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import loadable from '@loadable/component';
 
 const HomePage = loadable(() => import('@/pages/Home'));
-const SignInPage = loadable(() => import('@/pages/SignIn'));
+const SignInPage = loadable(() => import('@/pages/Search/SignIn'));
 const SignUpPage = loadable(() => import('@/pages/SignUp'));
 const SeachPage = loadable(() => import('@/pages/Search'));
 const GymPage = loadable(() => import('@/pages/Gym'));
 const OwenerPage = loadable(() => import('@/pages/Owner'));
-const NotFoundPage = loadable(() => import('@/pages/404'));
+const MemberPage = loadable(() => import('@/pages/Member'));
+const NotFoundPage = loadable(() => import('@/pages/NotFound'));
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/search" element={<SeachPage />} />
         <Route path="/gym/:gymId" element={<GymPage />} />
         <Route path="/owner/:ownerId/*" element={<OwenerPage />} />
+        <Route path="/member/:memberId/*" element={<MemberPage />} />
         <Route path="/404" element={<NotFoundPage />} />
         <Route path="/*" element={<Navigate to="/404" replace />} />
       </Routes>

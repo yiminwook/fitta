@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom/client';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 import App from '@/pages/App';
 import RootLayout from '@/components/layout/RootLayout';
 import 'pretendard/dist/web/variable/pretendardvariable.css';
@@ -7,10 +7,9 @@ import '@/styles/Toast.scss';
 import '@/styles/Global.scss';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ToastContainer } from 'react-toastify';
-
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -24,11 +23,13 @@ const queryClient = new QueryClient({
       retry: 3,
       retryDelay: 1000 * 30,
       refetchInterval: 1000 * 30,
+      suspense: true,
+      useErrorBoundary: true,
     },
   },
 });
 
-root.render(
+const app = (
   <>
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
@@ -38,7 +39,16 @@ root.render(
           </RootLayout>
           <ToastContainer position="top-right" autoClose={700} limit={3} />
         </BrowserRouter>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </HelmetProvider>
-  </>,
+  </>
 );
+
+const root = document.getElementById('root') as HTMLElement;
+
+if (root.hasChildNodes()) {
+  hydrateRoot(root, app);
+} else {
+  createRoot(root).render(app);
+}

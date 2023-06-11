@@ -1,9 +1,13 @@
-import GymSection from '@/components/owner/home/GymSection';
+import OwnerGymSection from '@/components/owner/home/GymSection';
+import OwnerProfileSection from '@/components/owner/home/ProfileSection';
+import OwnerSummarySection from '@/components/owner/home/SummarySection';
 
 const OwnerHome = () => {
   return (
     <>
-      <GymSection />
+      <OwnerProfileSection />
+      <OwnerSummarySection />
+      <OwnerGymSection />
     </>
   );
 };

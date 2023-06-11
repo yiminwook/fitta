@@ -1,7 +1,7 @@
 import signUpForm from '@/components/signUp/SignUpForm.module.scss';
 import { MemberFormElementsType, MemberFormProps } from '@/components/signUp/MemberForm';
 import { FormEvent, useRef } from 'react';
-import { useUser } from '@/hooks/useUser';
+import { useUser } from '@/hooks/useAPI';
 import { useNavigate } from 'react-router-dom';
 import SearchButton from '@/components/common/SeachButton';
 import PasswordInput from '@/components/common/PasswordInput';
@@ -21,7 +21,7 @@ export interface OwnerFormProps extends MemberFormProps {}
 
 const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProps) => {
   const ownerFormRef = useRef<OwnerFormType>(null);
-  const { data: myData, isLoading } = useUser();
+  const { myData, isLoadingMyData } = useUser();
   const navigate = useNavigate();
 
   const onSubmit = (e: FormEvent<OwnerFormType>) => {
@@ -59,7 +59,7 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProp
     }
   };
 
-  if (isLoading) {
+  if (isLoadingMyData) {
     return <Loading style={{ height: '42.5rem' }} />;
   }
 

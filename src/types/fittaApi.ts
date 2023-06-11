@@ -1,6 +1,6 @@
-type GenderType = 'FEMALE' | 'MALE';
-type RoleType = 'OWNER' | 'MEMBER' | 'STAFF';
-type GenderDivisionType = 'FEMALE_ONLY' | 'MALE_ONLY' | 'UNISEX';
+export type GenderType = 'FEMALE' | 'MALE';
+export type RoleType = 'OWNER' | 'MEMBER' | 'STAFF';
+export type GenderDivisionType = 'FEMALE_ONLY' | 'MALE_ONLY' | 'UNISEX';
 
 export interface EssentialBaseType {
   id: number;

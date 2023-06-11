@@ -6,19 +6,18 @@
   display: grid;
 
   @include min-width(map-get($points, ss)) {
-    grid-template-columns: minmax(auto, 10rem) auto;
+    grid-template-columns: 1fr 4fr;
   }
 
   .ownerSidebar {
-    position: relative;
     padding: 0.5rem;
-    border-right: 1px solid map-get($colors, gray);
-
-    & > a {
+    h1 {
+      font-size: 1.5rem;
       font-weight: 600;
+    }
+    h2 {
       margin-bottom: 1rem;
     }
-
     ul {
       display: flex;
       flex-direction: column;
@@ -30,9 +29,8 @@
       }
     }
   }
-
   .ownerSection {
-    padding: 0.5rem 1rem;
+    margin: 0.5rem;
 
     .gymEditForm {
       display: flex;
