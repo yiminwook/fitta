@@ -11,6 +11,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ToastContainer } from 'react-toastify';
 import axios from 'axios';
+import reportWebVitals from './reportWebVitals';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -36,7 +37,7 @@ if (process.env.NODE_ENV === 'production') {
   axios.defaults.withCredentials = true;
 }
 
-const app = (
+export const app = (
   <>
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
@@ -52,10 +53,12 @@ const app = (
   </>
 );
 
-const root = document.getElementById('root') as HTMLElement;
+export const root = document.getElementById('root') as HTMLElement;
 
 if (root.hasChildNodes()) {
   hydrateRoot(root, app);
 } else {
   createRoot(root).render(app);
 }
+
+// reportWebVitals(console.log);
