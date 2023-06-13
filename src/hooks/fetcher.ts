@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { QueryFunctionContext } from '@tanstack/react-query';
 
 const fetcher = async (context: QueryFunctionContext) => {
@@ -9,6 +9,11 @@ const fetcher = async (context: QueryFunctionContext) => {
     return data;
   } catch (error) {
     console.error(error);
+    if (error instanceof AxiosError) {
+      throw error;
+    } else {
+      throw new AxiosError('fetch error');
+    }
   }
 };
 

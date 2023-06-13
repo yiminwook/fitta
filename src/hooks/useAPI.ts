@@ -2,14 +2,20 @@ import { useQuery, useQueries, UseQueryResult } from '@tanstack/react-query';
 import fetcher from '@/hooks/fetcher';
 import { AxiosError } from 'axios';
 import { MyDataType, OwnerMyAllDataType, OwnerMyDataType } from '@/types/fittaApi';
+import { useEffect } from 'react';
 
 export const useUser = () => {
-  const {
+  let {
     data: myData,
     isLoading: isLoadingMyData,
     error: errorMyData,
     refetch: refetchMyData,
-  } = useQuery<MyDataType, AxiosError<{ message: string }>>(['/userdata'], fetcher);
+  } = useQuery<MyDataType, AxiosError<{ message: string }>>({
+    queryKey: ['/userdata'],
+    queryFn: fetcher,
+    suspense: false,
+  });
+
   return { myData, isLoadingMyData, errorMyData, refetchMyData };
 };
 

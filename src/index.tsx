@@ -11,7 +11,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ToastContainer } from 'react-toastify';
 import axios from 'axios';
-import reportWebVitals from './reportWebVitals';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,7 +25,7 @@ const queryClient = new QueryClient({
       retryDelay: 1000 * 30,
       refetchInterval: 1000 * 30,
       suspense: true,
-      useErrorBoundary: true,
+      useErrorBoundary: false,
     },
   },
 });
