@@ -6,6 +6,9 @@ const fetcher = async (context: QueryFunctionContext) => {
     if (context.queryKey.length === 0) return undefined;
     const key = context.queryKey[0] as string;
     const { data } = await axios.get(key);
+    if (/doctype/i.test(data)) {
+      throw new AxiosError('server is not working');
+    }
     return data;
   } catch (error) {
     console.error(error);

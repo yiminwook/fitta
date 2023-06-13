@@ -10,7 +10,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ToastContainer } from 'react-toastify';
-// import axios from 'axios';
+import axios from 'axios';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,31 +25,29 @@ const queryClient = new QueryClient({
       retryDelay: 1000 * 30,
       refetchInterval: 1000 * 30,
       suspense: true,
-      useErrorBoundary: false,
+      // useErrorBoundary: false,
     },
   },
 });
 
 if (process.env.NODE_ENV === 'production') {
   console.log('SETUP MODE', process.env.NODE_ENV);
-  // axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL;
-  // axios.defaults.withCredentials = true;
+  axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL;
+  axios.defaults.withCredentials = true;
 }
 
 export const app = (
-  <>
-    <HelmetProvider>
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <RootLayout>
-            <App />
-          </RootLayout>
-          <ToastContainer position="top-right" autoClose={700} limit={3} />
-        </BrowserRouter>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </HelmetProvider>
-  </>
+  <HelmetProvider>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <RootLayout>
+          <App />
+        </RootLayout>
+        <ToastContainer position="top-right" autoClose={700} limit={3} />
+      </BrowserRouter>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  </HelmetProvider>
 );
 
 export const root = document.getElementById('root') as HTMLElement;

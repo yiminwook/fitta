@@ -46,7 +46,7 @@
     "react-helmet-async": "^1.3.0",
     "react-icons": "^4.8.0",
     "react-kakao-maps-sdk": "^1.1.9",
-    "react-router-dom": "^6.11.1",
+    "react-router-dom": "6.4.0",
     "react-slick": "^0.29.0",
     "react-toastify": "^9.1.3",
     "slick-carousel": "^1.8.1",
@@ -101,6 +101,5 @@
       "axios": "axios/dist/node/axios.cjs",
       "transformIgnorePatterns": []
     }
-  },
-  "proxy": "http://localhost:8081"
+  }
 }
