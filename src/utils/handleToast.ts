@@ -4,9 +4,11 @@ import { toast } from 'react-toastify';
 export const handleToastError = (error: unknown) => {
   console.error(error);
   if (error instanceof AxiosError) {
-    return toast.error(error.response?.data.message ?? '통신에러');
+    toast.error(error.response?.data.message ?? '통신에러');
+    return;
   }
   if (error instanceof Error) {
-    return toast.error(error.message);
+    toast.error(error.message);
+    return;
   }
 };

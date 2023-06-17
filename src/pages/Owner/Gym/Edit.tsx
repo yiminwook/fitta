@@ -1,10 +1,10 @@
-import GymEditForm from '@/components/owner/detail/GymEditForm';
+import GymEditForm from '@/components/owner/gym/GymEditForm';
 import PostModal from '@/components/signUp/PostModal';
 import usePostModal from '@/hooks/usePostModal';
 
-interface OwnerEditGymProps {}
+interface OwnerGymEditProps {}
 
-const OwnerEditGym = ({}: OwnerEditGymProps) => {
+const OwnerGymEdit = ({}: OwnerGymEditProps) => {
   const { showPostModal, openPostModal, closePostModal, handleRoadAddress, roadAddress } = usePostModal();
   return (
     <>
@@ -14,4 +14,4 @@ const OwnerEditGym = ({}: OwnerEditGymProps) => {
   );
 };
 
-export default OwnerEditGym;
+export default OwnerGymEdit;

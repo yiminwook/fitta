@@ -77,14 +77,14 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: MemberFormPr
   };
 
   // useEffect(() => {
-  //   if (isLoading === false && !userData?.email) {
+  //   if (isLoadingMyData === false && !myData?.id) {
   //     navigate('/signin');
   //   }
-  // }, [isLoading, userData]);
+  // }, [isLoadingMyData, myData]);
 
-  if (isLoadingMyData) {
-    return <Loading style={{ height: '42.5rem' }} />;
-  }
+  // if (isLoadingMyData) {
+  //   return <Loading style={{ height: '42.5rem' }} />;
+  // }
 
   return (
     <form ref={memberFormRef} onSubmit={onSubmit} className={signUpForm['form']}>

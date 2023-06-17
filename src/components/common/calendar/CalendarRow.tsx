@@ -1,5 +1,5 @@
-import { CalendarCellType } from '@/components/common/Calendar/Calendar';
-import CalendarCell from '@/components/common/Calendar/CalendarCell';
+import { CalendarCellType } from '@/components/common/calendar/Calendar';
+import CalendarCell from '@/components/common/calendar/CalendarCell';
 
 interface CalendarRowProps {
   rowArray: CalendarCellType[];

@@ -50,3 +50,37 @@
     display: block;
   }
 }
+
+%mypage-base {
+  display: grid;
+
+  @include min-width(map-get($points, ss)) {
+    grid-template-columns: minmax(auto, 10rem) auto;
+  }
+
+  .sidebar {
+    position: relative;
+    padding: 0.5rem;
+    border-right: 1px solid map-get($colors, gray);
+
+    & > a {
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      li {
+        a {
+        }
+      }
+    }
+  }
+
+  .inner {
+    padding: 0.5rem 1rem;
+  }
+}

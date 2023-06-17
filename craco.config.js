@@ -1,4 +1,4 @@
-const CracoAlias = require('craco-alias');
+const { CracoAliasPlugin } = require('react-app-alias');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 const { LoaderOptionsPlugin } = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
@@ -8,12 +8,7 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 const config = {
   plugins: [
     {
-      plugin: CracoAlias,
-      options: {
-        source: 'tsconfig',
-        baseUrl: '.',
-        tsConfigPath: 'tsconfig.paths.json',
-      },
+      plugin: CracoAliasPlugin,
     },
   ],
   webpack: {

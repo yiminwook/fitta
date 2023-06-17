@@ -9,43 +9,69 @@ export const useUser = () => {
     isLoading: isLoadingMyData,
     error: errorMyData,
     refetch: refetchMyData,
-  } = useQuery<MyDataType, AxiosError<{ message: string }>>(['/userdata'], fetcher);
+  } = useQuery<MyDataType, AxiosError<{ message: string }>>({
+    queryKey: ['/userdata'],
+    queryFn: fetcher,
+    suspense: false,
+  });
+
   return { myData, isLoadingMyData, errorMyData, refetchMyData };
 };
 
 export const useOwner = () => {
   const { myData } = useUser();
   const [
+    { data: ownerMyData, error: errorOwnerMyData, isLoading: isLoadingOwnerMyData, refetch },
     {
       data: ownerMyAllData,
       error: errorOwnerMyAllData,
       isLoading: isLoadingOwnerMyAllData,
       refetch: refetchOwnerMyAllData,
     },
-    { data: ownerMyData, error: errorOwnerMyData, isLoading: isLoadingOwnerMyData, refetch: refetchOwnerMyData },
-  ] = useQueries<[UseQueryResult<OwnerMyAllDataType>, UseQueryResult<OwnerMyDataType>]>({
+  ] = useQueries<[UseQueryResult<OwnerMyDataType>, UseQueryResult<OwnerMyAllDataType>]>({
     queries: [
       {
-        queryKey: [`/owners/${myData?.id}/all-view`],
+        queryKey: [`/owners/${myData?.id}`],
         queryFn: fetcher,
         enabled: !!myData,
       },
       {
-        queryKey: [`/owners/${myData?.id}`],
+        queryKey: [`/owners/${myData?.id}/all-view`],
         queryFn: fetcher,
         enabled: !!myData,
       },
     ],
   });
 
+  const refetchOwnerMydata = () => {
+    refetch();
+    refetchOwnerMyAllData();
+  };
+
   return {
     ownerMyAllData,
     errorOwnerMyAllData,
     isLoadingOwnerMyAllData,
-    refetchOwnerMyAllData,
     ownerMyData,
     errorOwnerMyData,
     isLoadingOwnerMyData,
-    refetchOwnerMyData,
+    refetchOwnerMydata,
   };
+};
+
+export const useMember = () => {
+  const { myData } = useUser();
+
+  const {
+    data: memberMyData,
+    isLoading: isLoadingMemberMyData,
+    error: errorMemberMyData,
+    refetch: refetchMemberMyData,
+  } = useQuery<any, AxiosError<{ message: string }>>({
+    queryKey: [`/members/${myData?.id}`],
+    queryFn: fetcher,
+    enabled: !!myData,
+  });
+
+  return { memberMyData, isLoadingMemberMyData, errorMemberMyData, refetchMemberMyData };
 };

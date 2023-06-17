@@ -8,6 +8,7 @@ interface MenuProfileProps {}
 const MenuProfile = ({}: MenuProfileProps) => {
   const { myData } = useUser();
   const { signOut } = useSignOut();
+
   return (
     <div className={profile['menuProfile']}>
       <div>

@@ -1,4 +1,5 @@
 import gymCard from '@/components/common/GymCard.module.scss';
+import { Link, useLocation } from 'react-router-dom';
 
 interface GymCardProps {
   name: string;
@@ -8,19 +9,23 @@ interface GymCardProps {
 }
 
 const GymCard = ({ name, id, population, address }: GymCardProps) => {
+  const { pathname } = useLocation();
+
   return (
-    <div className={gymCard['card']}>
-      <div>
-        <img src="https://placehold.co/200x200" alt="card_image" />
+    <Link to={pathname === '/' ? `/gym/${id}` : `${pathname}/${id}`}>
+      <div className={gymCard['card']}>
+        <div>
+          <img src="https://placehold.co/200x200" alt="card_image" />
+        </div>
+        <div>
+          <h3>{name}</h3>
+          <ul>
+            <li>인원수: {population}</li>
+            <li>{address}</li>
+          </ul>
+        </div>
       </div>
-      <div>
-        <h3>{name}</h3>
-        <ul>
-          <li>인원수: {population}</li>
-          <li>{address}</li>
-        </ul>
-      </div>
-    </div>
+    </Link>
   );
 };
 

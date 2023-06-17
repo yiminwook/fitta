@@ -59,9 +59,9 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProp
     }
   };
 
-  if (isLoadingMyData) {
-    return <Loading style={{ height: '42.5rem' }} />;
-  }
+  // if (isLoadingMyData) {
+  //   return <Loading style={{ height: '42.5rem' }} />;
+  // }
 
   return (
     <form ref={ownerFormRef} onSubmit={onSubmit} className={signUpForm['form']}>

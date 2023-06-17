@@ -2,79 +2,49 @@
 @import '@/styles/var.scss';
 @import '@/styles/placeholder.scss';
 
-.ownerWapper {
-  display: grid;
+.wapper {
+  @extend %mypage-base;
 
-  @include min-width(map-get($points, ss)) {
-    grid-template-columns: minmax(auto, 10rem) auto;
-  }
+  .gymEditForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 2px solid map-get($colors, gray);
+    margin: auto;
+    border-radius: 10px;
+    padding: 1rem;
+    @include box-shadow();
+    max-width: 30rem;
 
-  .ownerSidebar {
-    position: relative;
-    padding: 0.5rem;
-    border-right: 1px solid map-get($colors, gray);
-
-    & > a {
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
-
-    ul {
+    & > div {
       display: flex;
       flex-direction: column;
       gap: 1rem;
 
-      li {
-        a {
-        }
+      label {
+        font-size: 1.25rem;
       }
-    }
-  }
 
-  .ownerSection {
-    padding: 0.5rem 1rem;
+      input {
+        font-size: 1.25rem;
+        padding: 0.5rem;
+        border: 2px solid map-get($colors, gray);
+        border-radius: 10px;
+      }
 
-    .gymEditForm {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      border: 2px solid map-get($colors, gray);
-      margin: auto;
-      border-radius: 10px;
-      padding: 1rem;
-      @include box-shadow();
-      max-width: 30rem;
-
-      & > div {
+      .genderDivision {
         display: flex;
-        flex-direction: column;
+        padding: 0.5rem;
+        margin: auto;
         gap: 1rem;
-
-        label {
-          font-size: 1.25rem;
-        }
-
-        input {
-          font-size: 1.25rem;
-          padding: 0.5rem;
-          border: 2px solid map-get($colors, gray);
-          border-radius: 10px;
-        }
-
-        .genderDivision {
-          display: flex;
-          padding: 0.5rem;
-          margin: auto;
-          gap: 1rem;
-        }
       }
+    }
 
-      footer {
-        button {
-          @extend %button-black;
-          padding: 0.5rem 1rem;
-          margin: auto;
-        }
+    footer {
+      button {
+        @extend %button-black;
+        padding: 0.5rem 1rem;
+        margin: auto;
       }
     }
   }
