@@ -7,10 +7,11 @@ import Loading from '@/components/common/Loading';
 import { Suspense } from 'react';
 
 const OwnerHome = loadable(() => import('@/pages/Owner/Home'));
-const OwnerDetailGym = loadable(() => import('@/pages/Owner/Gym'));
+const OwnerGym = loadable(() => import('@/pages/Owner/Gym'));
+const OwnerGymDetail = loadable(() => import('@/pages/Owner/Gym/Detail'));
+const OwnerGymEdit = loadable(() => import('@/pages/Owner/Gym/Edit'));
 const OwnerDetailStaff = loadable(() => import('@/pages/Owner/Staff'));
 const OwnerDetailMember = loadable(() => import('@/pages/Owner/Member'));
-const OwnerEditGym = loadable(() => import('@/pages/Owner/Gym/Edit'));
 const OwnerEditStaff = loadable(() => import('@/pages/Owner/Staff/Edit'));
 const OwnerEditMember = loadable(() => import('@/pages/Owner/Member/Edit'));
 
@@ -27,10 +28,11 @@ const Owner = () => {
             <Routes>
               <Route path="/" element={<Navigate to={`/owner/${ownerId}/home`} replace />} />
               <Route path="/home" element={<OwnerHome />} />
-              <Route path="/gym" element={<OwnerDetailGym />} />
+              <Route path="/gym" element={<OwnerGym />} />
+              <Route path="/gym/:gymId" element={<OwnerGymDetail />} />
+              <Route path="/gym/:gymId/edit" element={<OwnerGymEdit />} />
               <Route path="/staff" element={<OwnerDetailStaff />} />
               <Route path="/member" element={<OwnerDetailMember />} />
-              <Route path="/gym/edit" element={<OwnerEditGym />} />
               <Route path="/staff/edit" element={<OwnerEditStaff />} />
               <Route path="/member/edit" element={<OwnerEditMember />} />
               <Route path="*" element={<Navigate to="/404" replace />} />

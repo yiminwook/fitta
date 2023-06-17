@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 interface OwnerDetailGymProps {}
 
-const OwnerDetailGym = ({}: OwnerDetailGymProps) => {
+const OwnerGym = ({}: OwnerDetailGymProps) => {
   const { myData } = useUser();
 
   if (myData === undefined) {
@@ -14,11 +14,11 @@ const OwnerDetailGym = ({}: OwnerDetailGymProps) => {
   return (
     <>
       <section>
-        <Link to={`/owner/${myData!.id}/gym/edit`}>헬스장 추가하기!</Link>
+        <Link to={`/owner/${myData!.id}/gym/new/edit`}>새 헬스장 추가하기!</Link>
       </section>
       <GymListSection />
     </>
   );
 };
 
-export default OwnerDetailGym;
+export default OwnerGym;
