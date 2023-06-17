@@ -21,9 +21,9 @@ const Owner = () => {
   return (
     <>
       <Head title="Owner" />
-      <div className={owner['ownerWapper']}>
+      <div className={owner['wapper']}>
         <OwnerSidebar />
-        <section className={owner['ownerSection']}>
+        <section className={owner['inner']}>
           <Suspense fallback={<Loading style={{ height: '30rem' }} />}>
             <Routes>
               <Route path="/" element={<Navigate to={`/owner/${ownerId}/home`} replace />} />

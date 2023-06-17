@@ -2,9 +2,9 @@ import GymListSection from '@/components/owner/gym/GymListSection';
 import { useUser } from '@/hooks/useAPI';
 import { Link } from 'react-router-dom';
 
-interface OwnerDetailGymProps {}
+interface OwnerGymProps {}
 
-const OwnerGym = ({}: OwnerDetailGymProps) => {
+const OwnerGym = ({}: OwnerGymProps) => {
   const { myData } = useUser();
 
   if (myData === undefined) {

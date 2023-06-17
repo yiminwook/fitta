@@ -5,8 +5,9 @@ import member from '@/components/member/Member.module.scss';
 import MemberSidebar from '@/components/member/Sidebar';
 
 const MemberHome = loadable(() => import('@/pages/Member/Home'));
-const MemberDetailGym = loadable(() => import('@/pages/Member/Detail/Gym'));
-const MemberEditGym = loadable(() => import('@/pages/Member/Edit/Gym'));
+const MemberGym = loadable(() => import('@/pages/Member/Gym'));
+const MemberGymDetail = loadable(() => import('@/pages/Member/Gym/Detail'));
+const MemberGymEdit = loadable(() => import('@/pages/Member/Gym/Edit'));
 
 const Member = () => {
   const { memberId } = useParams();
@@ -14,14 +15,15 @@ const Member = () => {
   return (
     <>
       <Head title="Member" />
-      <div className={member['memberWapper']}>
+      <div className={member['wapper']}>
         <MemberSidebar />
-        <section className={member['memberSection']}>
+        <section className={member['inner']}>
           <Routes>
             <Route path="/" element={<Navigate to={`/member/${memberId}/home`} replace />} />
             <Route path="/home" element={<MemberHome />} />
-            <Route path="/detail/gym" element={<MemberDetailGym />} />
-            <Route path="/edit/gym" element={<MemberEditGym />} />
+            <Route path="/gym" element={<MemberGym />} />
+            <Route path="/gym/:gymId/detail" element={<MemberGymDetail />} />
+            <Route path="/gym/:gymId/edit" element={<MemberGymEdit />} />
             <Route path="*" element={<Navigate to="/404" replace />} />
           </Routes>
         </section>

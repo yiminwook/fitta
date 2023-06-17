@@ -1,8 +1,24 @@
+import { useOwner } from '@/hooks/useAPI';
+import axios from 'axios';
+import { useEffect } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 
 const OwnerGymDetail = () => {
   const { gymId } = useParams();
   const { pathname } = useLocation();
+  const { ownerMyData } = useOwner();
+
+  console.log(ownerMyData);
+
+  const getData = async () => {
+    const response = await axios.get('http://localhost:8081/gyms/1');
+    console.log(response.data);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <section>
       <h1>헬스장 상세 id:{gymId}</h1>

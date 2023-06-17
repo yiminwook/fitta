@@ -11,7 +11,7 @@ const OwnerSidebar = () => {
   }
 
   return (
-    <aside className={owner['ownerSidebar']}>
+    <aside className={owner['sidebar']}>
       <h1 className="blind">오너 사이드바</h1>
       <Link to={`/owner/${myData!.id}/home`}>마이페이지(오너)</Link>
       <ul>
