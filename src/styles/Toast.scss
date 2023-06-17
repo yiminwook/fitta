@@ -11,14 +11,14 @@
   // background: rgba(107, 115, 135, 0.8);
 }
 
-@include max-width(480px) {
-  .Toastify__toast-container--top-left,
-  .Toastify__toast-container--top-center,
-  .Toastify__toast-container--top-right {
-    top: auto;
-    bottom: 0;
-  }
-}
+// @include max-width(480px) {
+//   .Toastify__toast-container--top-left,
+//   .Toastify__toast-container--top-center,
+//   .Toastify__toast-container--top-right {
+//     top: auto;
+//     bottom: 0;
+//   }
+// }
 
 .Toastify__toast-icon {
 }

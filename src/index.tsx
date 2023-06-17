@@ -25,7 +25,7 @@ export const app = (
         <RootLayout>
           <App />
         </RootLayout>
-        <ToastContainer position="top-right" autoClose={700} limit={3} />
+        <ToastContainer position="bottom-center" autoClose={700} limit={3} />
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryProvider>
