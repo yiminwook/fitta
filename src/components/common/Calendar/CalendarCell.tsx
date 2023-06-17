@@ -1,4 +1,4 @@
-import { CalendarCellType } from '@/components/common/Calendar/Calendar';
+import { CalendarCellType } from '@/components/common/calendar/Calendar';
 
 interface CalendarCellProps {
   cell: CalendarCellType;
