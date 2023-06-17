@@ -2,7 +2,6 @@ import { useQuery, useQueries, UseQueryResult } from '@tanstack/react-query';
 import fetcher from '@/hooks/fetcher';
 import { AxiosError } from 'axios';
 import { MyDataType, OwnerMyAllDataType, OwnerMyDataType } from '@/types/fittaApi';
-import { useEffect } from 'react';
 
 export const useUser = () => {
   let {
@@ -28,7 +27,7 @@ export const useOwner = () => {
       isLoading: isLoadingOwnerMyAllData,
       refetch: refetchOwnerMyAllData,
     },
-    { data: ownerMyData, error: errorOwnerMyData, isLoading: isLoadingOwnerMyData, refetch: refetchOwnerMyData },
+    { data: ownerMyData, error: errorOwnerMyData, isLoading: isLoadingOwnerMyData, refetch },
   ] = useQueries<[UseQueryResult<OwnerMyAllDataType>, UseQueryResult<OwnerMyDataType>]>({
     queries: [
       {
@@ -44,14 +43,18 @@ export const useOwner = () => {
     ],
   });
 
+  const refetchOwnerMydata = () => {
+    refetch();
+    refetchOwnerMyAllData();
+  };
+
   return {
     ownerMyAllData,
     errorOwnerMyAllData,
     isLoadingOwnerMyAllData,
-    refetchOwnerMyAllData,
     ownerMyData,
     errorOwnerMyData,
     isLoadingOwnerMyData,
-    refetchOwnerMyData,
+    refetchOwnerMydata,
   };
 };
