@@ -102,5 +102,6 @@
       "axios": "axios/dist/node/axios.cjs",
       "transformIgnorePatterns": []
     }
-  }
+  },
+  "proxy": "http://localhost:8081"
 }

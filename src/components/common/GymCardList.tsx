@@ -1,14 +1,14 @@
 import gymCard from '@/components/common/GymCard.module.scss';
 import GymCard from '@/components/common/GymCard';
-import { Link } from 'react-router-dom';
 import { GymType } from '@/types/fittaApi';
+import { ReactNode } from 'react';
 
 interface GymCardListProps {
-  moreLink?: boolean;
+  linkElement?: ReactNode;
   gymData: GymType[];
 }
 
-const GymCardList = ({ gymData, moreLink = false }: GymCardListProps) => {
+const GymCardList = ({ gymData, linkElement = null }: GymCardListProps) => {
   return (
     <>
       <div className={gymCard['cardList']}>
@@ -19,7 +19,7 @@ const GymCardList = ({ gymData, moreLink = false }: GymCardListProps) => {
             </li>
           ))}
         </ul>
-        {moreLink ? <Link to="/search">+더보기</Link> : null}
+        {linkElement}
       </div>
     </>
   );
