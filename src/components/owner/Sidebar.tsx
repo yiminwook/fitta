@@ -15,10 +15,9 @@ const OwnerSidebar = () => {
       <h1 className="blind">오너 사이드바</h1>
       <Link to={`/owner/${myData!.id}/home`}>마이페이지(오너)</Link>
       <ul>
-        <NavChild to={`/owner/${myData!.id}/gym`} content="헬스장 현황" />
+        <NavChild to={`/owner/${myData!.id}/gym`} content="헬스장" />
         <NavChild to={`/owner/${myData!.id}/staff`} content="스태프 현황" />
         <NavChild to={`/owner/${myData!.id}/member`} content="멤버 현황" />
-        <NavChild to={`/owner/${myData!.id}/gym/edit`} content="헬스장 관리" />
         <NavChild to={`/owner/${myData!.id}/staff/edit`} content="스태프 관리" />
         <NavChild to={`/owner/${myData!.id}/member/edit`} content="멤버 관리" />
       </ul>

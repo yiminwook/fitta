@@ -4,7 +4,7 @@ import { AxiosError } from 'axios';
 import { MyDataType, OwnerMyAllDataType, OwnerMyDataType } from '@/types/fittaApi';
 
 export const useUser = () => {
-  let {
+  const {
     data: myData,
     isLoading: isLoadingMyData,
     error: errorMyData,
@@ -21,22 +21,22 @@ export const useUser = () => {
 export const useOwner = () => {
   const { myData } = useUser();
   const [
+    { data: ownerMyData, error: errorOwnerMyData, isLoading: isLoadingOwnerMyData, refetch },
     {
       data: ownerMyAllData,
       error: errorOwnerMyAllData,
       isLoading: isLoadingOwnerMyAllData,
       refetch: refetchOwnerMyAllData,
     },
-    { data: ownerMyData, error: errorOwnerMyData, isLoading: isLoadingOwnerMyData, refetch },
-  ] = useQueries<[UseQueryResult<OwnerMyAllDataType>, UseQueryResult<OwnerMyDataType>]>({
+  ] = useQueries<[UseQueryResult<OwnerMyDataType>, UseQueryResult<OwnerMyAllDataType>]>({
     queries: [
       {
-        queryKey: [`/owners/${myData?.id}/all-view`],
+        queryKey: [`/owners/${myData?.id}`],
         queryFn: fetcher,
         enabled: !!myData,
       },
       {
-        queryKey: [`/owners/${myData?.id}`],
+        queryKey: [`/owners/${myData?.id}/all-view`],
         queryFn: fetcher,
         enabled: !!myData,
       },
@@ -57,4 +57,21 @@ export const useOwner = () => {
     isLoadingOwnerMyData,
     refetchOwnerMydata,
   };
+};
+
+export const useMember = () => {
+  const { myData } = useUser();
+
+  const {
+    data: memberMyData,
+    isLoading: isLoadingMemberMyData,
+    error: errorMemberMyData,
+    refetch: refetchMemberMyData,
+  } = useQuery<any, AxiosError<{ message: string }>>({
+    queryKey: [`/members/${myData?.id}`],
+    queryFn: fetcher,
+    enabled: !!myData,
+  });
+
+  return { memberMyData, isLoadingMemberMyData, errorMemberMyData, refetchMemberMyData };
 };

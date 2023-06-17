@@ -13,11 +13,10 @@ const MemberSidebar = () => {
   return (
     <aside className={member['sidebar']}>
       <h1 className="blind">멤버 사이드바</h1>
-      <Link to={`/member/${myData!.id}/home`}>마이페이지(오너)</Link>
+      <Link to={`/member/${myData!.id}/home`}>마이페이지(멤버)</Link>
       <ul>
         <NavChild to={`/member/${myData!.id}/home`} content="마이페이지" />
-        <NavChild to={`/member/${myData!.id}/detail/gym`} content="헬스장 현황" />
-        <NavChild to={`/member/${myData!.id}/edit/gym`} content="헬스장 관리" />
+        <NavChild to={`/member/${myData!.id}/gym`} content="헬스장" />
       </ul>
     </aside>
   );
