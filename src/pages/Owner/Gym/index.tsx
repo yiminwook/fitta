@@ -1,5 +1,5 @@
 import GymListSection from '@/components/owner/gym/GymListSection';
-import { useOwner, useUser } from '@/hooks/useAPI';
+import { useUser } from '@/hooks/useAPI';
 import { Link } from 'react-router-dom';
 
 interface OwnerDetailGymProps {}
@@ -13,11 +13,10 @@ const OwnerDetailGym = ({}: OwnerDetailGymProps) => {
 
   return (
     <>
+      <section>
+        <Link to={`/owner/${myData!.id}/gym/edit`}>헬스장 추가하기!</Link>
+      </section>
       <GymListSection />
-      <div>
-        <Link to={`/owner/${myData!.id}/gym/edit`}>추가</Link>
-      </div>
-      OwnerDetailGym
     </>
   );
 };
