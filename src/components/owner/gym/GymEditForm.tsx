@@ -5,6 +5,7 @@ import owner from '@/components/owner/Owner.module.scss';
 import { handleToastError } from '@/utils/handleToast';
 import { formElementValueCheck } from '@/utils/formElementValueCheck';
 import axios from 'axios';
+import { useOwner } from '@/hooks/useAPI';
 
 interface GymEditFormProps {
   openPostModal: () => void;
@@ -26,6 +27,7 @@ interface GymEditFormType extends HTMLFormElement {
 
 const GymEditForm = ({ openPostModal, roadAddress }: GymEditFormProps) => {
   const { ownerId } = useParams();
+  const { refetchOwnerMydata } = useOwner();
   const gymEditFormRef = useRef<GymEditFormType>(null);
 
   const onSubmit = async (e: FormEvent<GymEditFormType>) => {
@@ -63,7 +65,10 @@ const GymEditForm = ({ openPostModal, roadAddress }: GymEditFormProps) => {
         address: data.address,
         genderDivision: data.genderDivision,
         ownerId,
+        businessIdentificationNumber: data.businessNumber,
       });
+
+      refetchOwnerMydata();
     } catch (error) {
       handleToastError(error);
     }
