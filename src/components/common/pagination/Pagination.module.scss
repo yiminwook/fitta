@@ -1,0 +1,27 @@
+@import '@/styles/mixin.scss';
+@import '@/styles/var.scss';
+@import '@/styles/placeholder.scss';
+
+.pagination {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+
+  li {
+    a {
+      padding: 0.35rem;
+      border-radius: 5px;
+      transition: all 0.2s ease;
+
+      &.disabled {
+        background-color: map-get($colors, gray);
+        pointer-events: none;
+      }
+
+      &:hover {
+        background-color: var(--fitta-text-color-default);
+        color: var(--fitta-background-color);
+      }
+    }
+  }
+}
