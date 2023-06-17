@@ -1,10 +1,14 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import NavSection from '@/components/signUp/NavSection';
 import { act } from 'react-dom/test-utils';
 import App from '@/pages/App';
 import { app, root } from '..';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, MemoryRouter, Route, Routes } from 'react-router-dom';
+import QueryProvider from '@/components/layout/QueryProvider';
+import RootLayout from '@/components/layout/RootLayout';
+import { ToastContainer } from 'react-toastify';
+import { HelmetProvider } from 'react-helmet-async';
 
 describe('SignUpPage Test', () => {
   test('memberLink Test', () => {
@@ -40,4 +44,18 @@ describe('SignUpPage Test', () => {
     fireEvent.click(ownerLinkElement);
     expect(ownerLinkElement.classList.contains('active')).toBeTruthy();
   });
+});
+
+test('로그인 링크 랜더링 테스트', async () => {
+  render(
+    <QueryProvider>
+      <MemoryRouter initialEntries={['/']}>
+        <RootLayout>
+          <App />
+        </RootLayout>
+        <ToastContainer position="top-right" autoClose={700} limit={3} />
+      </MemoryRouter>
+    </QueryProvider>,
+  );
+  const title = await screen.findByRole('link', { name: '로그인' });
 });

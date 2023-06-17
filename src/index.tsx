@@ -7,28 +7,10 @@ import '@/styles/Toast.scss';
 import '@/styles/Global.scss';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ToastContainer } from 'react-toastify';
 import axios from 'axios';
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      // refetchIntervalInBackground: false,
-      // refetchOnMount: false,
-      // refetchOnReconnect: false,
-      // refetchOnWindowFocus: false,
-      staleTime: 1000 * 60 * 10, //10분
-      cacheTime: 1000 * 60 * 10,
-      retry: 3,
-      retryDelay: 1000 * 30,
-      refetchInterval: 1000 * 30,
-      suspense: true,
-      // useErrorBoundary: false,
-    },
-  },
-});
+import QueryProvider from '@/components/layout/QueryProvider';
 
 if (process.env.NODE_ENV === 'production') {
   console.log('SETUP MODE', process.env.NODE_ENV);
@@ -38,7 +20,7 @@ if (process.env.NODE_ENV === 'production') {
 
 export const app = (
   <HelmetProvider>
-    <QueryClientProvider client={queryClient}>
+    <QueryProvider>
       <BrowserRouter>
         <RootLayout>
           <App />
@@ -46,7 +28,7 @@ export const app = (
         <ToastContainer position="top-right" autoClose={700} limit={3} />
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    </QueryProvider>
   </HelmetProvider>
 );
 
