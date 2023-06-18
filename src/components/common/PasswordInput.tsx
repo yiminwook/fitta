@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback, useState } from 'react';
 import passwordInput from '@/components/common/PasswordInput.module.scss';
-import { checkSpecialCharacter } from '@/utils/checkSpecialCharacter';
+import { checkSpecialCharacter } from '@/utils/checkByRegExp';
 import SpeechBubble from '@/components/common/SpeechBubble';
 import { PASSWORD_LENGTH } from '@/consts';
 

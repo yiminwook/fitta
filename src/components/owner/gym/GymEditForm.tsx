@@ -6,6 +6,7 @@ import { handleToastError } from '@/utils/handleToast';
 import { formElementValueCheck } from '@/utils/formElementValueCheck';
 import axios from 'axios';
 import { useOwner } from '@/hooks/useAPI';
+import DragDrap from '@/components/common/dragDrop/DragDrop';
 
 interface GymEditFormProps {
   openPostModal: () => void;
@@ -76,6 +77,7 @@ const GymEditForm = ({ openPostModal, roadAddress }: GymEditFormProps) => {
 
   return (
     <form onSubmit={onSubmit} className={owner['gymEditForm']} ref={gymEditFormRef}>
+      <DragDrap />
       <div>
         <label htmlFor="businessName">법인명(단체명)</label>
         <input name="businessName" type="text" placeholder="OO 피트니스" />

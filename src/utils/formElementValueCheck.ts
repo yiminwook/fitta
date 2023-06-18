@@ -1,6 +1,6 @@
 import { PASSWORD_LENGTH } from '@/consts';
 import { SignUpMemberDataType, SignUpOwnerDataType } from '@/types/fittaApi';
-import { checkSpecialCharacter } from './checkSpecialCharacter';
+import { checkSpecialCharacter } from '@/utils/checkByRegExp';
 
 export const formPasswordCheck = <T extends HTMLFormElement>({
   currentTarget,
