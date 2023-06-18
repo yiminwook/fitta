@@ -3,10 +3,11 @@ import { handleToastError } from '@/utils/handleToast';
 import { DragEvent } from 'react';
 
 interface PreviewProps {
+  id: string;
   imgUrl: string;
-  handleSaveImage: (file: File) => void;
+  handleImgFile: (file: File) => void;
 }
-const Preview = ({ imgUrl, handleSaveImage }: PreviewProps) => {
+const Preview = ({ id, imgUrl, handleImgFile: handleImgFile }: PreviewProps) => {
   const onDrop = (e: DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
     try {
@@ -17,7 +18,7 @@ const Preview = ({ imgUrl, handleSaveImage }: PreviewProps) => {
         file = e.dataTransfer.files[0];
       }
       checkImgFileType(file);
-      handleSaveImage(file);
+      handleImgFile(file);
     } catch (error) {
       handleToastError(error);
     }
@@ -31,9 +32,9 @@ const Preview = ({ imgUrl, handleSaveImage }: PreviewProps) => {
 
   return (
     <>
-      <label htmlFor="image-file-input" onDrop={onDrop} onDragOver={onDragOver}>
+      <label htmlFor={id} onDrop={onDrop} onDragOver={onDragOver}>
         <span className="blind">이미지 업로드</span>
-        <img src={imgUrl} alt="preview" />
+        <img src={imgUrl} alt="preview-image" />
       </label>
     </>
   );

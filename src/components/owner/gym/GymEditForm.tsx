@@ -1,4 +1,4 @@
-import { FormEvent, useRef } from 'react';
+import { FormEvent, useCallback, useRef, useState } from 'react';
 import NumberInput from '@/components/common/NumberInput';
 import { useParams } from 'react-router-dom';
 import owner from '@/components/owner/Owner.module.scss';
@@ -29,7 +29,17 @@ interface GymEditFormType extends HTMLFormElement {
 const GymEditForm = ({ openPostModal, roadAddress }: GymEditFormProps) => {
   const { ownerId } = useParams();
   const { refetchOwnerMydata } = useOwner();
+  const [profileImg, setProfileImg] = useState<File | null>(null);
+  const [backgroundImg, setBackgroundImg] = useState<File | null>(null);
   const gymEditFormRef = useRef<GymEditFormType>(null);
+
+  const handleProfileImg = useCallback((file: File) => {
+    setProfileImg(() => file);
+  }, []);
+
+  const handleBackgroundImg = useCallback((file: File) => {
+    setBackgroundImg(() => file);
+  }, []);
 
   const onSubmit = async (e: FormEvent<GymEditFormType>) => {
     e.preventDefault();
@@ -77,7 +87,8 @@ const GymEditForm = ({ openPostModal, roadAddress }: GymEditFormProps) => {
 
   return (
     <form onSubmit={onSubmit} className={owner['gymEditForm']} ref={gymEditFormRef}>
-      <DragDrap />
+      <DragDrap id="gym-background-img" imgFile={backgroundImg} handleImgFile={handleBackgroundImg} />
+      <DragDrap id="gym-profile-img" imgFile={profileImg} handleImgFile={handleProfileImg} />
       <div>
         <label htmlFor="businessName">법인명(단체명)</label>
         <input name="businessName" type="text" placeholder="OO 피트니스" />

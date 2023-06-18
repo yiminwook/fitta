@@ -3,20 +3,21 @@ import { checkImgFileType } from '@/utils/checkByRegExp';
 import { handleToastError } from '@/utils/handleToast';
 import { ChangeEvent, useEffect, useState } from 'react';
 
-const DragDrap = () => {
-  const [imgFile, setImgFile] = useState<File | null>(null);
-  const [imgUrl, setImgUrl] = useState<string>('');
+interface DragDrapProps {
+  imgFile: File | null;
+  handleImgFile: (file: File) => void;
+  id: string;
+}
 
-  const handleSaveImage = (file: File) => {
-    setImgFile(() => file);
-  };
+const DragDrap = ({ imgFile, handleImgFile, id }: DragDrapProps) => {
+  const [imgUrl, setImgUrl] = useState<string>('');
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     try {
       const newFile = e.target?.files?.[0];
       if (newFile) {
         checkImgFileType(newFile);
-        handleSaveImage(newFile);
+        handleImgFile(newFile);
       }
     } catch (error) {
       handleToastError(error);
@@ -33,11 +34,11 @@ const DragDrap = () => {
 
   return (
     <>
-      <Preview imgUrl={imgUrl} handleSaveImage={handleSaveImage} />
+      <Preview imgUrl={imgUrl} handleImgFile={handleImgFile} id={id} />
       <input
         style={{ display: 'none' }}
         type="file"
-        id="image-file-input"
+        id={id}
         accept=".png, .jpeg, .jpg .wepb"
         multiple={false}
         onChange={onChange}
