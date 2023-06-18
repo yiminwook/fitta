@@ -4,10 +4,12 @@ import { DragEvent } from 'react';
 
 interface PreviewProps {
   id: string;
+  className: string;
   imgUrl: string;
   handleImgFile: (file: File) => void;
 }
-const Preview = ({ id, imgUrl, handleImgFile: handleImgFile }: PreviewProps) => {
+
+const Preview = ({ id, className, imgUrl, handleImgFile: handleImgFile }: PreviewProps) => {
   const onDrop = (e: DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
     try {
@@ -32,9 +34,9 @@ const Preview = ({ id, imgUrl, handleImgFile: handleImgFile }: PreviewProps) => 
 
   return (
     <>
-      <label htmlFor={id} onDrop={onDrop} onDragOver={onDragOver}>
+      <label htmlFor={id} onDrop={onDrop} onDragOver={onDragOver} className={className}>
         <span className="blind">이미지 업로드</span>
-        <img src={imgUrl} alt="preview-image" />
+        <img src={imgUrl ? imgUrl : ''} alt="preview-image" />
       </label>
     </>
   );

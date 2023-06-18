@@ -19,7 +19,7 @@ interface GymEditFormFormElementsType extends HTMLFormControlsCollection {
   phoneNumber: HTMLInputElement;
   address: HTMLInputElement;
   addressDetail: HTMLInputElement;
-  genderDivision: HTMLSelectElement;
+  genderDivision: HTMLInputElement;
 }
 
 interface GymEditFormType extends HTMLFormElement {
@@ -55,7 +55,6 @@ const GymEditForm = ({ openPostModal, roadAddress }: GymEditFormProps) => {
         businessNumber: businessNumber.value,
         phoneNumber: phoneNumber.value,
         address,
-        genderDivision: genderDivision.value,
       };
 
       formElementValueCheck<GymEditFormType, any>({ currentTarget, data });
@@ -66,7 +65,7 @@ const GymEditForm = ({ openPostModal, roadAddress }: GymEditFormProps) => {
         name: data.businessName,
         phoneNumber: data.phoneNumber,
         address: data.address,
-        genderDivision: data.genderDivision,
+        genderDivision: genderDivision.value,
         ownerId,
       });
 
@@ -74,7 +73,7 @@ const GymEditForm = ({ openPostModal, roadAddress }: GymEditFormProps) => {
         name: data.businessName,
         phoneNumber: data.phoneNumber,
         address: data.address,
-        genderDivision: data.genderDivision,
+        genderDivision: genderDivision.value,
         ownerId,
         businessIdentificationNumber: data.businessNumber,
       });
@@ -87,8 +86,20 @@ const GymEditForm = ({ openPostModal, roadAddress }: GymEditFormProps) => {
 
   return (
     <form onSubmit={onSubmit} className={owner['gymEditForm']} ref={gymEditFormRef}>
-      <DragDrap id="gym-background-img" imgFile={backgroundImg} handleImgFile={handleBackgroundImg} />
-      <DragDrap id="gym-profile-img" imgFile={profileImg} handleImgFile={handleProfileImg} />
+      <header>
+        <DragDrap
+          className={owner['background']}
+          id="gym-background-img"
+          imgFile={backgroundImg}
+          handleImgFile={handleBackgroundImg}
+        />
+        <DragDrap
+          className={owner['profile']}
+          id="gym-profile-img"
+          imgFile={profileImg}
+          handleImgFile={handleProfileImg}
+        />
+      </header>
       <div>
         <label htmlFor="businessName">법인명(단체명)</label>
         <input name="businessName" type="text" placeholder="OO 피트니스" />
@@ -123,13 +134,15 @@ const GymEditForm = ({ openPostModal, roadAddress }: GymEditFormProps) => {
       </div>
       <div>
         <div className={owner['genderDivision']}>
-          <label htmlFor="genderDivision">여성전용 헬스장여부</label>
-          <select name="genderDivision">
-            <option value="">선택</option>
-            <option value="UNISEX">공용</option>
-            <option value="FEMALE_ONLY">여성전용</option>
-            <option value="MALE_ONLY">남성전용</option>
-          </select>
+          <p>여성전용 헬스장여부</p>
+          <div>
+            <label htmlFor="UNISEX">남녀공용</label>
+            <input type="radio" name="genderDivision" value="UNISEX" id="UNISEX" defaultChecked />
+            <label htmlFor="FEMALE_ONLY">여성전용</label>
+            <input type="radio" name="genderDivision" value="FEMALE_ONLY" />
+            <label htmlFor="MALE_ONLY">남성전용</label>
+            <input type="radio" name="genderDivision" value="MALE_ONLY" />
+          </div>
         </div>
       </div>
       <footer>

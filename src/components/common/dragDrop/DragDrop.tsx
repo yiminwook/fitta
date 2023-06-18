@@ -4,12 +4,13 @@ import { handleToastError } from '@/utils/handleToast';
 import { ChangeEvent, useEffect, useState } from 'react';
 
 interface DragDrapProps {
+  id: string;
+  className: string;
   imgFile: File | null;
   handleImgFile: (file: File) => void;
-  id: string;
 }
 
-const DragDrap = ({ imgFile, handleImgFile, id }: DragDrapProps) => {
+const DragDrap = ({ id, className, imgFile, handleImgFile }: DragDrapProps) => {
   const [imgUrl, setImgUrl] = useState<string>('');
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +35,7 @@ const DragDrap = ({ imgFile, handleImgFile, id }: DragDrapProps) => {
 
   return (
     <>
-      <Preview imgUrl={imgUrl} handleImgFile={handleImgFile} id={id} />
+      <Preview imgUrl={imgUrl} handleImgFile={handleImgFile} id={id} className={className} />
       <input
         style={{ display: 'none' }}
         type="file"
