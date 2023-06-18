@@ -76,7 +76,7 @@
     "node-sass": "^8.0.0",
     "prettier": "^2.8.8",
     "react-app-alias": "^2.2.2",
-    "react-refresh": "^0.14.0",
+    "react-refresh": "0.11.0",
     "react-scripts": "^5.0.1",
     "react-snap": "^1.23.0",
     "sass": "^1.62.1",
