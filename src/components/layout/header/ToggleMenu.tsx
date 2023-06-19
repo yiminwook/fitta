@@ -1,9 +1,9 @@
-import NavChild from '@/components/common/NavChild';
 import toggleMenu from '@/components/layout/header/ToggleMenu.module.scss';
 import { useUser } from '@/hooks/useAPI';
 import { MouseEvent, useEffect } from 'react';
 import { CgClose } from 'react-icons/cg';
 import MenuProfile from '@/components/layout/header/MenuProfile';
+import MyPageLink from '@/components/common/MyPageLink';
 
 interface ToggleMenuProps {
   onClose: () => void;
@@ -24,12 +24,6 @@ const ToggleMenu = ({ onClose }: ToggleMenuProps) => {
     return () => body.removeEventListener('click', onClick);
   }, []);
 
-  const renderMyPageLink = () => {
-    if (!myData) return null;
-    const { role, id } = myData;
-    return <NavChild to={`${role.toLocaleLowerCase()}/${id}/home`} content="마이페이지" />;
-  };
-
   return (
     <div className={toggleMenu['toggleMenu']}>
       <header>
@@ -40,7 +34,7 @@ const ToggleMenu = ({ onClose }: ToggleMenuProps) => {
       {myData ? <MenuProfile /> : null}
       <ul>
         {/* pageLink 임시 */}
-        {renderMyPageLink()}
+        <MyPageLink>마이페이지</MyPageLink>
       </ul>
     </div>
   );
