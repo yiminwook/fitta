@@ -36,7 +36,7 @@ export const BeforeLink = ({ initialPage }: { initialPage: number | null; totalP
 };
 export const AfterLink = ({ initialPage, totalPage }: { initialPage: number | null; totalPage: number }) => {
   if (initialPage === null) return null;
-  const disabled = totalPage < initialPage + 1 + PAGINATION_SIZE;
+  const disabled = totalPage < initialPage + PAGINATION_SIZE;
 
   return (
     <PaginationItem
