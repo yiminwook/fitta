@@ -1,4 +1,4 @@
-import graph from '@/components/common/Graph.module.scss';
+import graph from '@/components/common/graph/Graph.module.scss';
 import { CSSProperties, useCallback, useEffect, useMemo, useState } from 'react';
 
 export interface ChartData {

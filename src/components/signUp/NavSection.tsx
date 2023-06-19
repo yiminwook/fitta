@@ -1,4 +1,4 @@
-import NavChild from '@/components/common/NavChild';
+import NavChild from '@/components/common/link/NavChild';
 import signup from '@/components/signUp/SignUp.module.scss';
 import { useLocation } from 'react-router-dom';
 

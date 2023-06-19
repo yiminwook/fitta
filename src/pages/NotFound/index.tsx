@@ -1,6 +1,6 @@
 import Calendar from '@/components/common/calendar/Calendar';
-import DonutGraph from '@/components/common/DonutGraph';
-import Loading from '@/components/common/Loading';
+import DonutGraph from '@/components/common/graph/DonutGraph';
+import Loading from '@/components/common/loading/Loading';
 import Modal from '@/components/layout/Modal';
 import { useState } from 'react';
 

@@ -3,10 +3,10 @@ import { MemberFormElementsType, MemberFormProps } from '@/components/signUp/Mem
 import { FormEvent, useRef } from 'react';
 import { useUser } from '@/hooks/useAPI';
 import { useNavigate } from 'react-router-dom';
-import SearchButton from '@/components/common/SeachButton';
-import PasswordInput from '@/components/common/PasswordInput';
-import Loading from '@/components/common/Loading';
-import NumberInput from '@/components/common/NumberInput';
+import SearchButton from '@/components/common/button/SeachButton';
+import PasswordInput from '@/components/common/input/PasswordInput';
+import Loading from '@/components/common/loading/Loading';
+import NumberInput from '@/components/common/input/NumberInput';
 import { SignUpOwnerDataType } from '@/types/fittaApi';
 import { formElementValueCheck, formPasswordCheck } from '@/utils/formElementValueCheck';
 import { handleToastError } from '@/utils/handleToast';

@@ -1,4 +1,4 @@
-import gymCard from '@/components/common/GymCard.module.scss';
+import gymCard from '@/components/common/card/GymCard.module.scss';
 import { Link, useLocation } from 'react-router-dom';
 
 interface GymCardProps {

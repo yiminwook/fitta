@@ -1,4 +1,4 @@
-import GymCardList from '@/components/common/GymCardList';
+import GymCardList from '@/components/common/card/GymCardList';
 import Pagination from '@/components/common/pagination/Pagination';
 import { useMember, useOwner } from '@/hooks/useAPI';
 

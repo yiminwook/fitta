@@ -1,4 +1,4 @@
-import NavChild from '@/components/common/NavChild';
+import NavChild from '@/components/common/link/NavChild';
 import member from '@/components/member/Member.module.scss';
 import { useUser } from '@/hooks/useAPI';
 import { Link } from 'react-router-dom';

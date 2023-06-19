@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
-import loading from '@/components/common/Loading.module.scss';
+import loading from '@/components/common/loading/Loading.module.scss';
 
 interface LoadingProps {
   style?: CSSProperties;

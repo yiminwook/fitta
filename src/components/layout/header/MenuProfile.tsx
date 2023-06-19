@@ -2,7 +2,7 @@ import { useUser } from '@/hooks/useAPI';
 import profile from '@/components/layout/header/Profile.module.scss';
 import { createDefaultProfileImage } from '@/utils/createDefaultProfileImage';
 import { useSignOut } from '@/hooks/useSignOut';
-import MyPageLink from '@/components/common/MyPageLink';
+import MyPageLink from '@/components/common/link/MyPageLink';
 
 interface MenuProfileProps {}
 

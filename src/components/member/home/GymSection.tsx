@@ -1,4 +1,4 @@
-import GymCardList from '@/components/common/GymCardList';
+import GymCardList from '@/components/common/card/GymCardList';
 import fetcher from '@/hooks/fetcher';
 import { useUser } from '@/hooks/useAPI';
 import { OwnerMyAllDataType, OwnerMyDataType } from '@/types/fittaApi';

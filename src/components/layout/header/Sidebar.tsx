@@ -1,4 +1,4 @@
-import NavChild from '@/components/common/NavChild';
+import NavChild from '@/components/common/link/NavChild';
 import sidebar from '@/components/layout/header/Sidebar.module.scss';
 import DarkMode, { DarkModeProps } from '@/components/layout/header/DarkMode';
 import MenuProfile from '@/components/layout/header/MenuProfile';

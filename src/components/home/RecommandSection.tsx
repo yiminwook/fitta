@@ -1,4 +1,4 @@
-import GymCardList from '@/components/common/GymCardList';
+import GymCardList from '@/components/common/card/GymCardList';
 import { GYMCARD_LIST_LENGTH } from '@/consts';
 import { GymType } from '@/types/fittaApi';
 import { Link } from 'react-router-dom';

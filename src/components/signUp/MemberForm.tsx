@@ -2,11 +2,11 @@ import { FormEvent, useEffect, useRef } from 'react';
 import signUpForm from '@/components/signUp/SignUpForm.module.scss';
 import { useUser } from '@/hooks/useAPI';
 import { useNavigate } from 'react-router-dom';
-import SearchButton from '@/components/common/SeachButton';
-import PasswordInput from '@/components/common/PasswordInput';
+import SearchButton from '@/components/common/button/SeachButton';
+import PasswordInput from '@/components/common/input/PasswordInput';
 import { SignUpMemberDataType, SignUpOwnerDataType } from '@/types/fittaApi';
-import Loading from '@/components/common/Loading';
-import NumberInput from '@/components/common/NumberInput';
+import Loading from '@/components/common/loading/Loading';
+import NumberInput from '@/components/common/input/NumberInput';
 import { toast } from 'react-toastify';
 import { formElementValueCheck, formPasswordCheck } from '@/utils/formElementValueCheck';
 

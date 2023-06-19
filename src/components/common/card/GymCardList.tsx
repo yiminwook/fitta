@@ -1,5 +1,5 @@
-import gymCard from '@/components/common/GymCard.module.scss';
-import GymCard from '@/components/common/GymCard';
+import gymCard from '@/components/common/card/GymCard.module.scss';
+import GymCard from '@/components/common/card/GymCard';
 import { GymType } from '@/types/fittaApi';
 import { ReactNode } from 'react';
 

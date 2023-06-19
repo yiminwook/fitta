@@ -1,5 +1,5 @@
 import { FormEvent, useCallback, useRef, useState } from 'react';
-import NumberInput from '@/components/common/NumberInput';
+import NumberInput from '@/components/common/input/NumberInput';
 import { useParams } from 'react-router-dom';
 import owner from '@/components/owner/Owner.module.scss';
 import { handleToastError } from '@/utils/handleToast';

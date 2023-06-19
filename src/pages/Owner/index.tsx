@@ -3,7 +3,7 @@ import { Navigate, Route, Routes, useParams } from 'react-router-dom';
 import loadable from '@loadable/component';
 import OwnerSidebar from '@/components/owner/Sidebar';
 import owner from '@/components/owner/Owner.module.scss';
-import Loading from '@/components/common/Loading';
+import Loading from '@/components/common/loading/Loading';
 import { Suspense } from 'react';
 
 const OwnerHome = loadable(() => import('@/pages/Owner/Home'));

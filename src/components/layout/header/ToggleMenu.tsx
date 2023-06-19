@@ -3,7 +3,7 @@ import { useUser } from '@/hooks/useAPI';
 import { MouseEvent, useEffect } from 'react';
 import { CgClose } from 'react-icons/cg';
 import MenuProfile from '@/components/layout/header/MenuProfile';
-import MyPageLink from '@/components/common/MyPageLink';
+import MyPageLink from '@/components/common/link/MyPageLink';
 
 interface ToggleMenuProps {
   onClose: () => void;
