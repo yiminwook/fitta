@@ -10,7 +10,7 @@ const GymListSection = () => {
   return (
     <section>
       <GymCardList gymData={ownerMyData.gymList} />
-      <Pagination totalPage={5} />
+      <Pagination totalPage={100} />
     </section>
   );
 };
