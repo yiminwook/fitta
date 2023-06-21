@@ -3,7 +3,7 @@ import { RequestPayResponseCallback } from '@/types/iamport';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
-const { REACT_APP_IAMPORT_IMP_CODE } = envConfig();
+const { REACT_APP_IAMPORT_IMP_CODE, REACT_APP_SITE_URL } = envConfig();
 
 const IamPort = () => {
   const [load, setLoad] = useState(0);
@@ -59,7 +59,9 @@ const IamPort = () => {
       buyer_tel: '010-4242-4242',
       buyer_addr: '서울특별시 강남구 신사동',
       buyer_postcode: '01181',
+      m_redirect_url: REACT_APP_SITE_URL,
     };
+    console.log(IMP.request_pay);
     IMP.request_pay(data, callback);
   };
 
