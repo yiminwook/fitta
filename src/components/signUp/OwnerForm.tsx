@@ -49,7 +49,7 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProp
         address,
       };
 
-      formElementValueCheck<OwnerFormType, SignUpOwnerDataType>({ currentTarget: e.currentTarget, data });
+      formElementValueCheck<OwnerFormType, typeof data>({ currentTarget: e.currentTarget, data });
       sendSignUpData({
         isOwner: true,
         data,

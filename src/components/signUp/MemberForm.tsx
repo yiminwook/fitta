@@ -63,7 +63,7 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: MemberFormPr
         occupation: occupation.value,
       };
 
-      formElementValueCheck<MemberFormType, SignUpMemberDataType>({ currentTarget, data });
+      formElementValueCheck<MemberFormType, typeof data>({ currentTarget, data });
       sendSignUpData({
         isOwner: false,
         data,

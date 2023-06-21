@@ -33,7 +33,7 @@ export const formElementValueCheck = <T extends HTMLFormElement, U>({
   data,
 }: {
   currentTarget: T;
-  data: SignUpMemberDataType | SignUpOwnerDataType | any;
+  data: U;
 }) => {
   Object.entries(data as unknown as Record<string, string>).forEach(([name, value]) => {
     const target = currentTarget[name] as unknown as HTMLElement;

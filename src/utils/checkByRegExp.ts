@@ -1,5 +1,6 @@
 /** 특수문자 1개이상일때 true */
 export const checkSpecialCharacter = (string: string) => {
+  // eslint-disable-next-line no-useless-escape
   return /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g.test(string);
 };
 

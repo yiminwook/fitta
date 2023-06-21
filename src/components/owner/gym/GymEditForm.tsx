@@ -57,7 +57,7 @@ const GymEditForm = ({ openPostModal, roadAddress }: GymEditFormProps) => {
         address,
       };
 
-      formElementValueCheck<GymEditFormType, any>({ currentTarget, data });
+      formElementValueCheck<GymEditFormType, typeof data>({ currentTarget, data });
       data.businessNumber = data.businessNumber.split('-').join('');
       data.phoneNumber = data.phoneNumber.split('-').join('');
 
