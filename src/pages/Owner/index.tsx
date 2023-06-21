@@ -10,6 +10,7 @@ const OwnerHome = loadable(() => import('@/pages/Owner/Home'));
 const OwnerGym = loadable(() => import('@/pages/Owner/Gym'));
 const OwnerGymDetail = loadable(() => import('@/pages/Owner/Gym/Detail'));
 const OwnerGymEdit = loadable(() => import('@/pages/Owner/Gym/Edit'));
+const OwnerEditSchedule = loadable(() => import('@/pages/Owner/Gym/EditSchedule'));
 const OwnerDetailStaff = loadable(() => import('@/pages/Owner/Staff'));
 const OwnerDetailMember = loadable(() => import('@/pages/Owner/Member'));
 const OwnerEditStaff = loadable(() => import('@/pages/Owner/Staff/Edit'));
@@ -28,6 +29,7 @@ const Owner = () => {
               <Route path="/gym" element={<OwnerGym />} />
               <Route path="/gym/:gymId" element={<OwnerGymDetail />} />
               <Route path="/gym/:gymId/edit" element={<OwnerGymEdit />} />
+              <Route path="/gym/:gymId/edit/schedule" element={<OwnerEditSchedule />} />
               <Route path="/staff" element={<OwnerDetailStaff />} />
               <Route path="/member" element={<OwnerDetailMember />} />
               <Route path="/staff/:staffId/edit" element={<OwnerEditStaff />} />
