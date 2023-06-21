@@ -9,6 +9,11 @@ const MemberGym = loadable(() => import('@/pages/Member/Gym'));
 const MemberGymDetail = loadable(() => import('@/pages/Member/Gym/Detail'));
 const MemberGymEdit = loadable(() => import('@/pages/Member/Gym/Edit'));
 
+const RedirectToGymPage = () => {
+  const { gymId } = useParams();
+  return <Navigate to={`/gym/${gymId}`} replace />;
+};
+
 const Member = () => {
   return (
     <>
@@ -19,8 +24,9 @@ const Member = () => {
           <Routes>
             <Route path="/" element={<MemberHome />} />
             <Route path="/gym" element={<MemberGym />} />
-            <Route path="/gym/:gymId/detail" element={<MemberGymDetail />} />
-            <Route path="/gym/:gymId/edit" element={<MemberGymEdit />} />
+            <Route path="/gym/:gymId" element={<RedirectToGymPage />} />
+            <Route path="/detail" element={<MemberGymDetail />} />
+            <Route path="/edit" element={<MemberGymEdit />} />
             <Route path="*" element={<Navigate to="/404" replace />} />
           </Routes>
         </section>
