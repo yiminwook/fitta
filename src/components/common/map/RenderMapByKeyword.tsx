@@ -28,6 +28,10 @@ const RenderMapByKeyword = ({ keyword, style }: RenderMapByKeywordProps) => {
     script.defer = true;
     script.addEventListener('load', () => setIsLoad(() => true)); //kakao map script가 load된 뒤에 실행
     document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
   }, []);
 
   useEffect(() => {

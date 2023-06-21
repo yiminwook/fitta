@@ -12,5 +12,6 @@ declare namespace NodeJS {
     readonly REACT_APP_KAKAO_JAVASCRIPT_KEY: string;
     readonly REACT_APP_GOOGLE_API_KEY: string;
     readonly REACT_APP_BUSINESS_NUMBER_API_KEY: string;
+    readonly REACT_APP_IAMPORT_IMP_CODE: string;
   }
 }
