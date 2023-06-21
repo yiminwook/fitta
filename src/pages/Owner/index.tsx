@@ -33,7 +33,7 @@ const Owner = () => {
               <Route path="/gym/:gymId/edit" element={<OwnerGymEdit />} />
               <Route path="/staff" element={<OwnerDetailStaff />} />
               <Route path="/member" element={<OwnerDetailMember />} />
-              <Route path="/staff/edit" element={<OwnerEditStaff />} />
+              <Route path="/staff/:staffId/edit" element={<OwnerEditStaff />} />
               <Route path="/member/edit" element={<OwnerEditMember />} />
               <Route path="*" element={<Navigate to="/404" replace />} />
             </Routes>

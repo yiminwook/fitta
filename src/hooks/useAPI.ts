@@ -2,10 +2,11 @@ import { useQuery, useQueries, UseQueryResult } from '@tanstack/react-query';
 import fetcher from '@/hooks/fetcher';
 import { AxiosError } from 'axios';
 import { MyDataType, OwnerMyAllDataType, OwnerMyDataType } from '@/types/fittaApi';
+import { useMemo } from 'react';
 
 export const useUser = () => {
   const {
-    data: myData,
+    data,
     isLoading: isLoadingMyData,
     error: errorMyData,
     refetch: refetchMyData,
@@ -15,6 +16,7 @@ export const useUser = () => {
     suspense: false,
   });
 
+  const myData = useMemo(() => (data ? { ...data, role: data.role.toLocaleLowerCase() } : undefined), [data]);
   return { myData, isLoadingMyData, errorMyData, refetchMyData };
 };
 

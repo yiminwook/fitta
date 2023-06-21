@@ -105,8 +105,9 @@ const GymEditForm = ({ openPostModal, roadAddress }: GymEditFormProps) => {
         <input name="businessName" type="text" placeholder="OO 피트니스" />
       </div>
       <div>
-        <label htmlFor="businessNumber">사업자등록번호</label>
+        <label htmlFor="business-number">사업자등록번호</label>
         <NumberInput
+          id="business-number"
           name="businessNumber"
           maxLength={10}
           pattern={/(^\d{3})(\d{2})(\d{5}$)/}
@@ -114,8 +115,13 @@ const GymEditForm = ({ openPostModal, roadAddress }: GymEditFormProps) => {
         />
       </div>
       <div>
-        <label htmlFor="phoneNumber">사업장연락처</label>
-        <NumberInput name="phoneNumber" maxLength={11} pattern={/(^\d{2,3})(\d{4})(\d{4}$)/} />
+        <label htmlFor="gym-phone-number-input">사업장연락처</label>
+        <NumberInput
+          name="phoneNumber"
+          id="gym-phone-number-input"
+          maxLength={11}
+          pattern={/(^\d{2,3})(\d{4})(\d{4}$)/}
+        />
       </div>
       <div>
         <label htmlFor="address">주소</label>

@@ -72,8 +72,13 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProp
       {/* name phone */}
       <label htmlFor="name">이름</label>
       <input name="name" type="text" />
-      <label htmlFor="phoneNumber">연락처</label>
-      <NumberInput name="phoneNumber" maxLength={11} pattern={/(^\d{3})(\d{3,4})(\d{4}$)/} />
+      <label htmlFor="owner-phone-number-input">연락처</label>
+      <NumberInput
+        name="phoneNumber"
+        id="owner-phone-number-input"
+        maxLength={11}
+        pattern={/(^\d{3})(\d{3,4})(\d{4}$)/}
+      />
       {/* address */}
       <label htmlFor="address">주소</label>
       <div className={signUpForm['address']}>

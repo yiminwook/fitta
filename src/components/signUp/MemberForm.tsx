@@ -97,8 +97,13 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: MemberFormPr
       {/* name phone */}
       <label htmlFor="name">이름</label>
       <input name="name" type="text" />
-      <label htmlFor="phoneNumber">연락처</label>
-      <NumberInput name="phoneNumber" maxLength={11} pattern={/(^\d{2,3})(\d{4})(\d{4}$)/} />
+      <label htmlFor="member-phone-number-input">연락처</label>
+      <NumberInput
+        name="phoneNumber"
+        id="member-phone-number-input"
+        maxLength={11}
+        pattern={/(^\d{2,3})(\d{4})(\d{4}$)/}
+      />
       <label htmlFor="occupation">직업</label>
       <input name="occupation" type="text" />
       {/* address */}

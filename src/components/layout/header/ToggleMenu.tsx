@@ -22,6 +22,7 @@ const ToggleMenu = ({ onClose }: ToggleMenuProps) => {
     body.addEventListener('click', onClick);
 
     return () => body.removeEventListener('click', onClick);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

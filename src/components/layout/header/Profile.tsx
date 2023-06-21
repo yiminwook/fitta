@@ -29,7 +29,7 @@ const Profile = ({}: ProfileProps) => {
     <>
       <div className={profile['profile']} onClick={handleToggle}>
         <div className={profile['profileImageWapper']}>
-          <img src={createDefaultProfileImage({ key: myData!.name })} alt="user-profile-image" />
+          <img src={createDefaultProfileImage({ key: myData!.name })} alt="user-profile-preview" />
         </div>
         <p>{myData!.name}</p>
         {toggleShow ? <ToggleMenu onClose={closeToggle} /> : null}

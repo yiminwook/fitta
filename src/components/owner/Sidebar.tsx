@@ -23,7 +23,6 @@ const OwnerSidebar = () => {
       <Accordion title="스태프">
         <ul>
           <NavChild to={`/owner/${myData!.id}/staff`} content="스태프 현황" />
-          <NavChild to={`/owner/${myData!.id}/staff/edit`} content="스태프 관리" />
         </ul>
       </Accordion>
       <Accordion title="멤버">

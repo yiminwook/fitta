@@ -2,22 +2,25 @@ import { ChangeEvent, RefObject, useCallback, useState } from 'react';
 
 interface NumberInputProps {
   className?: string;
+  id: string;
   name: string;
   ref?: RefObject<HTMLInputElement> | null;
   pattern?: RegExp | string;
-  maxLength: number;
+  maxLength?: number;
   placeholder?: string;
 }
 
 const NumberInput = ({
+  id,
   className = '',
   ref = null,
-  pattern = '',
+  pattern = /(^\d{3})(\d{3,4})(\d{4}$)/,
   name,
-  maxLength,
+  maxLength = 11,
   placeholder = '010-1234-5678',
 }: NumberInputProps) => {
   const [inputValue, setInputValue] = useState('');
+
   const onChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       if (!e.target) return;
@@ -28,11 +31,13 @@ const NumberInput = ({
       }
       setInputValue(() => value.replace(pattern, `$1-$2-$3`));
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [inputValue],
   );
 
   return (
     <input
+      id={id}
       type="text"
       className={className}
       ref={ref}
