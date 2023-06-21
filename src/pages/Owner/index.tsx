@@ -16,8 +16,6 @@ const OwnerEditStaff = loadable(() => import('@/pages/Owner/Staff/Edit'));
 const OwnerEditMember = loadable(() => import('@/pages/Owner/Member/Edit'));
 
 const Owner = () => {
-  const { ownerId } = useParams();
-
   return (
     <>
       <Head title="Owner" />
@@ -26,8 +24,7 @@ const Owner = () => {
         <section className={owner['inner']}>
           <Suspense fallback={<Loading style={{ height: '30rem' }} />}>
             <Routes>
-              <Route path="/" element={<Navigate to={`/owner/${ownerId}/home`} replace />} />
-              <Route path="/home" element={<OwnerHome />} />
+              <Route path="/" element={<OwnerHome />} />
               <Route path="/gym" element={<OwnerGym />} />
               <Route path="/gym/:gymId" element={<OwnerGymDetail />} />
               <Route path="/gym/:gymId/edit" element={<OwnerGymEdit />} />

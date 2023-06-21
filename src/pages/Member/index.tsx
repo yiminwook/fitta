@@ -10,8 +10,6 @@ const MemberGymDetail = loadable(() => import('@/pages/Member/Gym/Detail'));
 const MemberGymEdit = loadable(() => import('@/pages/Member/Gym/Edit'));
 
 const Member = () => {
-  const { memberId } = useParams();
-
   return (
     <>
       <Head title="Member" />
@@ -19,8 +17,7 @@ const Member = () => {
         <MemberSidebar />
         <section className={member['inner']}>
           <Routes>
-            <Route path="/" element={<Navigate to={`/member/${memberId}/home`} replace />} />
-            <Route path="/home" element={<MemberHome />} />
+            <Route path="/" element={<MemberHome />} />
             <Route path="/gym" element={<MemberGym />} />
             <Route path="/gym/:gymId/detail" element={<MemberGymDetail />} />
             <Route path="/gym/:gymId/edit" element={<MemberGymEdit />} />

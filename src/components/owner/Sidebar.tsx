@@ -1,8 +1,8 @@
 import NavChild from '@/components/common/link/NavChild';
 import owner from '@/components/owner/Owner.module.scss';
 import { useUser } from '@/hooks/useAPI';
-import { Link } from 'react-router-dom';
 import Accordion from '@/components/common/accordion/Accordion';
+import MyPageLink from '@/components/common/link/MyPageLink';
 
 const OwnerSidebar = () => {
   const { myData } = useUser();
@@ -14,7 +14,7 @@ const OwnerSidebar = () => {
   return (
     <aside className={owner['sidebar']}>
       <h1 className="blind">오너 사이드바</h1>
-      <Link to={`/owner/${myData!.id}/home`}>마이페이지(오너)</Link>
+      <MyPageLink>마이페이지(오너)</MyPageLink>
       <Accordion title="헬스장">
         <ul>
           <NavChild to={`/owner/${myData!.id}/gym`} content="헬스장 현황" />

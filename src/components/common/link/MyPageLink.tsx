@@ -10,7 +10,7 @@ const MyPageLink = ({ children }: MyPageLinkProps) => {
   const { myData } = useUser();
   if (!myData) return null;
   const { role, id } = myData;
-  return <Link to={`${role}/${id}/home`}>{children}</Link>;
+  return <Link to={`/${role}/${id}`}>{children}</Link>;
 };
 
 export default MyPageLink;
