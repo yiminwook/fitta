@@ -2,6 +2,7 @@ import Calendar from '@/components/common/calendar/Calendar';
 import DonutGraph from '@/components/common/graph/DonutGraph';
 import Loading from '@/components/common/loading/Loading';
 import Modal from '@/components/layout/Modal';
+import dayjs from '@/models/dayjs';
 import { useState } from 'react';
 
 const NotFound = () => {
@@ -9,6 +10,7 @@ const NotFound = () => {
   return (
     <section>
       <h1>NotFound</h1>
+      <time>{dayjs().format('YY MM DD ddd A hh:mm')}</time>
       <section>
         <Calendar />
       </section>
