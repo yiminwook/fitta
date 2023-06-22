@@ -41,6 +41,7 @@ export interface RequestPayParams extends RequestPayAdditionalParams {
   buyer_postcode?: string;
   notice_url?: string | string[];
   display?: Display;
+  m_redirect_url: string;
 }
 
 export interface RequestPayAdditionalResponse {

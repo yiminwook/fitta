@@ -61,6 +61,7 @@ const IamPort = () => {
       buyer_postcode: '01181',
       m_redirect_url: REACT_APP_SITE_URL,
     };
+    //redirect_url?imp_uid&imp_success&merchant_uid
     console.log(IMP.request_pay);
     IMP.request_pay(data, callback);
   };
