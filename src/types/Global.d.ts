@@ -6,7 +6,7 @@ declare module '*.module.scss';
 //override
 declare namespace NodeJS {
   interface ProcessEnv {
-    readonly NODE_ENV: 'development' | 'production';
+    readonly NODE_ENV: 'development' | 'production' | 'test';
     readonly REACT_APP_SITE_URL: string;
     readonly REACT_APP_SERVER_URL: string;
     readonly REACT_APP_KAKAO_JAVASCRIPT_KEY: string;
