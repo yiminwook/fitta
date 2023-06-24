@@ -69,15 +69,27 @@ const GymEditForm = ({ openPostModal, roadAddress }: GymEditFormProps) => {
         ownerId,
       });
 
-      await axios.post('/gyms', {
+      const formData = new FormData();
+      const request = {
         name: data.businessName,
         phoneNumber: data.phoneNumber,
         address: data.address,
         genderDivision: genderDivision.value,
         ownerId,
         businessIdentificationNumber: data.businessNumber,
+      };
+
+      formData.append('request', JSON.stringify(request));
+      if (profileImg !== null) {
+        formData.append('multipartFile', profileImg);
+      }
+
+      const response = await axios.post('/gyms', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+        transformRequest: (formData) => formData,
       });
 
+      console.log(response);
       refetchOwnerMydata();
     } catch (error) {
       handleToastError(error);
