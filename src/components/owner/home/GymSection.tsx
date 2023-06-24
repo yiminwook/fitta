@@ -9,7 +9,7 @@ const OwnerGymSection = () => {
 
   return (
     <section className={ownerHome['gymSection']}>
-      <GymCardList gymData={ownerMyData.gymList ?? []} />
+      <GymCardList gymData={ownerMyData.gymList.slice(0, 6) ?? []} />
     </section>
   );
 };
