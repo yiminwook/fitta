@@ -1,8 +1,9 @@
-import { useQuery, useQueries, UseQueryResult } from '@tanstack/react-query';
+import { useQuery, useQueries, UseQueryResult, useInfiniteQuery } from '@tanstack/react-query';
 import fetcher from '@/hooks/fetcher';
-import { AxiosError } from 'axios';
-import { MyDataType, OwnerMyAllDataType, OwnerMyDataType } from '@/types/fittaApi';
+import axios, { AxiosError } from 'axios';
+import { GymType, MyDataType, OwnerMyAllDataType, OwnerMyDataType } from '@/types/fittaApi';
 import { useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 export const useUser = () => {
   const {
@@ -76,4 +77,40 @@ export const useMember = () => {
   });
 
   return { memberMyData, isLoadingMemberMyData, errorMemberMyData, refetchMemberMyData };
+};
+
+interface GymResponseType {
+  content: GymType[];
+  number: number;
+  size: number;
+  totalPages: number;
+  totalElements: number;
+}
+
+export const useGymList = () => {
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get('query') ?? '';
+
+  const {
+    data: gymListData,
+    fetchNextPage: fetchNextPageGymListData,
+    hasNextPage: hasNextPageGymListData,
+    refetch: refetchGymListData,
+  } = useInfiniteQuery({
+    queryKey: [`/gyms`, query],
+    queryFn: async ({ pageParam = 0, queryKey }) => {
+      const response = await axios.get<GymResponseType>(queryKey[0], {
+        params: { page: pageParam, query },
+      });
+      return response.data;
+    },
+    getNextPageParam: (lastPage, _allPage) => {
+      const { number, totalPages } = lastPage;
+      return number === totalPages ? undefined : number + 1;
+    },
+    suspense: false,
+    cacheTime: 0,
+  });
+
+  return { gymListData, fetchNextPageGymListData, hasNextPageGymListData, refetchGymListData };
 };
