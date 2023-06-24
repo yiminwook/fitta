@@ -8,13 +8,10 @@ interface SearchInputProps {
 }
 
 const SearchInput = ({ searchInputValue, setSearchInputValue, openHistory, onKeydown }: SearchInputProps) => {
-  const onChangeSearchInput = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      if (!e.target) return;
-      setSearchInputValue(() => e.target.value);
-    },
-    [searchInputValue],
-  );
+  const onChangeSearchInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target) return;
+    setSearchInputValue(() => e.target.value);
+  }, []);
 
   return (
     <input

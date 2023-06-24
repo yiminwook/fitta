@@ -6,16 +6,24 @@ import { ReactNode } from 'react';
 interface GymCardListProps {
   linkElement?: ReactNode;
   gymData: GymType[];
+  handleInfinityScroll?: () => void;
 }
 
-const GymCardList = ({ gymData, linkElement = null }: GymCardListProps) => {
+const GymCardList = ({ gymData, linkElement = null, handleInfinityScroll }: GymCardListProps) => {
   return (
     <>
       <div className={gymCard['cardList']}>
         <ul>
-          {gymData.map(({ name, id, members, staffs, address }) => (
-            <li key={`gymCard-${id}`}>
-              <GymCard id={id} name={name} population={1 + members.length + staffs.length} address={address} />
+          {gymData.map(({ name, id, address }, idx) => (
+            <li key={`gymCard-${id}-${name}`}>
+              <GymCard
+                id={id}
+                name={name}
+                address={address}
+                currentIndex={idx + 1}
+                lastContentsIndex={gymData.length}
+                handleInfinityScroll={handleInfinityScroll}
+              />
             </li>
           ))}
         </ul>
