@@ -20,6 +20,7 @@ export const useSearchLocalStorage = () => {
     queryKey: ['searchLocalStorage', query],
     queryFn: () => searchHistoryLocalStorage.Data,
     enabled: !!searchParams,
+    suspense: false,
   });
 
   return { searchHistoryData, refetchSearchHistoryData };
