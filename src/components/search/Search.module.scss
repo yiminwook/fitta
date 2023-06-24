@@ -14,6 +14,7 @@
 
     & > div {
       position: absolute;
+      z-index: 1;
       display: flex;
       gap: 0.25rem;
       left: 50%;
