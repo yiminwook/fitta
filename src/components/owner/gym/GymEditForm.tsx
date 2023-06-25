@@ -7,6 +7,8 @@ import { formElementValueCheck } from '@/utils/formElementValueCheck';
 import axios from 'axios';
 import { useOwner } from '@/hooks/useAPI';
 import DragDrap from '@/components/common/dragDrop/DragDrop';
+import { type } from 'os';
+import { transferJsonInFormData } from '@/utils/transferFormData';
 
 interface GymEditFormProps {
   openPostModal: () => void;
@@ -70,6 +72,7 @@ const GymEditForm = ({ openPostModal, roadAddress }: GymEditFormProps) => {
       });
 
       const formData = new FormData();
+
       const request = {
         name: data.businessName,
         phoneNumber: data.phoneNumber,
@@ -79,15 +82,13 @@ const GymEditForm = ({ openPostModal, roadAddress }: GymEditFormProps) => {
         businessIdentificationNumber: data.businessNumber,
       };
 
-      formData.append('request', JSON.stringify(request));
+      formData.append('request', transferJsonInFormData(request));
+
       if (profileImg !== null) {
-        formData.append('multipartFile', profileImg);
+        formData.append('images', profileImg);
       }
 
-      const response = await axios.post('/gyms', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-        transformRequest: (formData) => formData,
-      });
+      const response = await axios.post('/gyms', formData);
 
       console.log(response);
       refetchOwnerMydata();
