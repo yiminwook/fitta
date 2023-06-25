@@ -17,7 +17,7 @@
     "jsx": "react-jsx",
     "types": ["node", "kakao.maps.d.ts"]
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts", "**/*.tsx", "config-overrides.js", "src/test/jest.test.jsx"],
   "exclude": ["node_modules"],
   "extends": "./tsconfig.paths.json"
 }
