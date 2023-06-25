@@ -20,4 +20,7 @@ module.exports = override(
 
   !isDevelopment &&
     (addWebpackPlugin(new LoaderOptionsPlugin({ minimize: true })),
+    addWebpackExternals({
+      'lottie-web': 'lottie',
+    })),
 );
