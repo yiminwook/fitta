@@ -11,6 +11,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ToastContainer } from 'react-toastify';
 import axios from 'axios';
 import QueryProvider from '@/components/layout/QueryProvider';
+import StoreProvider from '@/components/layout/StoreProvider';
 
 if (process.env.NODE_ENV === 'production') {
   console.log('SETUP MODE', process.env.NODE_ENV);
@@ -20,15 +21,17 @@ if (process.env.NODE_ENV === 'production') {
 
 export const app = (
   <HelmetProvider>
-    <QueryProvider>
-      <BrowserRouter>
-        <RootLayout>
-          <App />
-        </RootLayout>
-        <ToastContainer position="bottom-center" autoClose={700} limit={3} />
-      </BrowserRouter>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryProvider>
+    <StoreProvider>
+      <QueryProvider>
+        <BrowserRouter>
+          <RootLayout>
+            <App />
+          </RootLayout>
+          <ToastContainer position="bottom-center" autoClose={700} limit={3} />
+        </BrowserRouter>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryProvider>
+    </StoreProvider>
   </HelmetProvider>
 );
 
