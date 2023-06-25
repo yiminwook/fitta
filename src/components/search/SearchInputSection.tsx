@@ -38,6 +38,7 @@ const SearchInputSection = ({}: SearchInputSectionProps) => {
       e.preventDefault();
       searchHistoryLocalStorage.addOneData(searchInputValue);
       setSearchParams(() => ({ query: searchInputValue }));
+      closeHistory();
     },
     [searchHistoryLocalStorage, searchInputValue],
   );

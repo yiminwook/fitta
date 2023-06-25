@@ -1,4 +1,5 @@
-import GymCardList from '@/components/common/GymCardList';
+import GymCardList from '@/components/common/card/GymCardList';
+import { DummyGym } from '@/components/home/RecommandSection';
 import fetcher from '@/hooks/fetcher';
 import { useUser } from '@/hooks/useAPI';
 import { OwnerMyAllDataType, OwnerMyDataType } from '@/types/fittaApi';
@@ -18,7 +19,11 @@ const GymSection = () => {
 
   // if (!ownerMydata) return null;
 
-  return <section>{/* <GymCardList moreLink={false} gymData={ownerMydata.gymList ?? []} /> */}</section>;
+  return (
+    <section>
+      <GymCardList gymData={DummyGym} />
+    </section>
+  );
 };
 
 export default GymSection;

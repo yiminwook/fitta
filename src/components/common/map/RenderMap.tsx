@@ -20,6 +20,10 @@ const RenderMap = () => {
     script.defer = true;
     script.addEventListener('load', () => setIsLoad(() => true));
     document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
   }, []);
 
   return (

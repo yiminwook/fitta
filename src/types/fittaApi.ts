@@ -24,8 +24,8 @@ export interface GymType extends EssentialBaseType {
   address: string;
   phoneNumber: string;
   genderDivision: GenderDivisionType;
-  members: MemberType[];
-  staffs: StaffType[];
+  // members: MemberType[];
+  // staffs: StaffType[];
 }
 
 export interface MyDataType extends EssentialBaseType {

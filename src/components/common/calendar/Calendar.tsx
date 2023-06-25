@@ -1,15 +1,7 @@
-import dayjs from 'dayjs';
-import timezone from 'dayjs/plugin/timezone';
-import utc from 'dayjs/plugin/utc';
-import ko from 'dayjs/locale/ko';
 import { useEffect, useMemo, useState } from 'react';
 import { beforeOneMonth, nextOneMonth, pascalMonth } from '@/utils/time';
-import CalendarRow from './CalendarRow';
-
-dayjs.extend(utc);
-dayjs.extend(timezone);
-dayjs.tz.setDefault('Asia/Seoul');
-dayjs.locale(ko);
+import CalendarRow from '@/components/common/calendar/CalendarRow';
+import dayjs from '@/models/dayjs';
 
 //date객체 월은 0부터 시작
 //요일 1 => 월, 6 => 토요일

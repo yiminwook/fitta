@@ -2,11 +2,11 @@ import { FormEvent, useEffect, useRef } from 'react';
 import signUpForm from '@/components/signUp/SignUpForm.module.scss';
 import { useUser } from '@/hooks/useAPI';
 import { useNavigate } from 'react-router-dom';
-import SearchButton from '@/components/common/SeachButton';
-import PasswordInput from '@/components/common/PasswordInput';
+import SearchButton from '@/components/common/button/SeachButton';
+import PasswordInput from '@/components/common/input/PasswordInput';
 import { SignUpMemberDataType, SignUpOwnerDataType } from '@/types/fittaApi';
-import Loading from '@/components/common/Loading';
-import NumberInput from '@/components/common/NumberInput';
+import Loading from '@/components/common/loading/Loading';
+import NumberInput from '@/components/common/input/NumberInput';
 import { toast } from 'react-toastify';
 import { formElementValueCheck, formPasswordCheck } from '@/utils/formElementValueCheck';
 
@@ -63,7 +63,7 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: MemberFormPr
         occupation: occupation.value,
       };
 
-      formElementValueCheck<MemberFormType, SignUpMemberDataType>({ currentTarget, data });
+      formElementValueCheck<MemberFormType, typeof data>({ currentTarget, data });
       sendSignUpData({
         isOwner: false,
         data,
@@ -97,8 +97,13 @@ const MemberForm = ({ sendSignUpData, openPostModal, roadAddress }: MemberFormPr
       {/* name phone */}
       <label htmlFor="name">이름</label>
       <input name="name" type="text" />
-      <label htmlFor="phoneNumber">연락처</label>
-      <NumberInput name="phoneNumber" maxLength={11} pattern={/(^\d{2,3})(\d{4})(\d{4}$)/} />
+      <label htmlFor="member-phone-number-input">연락처</label>
+      <NumberInput
+        name="phoneNumber"
+        id="member-phone-number-input"
+        maxLength={11}
+        pattern={/(^\d{2,3})(\d{4})(\d{4}$)/}
+      />
       <label htmlFor="occupation">직업</label>
       <input name="occupation" type="text" />
       {/* address */}

@@ -27,6 +27,7 @@ const OwnerGymDetail = () => {
       </div>
       <div>
         <Link to={`${pathname}/edit`}>수정하기</Link>
+        <Link to={`${pathname}/edit/schedule`}>스케쥴 추가</Link>
       </div>
     </section>
   );

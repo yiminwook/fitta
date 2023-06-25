@@ -1,0 +1,75 @@
+@import '@/styles/mixin.scss';
+@import '@/styles/var.scss';
+@import '@/styles/placeholder.scss';
+
+.editForm {
+  padding: 0.5rem;
+  margin: auto;
+
+  header {
+    position: relative;
+    height: 12.5rem;
+    margin-bottom: 2rem;
+
+    .profile {
+      @extend %profile-drag-drop;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  & > div {
+    margin-bottom: 1rem;
+    text-align: center;
+
+    label {
+      text-align: center;
+      width: 5rem;
+      display: inline-block;
+    }
+
+    input {
+      @extend %input-base;
+      display: inline-block;
+
+      &:not([type='radio']) {
+        width: 15rem;
+      }
+    }
+  }
+
+  .gender {
+    display: flex;
+    justify-content: center;
+
+    p {
+      text-align: center;
+      width: 5rem;
+      vertical-align: middle;
+    }
+
+    & > div {
+      width: 15rem;
+      text-align: center;
+
+      label {
+        width: auto;
+        margin-right: 0.5rem;
+      }
+
+      input:not(:last-child) {
+        margin-right: 1rem;
+      }
+    }
+  }
+
+  footer {
+    padding: 1.5rem 0;
+
+    button {
+      @extend %button-black;
+      margin: auto;
+      padding: 0.5rem 1rem;
+    }
+  }
+}

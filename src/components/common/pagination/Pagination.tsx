@@ -7,7 +7,7 @@ import {
   BeforeLink,
   FirstLink,
   LastLink,
-  PaginationChild,
+  PaginationItem,
 } from '@/components/common/pagination/PaginationChild';
 
 interface PaginationProps {
@@ -35,7 +35,12 @@ const Pagination = ({ totalPage }: PaginationProps) => {
       <FirstLink currentPage={currentPage} />
       <BeforeLink initialPage={pageArray[0]} totalPage={totalPage} />
       {pageArray.map((page, index) => (
-        <PaginationChild key={`${pathname}-pagination-list-${index}`} page={page} currentPage={currentPage} />
+        <PaginationItem
+          key={`${pathname}-pagination-list-${index}`}
+          nextPage={page}
+          currentPage={currentPage}
+          value={page}
+        />
       ))}
       <AfterLink initialPage={pageArray[0]} totalPage={totalPage} />
       <LastLink currentPage={currentPage} totalPage={totalPage} />

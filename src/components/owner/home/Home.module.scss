@@ -7,7 +7,8 @@
   padding: 1rem;
   border-radius: 10px;
   border: 2px solid map-get($colors, gray);
-  margin: auto;
+  margin-left: 0.5rem;
+
   display: flex;
   gap: 1rem;
   @include box-shadow();
@@ -62,4 +63,8 @@
       }
     }
   }
+}
+
+.gymSection {
+  margin-left: 0.5rem;
 }

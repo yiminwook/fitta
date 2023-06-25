@@ -1,4 +1,4 @@
-import NavChild from '@/components/common/NavChild';
+import NavChild from '@/components/common/link/NavChild';
 import header from '@/components/layout/header/Header.module.scss';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Profile from '@/components/layout/header/Profile';

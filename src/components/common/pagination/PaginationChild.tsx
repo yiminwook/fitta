@@ -7,79 +7,83 @@ import {
   MdKeyboardDoubleArrowLeft,
   MdKeyboardDoubleArrowRight,
 } from 'react-icons/md';
+import { ReactNode } from 'react';
 
 export const FirstLink = ({ currentPage }: { currentPage: number }) => {
-  const { pathname } = useLocation();
+  const disabled = currentPage === 1;
   return (
-    <li>
-      <Link to={`${pathname}?page=1`} className={currentPage === 1 ? pagination['disabled'] : ''}>
-        <MdKeyboardDoubleArrowLeft size="1rem" color="inherit" />
-      </Link>
-    </li>
+    <PaginationItem
+      currentPage={0}
+      nextPage={1}
+      disabled={disabled}
+      value={<MdKeyboardDoubleArrowLeft size="1rem" color="inherit" />}
+    />
   );
 };
 
 export const BeforeLink = ({ initialPage }: { initialPage: number | null; totalPage: number }) => {
-  const { pathname } = useLocation();
-
   if (initialPage === null) return null;
+  const disabled = initialPage === 1;
 
   return (
-    <li>
-      <Link
-        to={`${pathname}?page=${initialPage - PAGINATION_SIZE}`}
-        className={initialPage === 1 ? pagination['disabled'] : ''}
-      >
-        <MdKeyboardArrowLeft size="1rem" color="inherit" />
-      </Link>
-    </li>
+    <PaginationItem
+      currentPage={0}
+      nextPage={initialPage - PAGINATION_SIZE}
+      disabled={disabled}
+      value={<MdKeyboardArrowLeft size="1rem" color="inherit" />}
+    />
   );
 };
-
 export const AfterLink = ({ initialPage, totalPage }: { initialPage: number | null; totalPage: number }) => {
-  const { pathname } = useLocation();
-
   if (initialPage === null) return null;
+  const disabled = totalPage < initialPage + PAGINATION_SIZE;
 
   return (
-    <li>
-      <Link
-        to={`${pathname}?page=${initialPage + PAGINATION_SIZE}`}
-        className={totalPage < initialPage + 1 + PAGINATION_SIZE ? pagination['disabled'] : ''}
-      >
-        <MdKeyboardArrowRight size="1rem" color="inherit" />
-      </Link>
-    </li>
+    <PaginationItem
+      currentPage={0}
+      nextPage={initialPage + PAGINATION_SIZE}
+      disabled={disabled}
+      value={<MdKeyboardArrowRight size="1rem" color="inherit" />}
+    />
   );
 };
 
 export const LastLink = ({ currentPage, totalPage }: { currentPage: number; totalPage: number }) => {
-  const { pathname } = useLocation();
+  const disabled = currentPage === totalPage;
+
   return (
-    <li>
-      <Link to={`${pathname}?page=${totalPage}`} className={currentPage === totalPage ? pagination['disabled'] : ''}>
-        <MdKeyboardDoubleArrowRight size="1rem" color="inherit" />
-      </Link>
-    </li>
+    <PaginationItem
+      nextPage={totalPage}
+      currentPage={currentPage}
+      value={<MdKeyboardDoubleArrowRight size="1rem" color="inherit" />}
+      disabled={disabled}
+    />
   );
 };
 
 interface PaginationChildProps {
   currentPage: number;
-  page: number | null;
+  nextPage: number | null;
+  value: ReactNode;
+  disabled?: boolean;
 }
 
-export const PaginationChild = ({ page, currentPage }: PaginationChildProps) => {
+export const PaginationItem = ({ nextPage, currentPage, disabled, value }: PaginationChildProps) => {
   const { pathname } = useLocation();
 
-  if (page === undefined || page === null) {
+  if (nextPage === undefined || nextPage === null) {
     return null;
   }
 
+  const isActive = nextPage === currentPage;
+
   return (
     <li>
-      <Link to={`${pathname}?page=${page}`} className={page === currentPage ? pagination['disabled'] : ''}>
-        {page}
+      <Link
+        to={`${pathname}?page=${nextPage}`}
+        className={[isActive ? pagination['active'] : '', disabled ? pagination['disabled'] : ''].join(' ')}
+      >
+        {value}
       </Link>
     </li>
   );

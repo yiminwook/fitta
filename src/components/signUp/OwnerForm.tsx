@@ -3,10 +3,10 @@ import { MemberFormElementsType, MemberFormProps } from '@/components/signUp/Mem
 import { FormEvent, useRef } from 'react';
 import { useUser } from '@/hooks/useAPI';
 import { useNavigate } from 'react-router-dom';
-import SearchButton from '@/components/common/SeachButton';
-import PasswordInput from '@/components/common/PasswordInput';
-import Loading from '@/components/common/Loading';
-import NumberInput from '@/components/common/NumberInput';
+import SearchButton from '@/components/common/button/SeachButton';
+import PasswordInput from '@/components/common/input/PasswordInput';
+import Loading from '@/components/common/loading/Loading';
+import NumberInput from '@/components/common/input/NumberInput';
 import { SignUpOwnerDataType } from '@/types/fittaApi';
 import { formElementValueCheck, formPasswordCheck } from '@/utils/formElementValueCheck';
 import { handleToastError } from '@/utils/handleToast';
@@ -49,7 +49,7 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProp
         address,
       };
 
-      formElementValueCheck<OwnerFormType, SignUpOwnerDataType>({ currentTarget: e.currentTarget, data });
+      formElementValueCheck<OwnerFormType, typeof data>({ currentTarget: e.currentTarget, data });
       sendSignUpData({
         isOwner: true,
         data,
@@ -72,8 +72,13 @@ const OwnerForm = ({ sendSignUpData, openPostModal, roadAddress }: OwnerFormProp
       {/* name phone */}
       <label htmlFor="name">이름</label>
       <input name="name" type="text" />
-      <label htmlFor="phoneNumber">연락처</label>
-      <NumberInput name="phoneNumber" maxLength={11} pattern={/(^\d{3})(\d{3,4})(\d{4}$)/} />
+      <label htmlFor="owner-phone-number-input">연락처</label>
+      <NumberInput
+        name="phoneNumber"
+        id="owner-phone-number-input"
+        maxLength={11}
+        pattern={/(^\d{3})(\d{3,4})(\d{4}$)/}
+      />
       {/* address */}
       <label htmlFor="address">주소</label>
       <div className={signUpForm['address']}>

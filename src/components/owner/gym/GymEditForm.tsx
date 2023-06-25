@@ -1,11 +1,14 @@
-import { FormEvent, useRef } from 'react';
-import NumberInput from '@/components/common/NumberInput';
+import { FormEvent, useCallback, useRef, useState } from 'react';
+import NumberInput from '@/components/common/input/NumberInput';
 import { useParams } from 'react-router-dom';
 import owner from '@/components/owner/Owner.module.scss';
 import { handleToastError } from '@/utils/handleToast';
 import { formElementValueCheck } from '@/utils/formElementValueCheck';
 import axios from 'axios';
 import { useOwner } from '@/hooks/useAPI';
+import DragDrap from '@/components/common/dragDrop/DragDrop';
+import { type } from 'os';
+import { transferJsonInFormData } from '@/utils/transferFormData';
 
 interface GymEditFormProps {
   openPostModal: () => void;
@@ -18,7 +21,7 @@ interface GymEditFormFormElementsType extends HTMLFormControlsCollection {
   phoneNumber: HTMLInputElement;
   address: HTMLInputElement;
   addressDetail: HTMLInputElement;
-  genderDivision: HTMLSelectElement;
+  genderDivision: HTMLInputElement;
 }
 
 interface GymEditFormType extends HTMLFormElement {
@@ -28,7 +31,17 @@ interface GymEditFormType extends HTMLFormElement {
 const GymEditForm = ({ openPostModal, roadAddress }: GymEditFormProps) => {
   const { ownerId } = useParams();
   const { refetchOwnerMydata } = useOwner();
+  const [profileImg, setProfileImg] = useState<File | null>(null);
+  const [backgroundImg, setBackgroundImg] = useState<File | null>(null);
   const gymEditFormRef = useRef<GymEditFormType>(null);
+
+  const handleProfileImg = useCallback((file: File) => {
+    setProfileImg(() => file);
+  }, []);
+
+  const handleBackgroundImg = useCallback((file: File) => {
+    setBackgroundImg(() => file);
+  }, []);
 
   const onSubmit = async (e: FormEvent<GymEditFormType>) => {
     e.preventDefault();
@@ -44,10 +57,9 @@ const GymEditForm = ({ openPostModal, roadAddress }: GymEditFormProps) => {
         businessNumber: businessNumber.value,
         phoneNumber: phoneNumber.value,
         address,
-        genderDivision: genderDivision.value,
       };
 
-      formElementValueCheck<GymEditFormType, any>({ currentTarget, data });
+      formElementValueCheck<GymEditFormType, typeof data>({ currentTarget, data });
       data.businessNumber = data.businessNumber.split('-').join('');
       data.phoneNumber = data.phoneNumber.split('-').join('');
 
@@ -55,19 +67,30 @@ const GymEditForm = ({ openPostModal, roadAddress }: GymEditFormProps) => {
         name: data.businessName,
         phoneNumber: data.phoneNumber,
         address: data.address,
-        genderDivision: data.genderDivision,
+        genderDivision: genderDivision.value,
         ownerId,
       });
 
-      await axios.post('/gyms', {
+      const formData = new FormData();
+
+      const request = {
         name: data.businessName,
         phoneNumber: data.phoneNumber,
         address: data.address,
-        genderDivision: data.genderDivision,
+        genderDivision: genderDivision.value,
         ownerId,
         businessIdentificationNumber: data.businessNumber,
-      });
+      };
 
+      formData.append('request', transferJsonInFormData(request));
+
+      if (profileImg !== null) {
+        formData.append('images', profileImg);
+      }
+
+      const response = await axios.post('/gyms', formData);
+
+      console.log(response);
       refetchOwnerMydata();
     } catch (error) {
       handleToastError(error);
@@ -76,13 +99,28 @@ const GymEditForm = ({ openPostModal, roadAddress }: GymEditFormProps) => {
 
   return (
     <form onSubmit={onSubmit} className={owner['gymEditForm']} ref={gymEditFormRef}>
+      <header>
+        <DragDrap
+          className={owner['background']}
+          id="gym-background-img"
+          imgFile={backgroundImg}
+          handleImgFile={handleBackgroundImg}
+        />
+        <DragDrap
+          className={owner['profile']}
+          id="gym-profile-img"
+          imgFile={profileImg}
+          handleImgFile={handleProfileImg}
+        />
+      </header>
       <div>
         <label htmlFor="businessName">법인명(단체명)</label>
         <input name="businessName" type="text" placeholder="OO 피트니스" />
       </div>
       <div>
-        <label htmlFor="businessNumber">사업자등록번호</label>
+        <label htmlFor="business-number">사업자등록번호</label>
         <NumberInput
+          id="business-number"
           name="businessNumber"
           maxLength={10}
           pattern={/(^\d{3})(\d{2})(\d{5}$)/}
@@ -90,8 +128,13 @@ const GymEditForm = ({ openPostModal, roadAddress }: GymEditFormProps) => {
         />
       </div>
       <div>
-        <label htmlFor="phoneNumber">사업장연락처</label>
-        <NumberInput name="phoneNumber" maxLength={11} pattern={/(^\d{2,3})(\d{4})(\d{4}$)/} />
+        <label htmlFor="gym-phone-number-input">사업장연락처</label>
+        <NumberInput
+          name="phoneNumber"
+          id="gym-phone-number-input"
+          maxLength={11}
+          pattern={/(^\d{2,3})(\d{4})(\d{4}$)/}
+        />
       </div>
       <div>
         <label htmlFor="address">주소</label>
@@ -110,13 +153,15 @@ const GymEditForm = ({ openPostModal, roadAddress }: GymEditFormProps) => {
       </div>
       <div>
         <div className={owner['genderDivision']}>
-          <label htmlFor="genderDivision">여성전용 헬스장여부</label>
-          <select name="genderDivision">
-            <option value="">선택</option>
-            <option value="UNISEX">공용</option>
-            <option value="FEMALE_ONLY">여성전용</option>
-            <option value="MALE_ONLY">남성전용</option>
-          </select>
+          <p>여성전용 헬스장여부</p>
+          <div>
+            <label htmlFor="UNISEX">남녀공용</label>
+            <input type="radio" name="genderDivision" value="UNISEX" id="UNISEX" defaultChecked />
+            <label htmlFor="FEMALE_ONLY">여성전용</label>
+            <input type="radio" name="genderDivision" value="FEMALE_ONLY" />
+            <label htmlFor="MALE_ONLY">남성전용</label>
+            <input type="radio" name="genderDivision" value="MALE_ONLY" />
+          </div>
         </div>
       </div>
       <footer>

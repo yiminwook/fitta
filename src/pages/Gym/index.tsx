@@ -1,3 +1,4 @@
+import IamPort from '@/components/common/imaport/IamPort';
 import MapSection from '@/components/gym/Mapsection';
 import Head from '@/components/layout/Head';
 import { useParams } from 'react-router-dom';
@@ -10,6 +11,7 @@ const Gym = () => {
     <>
       <Head title="GYM" />
       {gymId ? <div>{gymId}</div> : null}
+      <IamPort />
       <MapSection />
     </>
   );

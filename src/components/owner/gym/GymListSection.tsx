@@ -1,4 +1,4 @@
-import GymCardList from '@/components/common/GymCardList';
+import GymCardList from '@/components/common/card/GymCardList';
 import Pagination from '@/components/common/pagination/Pagination';
 import { useOwner } from '@/hooks/useAPI';
 
@@ -10,7 +10,7 @@ const GymListSection = () => {
   return (
     <section>
       <GymCardList gymData={ownerMyData.gymList} />
-      <Pagination totalPage={5} />
+      <Pagination totalPage={100} />
     </section>
   );
 };

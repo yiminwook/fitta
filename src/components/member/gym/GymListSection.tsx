@@ -1,6 +1,7 @@
-import GymCardList from '@/components/common/GymCardList';
+import GymCardList from '@/components/common/card/GymCardList';
 import Pagination from '@/components/common/pagination/Pagination';
-import { useMember, useOwner } from '@/hooks/useAPI';
+import { DummyGym } from '@/components/home/RecommandSection';
+import { useMember } from '@/hooks/useAPI';
 
 const GymListSection = () => {
   const { memberMyData } = useMember();
@@ -10,6 +11,7 @@ const GymListSection = () => {
 
   return (
     <section>
+      <GymCardList gymData={DummyGym} />
       <GymCardList gymData={[]} />
       <Pagination totalPage={5} />
     </section>

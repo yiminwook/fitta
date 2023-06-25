@@ -30,6 +30,10 @@ const RenderMapByAddress = ({ gymName, address, style }: RenderMapByAddress) => 
     script.defer = true;
     script.addEventListener('load', () => setIsLoad(() => true)); //kakao map script가 load된 뒤에 실행
     document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
   }, []);
 
   useEffect(() => {
@@ -55,6 +59,7 @@ const RenderMapByAddress = ({ gymName, address, style }: RenderMapByAddress) => 
         map.setCenter(new kakao.maps.LatLng(lat, lng));
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [map, isLoad]);
 
   return (
