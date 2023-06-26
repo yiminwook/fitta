@@ -14,13 +14,14 @@ interface CalenderProps {
   multiSelect?: boolean; //true일시 두개이상 선택
   selected: string[];
   setSelected: Dispatch<SetStateAction<CalenderProps['selected']>>;
+  userSelect?: boolean;
 }
 
 export interface CalendarCellType {
   date: Dayjs;
 }
 
-const Calendar = ({ multiSelect = false, selected, setSelected }: CalenderProps) => {
+const Calendar = ({ multiSelect = false, selected, setSelected, userSelect = true }: CalenderProps) => {
   const [current, setCurrent] = useState(dayjs());
 
   const [matrix, setMatrix] = useState<CalendarCellType[][]>([]);
@@ -42,6 +43,7 @@ const Calendar = ({ multiSelect = false, selected, setSelected }: CalenderProps)
   };
 
   const toggleSelected = (date: string) => {
+    if (userSelect === false) return;
     selected.includes(date) ? cancelSelected(date) : addSelected(date);
   };
 
