@@ -6,9 +6,11 @@ interface CalendarRowProps {
   rowIndex: number;
   nowYear: number;
   nowMonth: number;
+  selected: string[];
+  toggleSelect: (date: string) => void;
 }
 
-const CalendarRow = ({ rowArray, rowIndex, nowYear, nowMonth }: CalendarRowProps) => {
+const CalendarRow = ({ rowArray, rowIndex, nowYear, nowMonth, selected, toggleSelect }: CalendarRowProps) => {
   return (
     <tr>
       {rowArray.map((cell, index) => (
@@ -19,6 +21,8 @@ const CalendarRow = ({ rowArray, rowIndex, nowYear, nowMonth }: CalendarRowProps
           colIndex={index}
           nowYear={nowYear}
           nowMonth={nowMonth}
+          selected={selected}
+          toggleSelect={toggleSelect}
         />
       ))}
     </tr>
