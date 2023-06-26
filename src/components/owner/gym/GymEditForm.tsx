@@ -7,7 +7,6 @@ import { formElementValueCheck } from '@/utils/formElementValueCheck';
 import axios from 'axios';
 import { useOwner } from '@/hooks/useAPI';
 import DragDrap from '@/components/common/dragDrop/DragDrop';
-import { type } from 'os';
 import { transferJsonInFormData } from '@/utils/transferFormData';
 
 interface GymEditFormProps {
