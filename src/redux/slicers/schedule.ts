@@ -1,12 +1,10 @@
-import dayjs from '@/models/dayjs';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface ScheduleInitialStateType {
   step: 1 | 2 | 3 | 4;
   showGoBackModal: boolean;
-  startDate: string;
-  endDate: string;
-  days: (1 | 2 | 3 | 4 | 5 | 6 | 7)[]; //요일 배열
+  selected: string[];
+  schedule: string[];
   holidays: string[]; //휴일 배열
   staffId: null | number;
   price: number;
@@ -15,9 +13,8 @@ interface ScheduleInitialStateType {
 const scheduleInitialState: ScheduleInitialStateType = {
   step: 1,
   showGoBackModal: false,
-  startDate: dayjs().format('YYYY-MM-DD'),
-  endDate: dayjs().format('YYYY-MM-DD'),
-  days: [],
+  selected: [],
+  schedule: [],
   holidays: [],
   staffId: null,
   price: 0,
@@ -45,24 +42,11 @@ const scheduleSlice = createSlice({
       if (prev.step === 1) return prev;
       prev.step--;
     },
-    setStartDate: (prev, action) => {
-      if (typeof action.payload === 'string') {
-        prev.startDate = action.payload;
+    saveSchedule: (prev, action: PayloadAction<{ selected: string[]; schedule: string[] }>) => {
+      prev.selected = action.payload.selected;
+      if (action.payload.schedule.length >= 2) {
+        prev.schedule = action.payload.schedule;
       }
-    },
-    setEndDate: (prev, action) => {
-      if (typeof action.payload === 'string') {
-        prev.endDate = action.payload;
-      }
-    },
-    resetDays: (prev) => {
-      prev.days = [];
-    },
-    addDays: (prev, action) => {
-      prev.days.push(action.payload);
-    },
-    removeDays: (prev, action) => {
-      prev.days.filter((day) => day !== action.payload);
     },
     resetHolidays: (prev) => {
       prev.holidays = [];

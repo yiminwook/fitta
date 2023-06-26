@@ -8,7 +8,6 @@ import scheduleSlice from '@/redux/slicers/schedule';
 import { useDispatch, useSelector } from '@/redux/store';
 import { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 const EditSchedule = () => {
   const navigate = useNavigate();
@@ -22,14 +21,6 @@ const EditSchedule = () => {
   const resetSchedule = () => {
     dispatch(scheduleSlice.actions.reset());
   };
-
-  const nextStep = useCallback(() => {
-    dispatch(scheduleSlice.actions.nextStep());
-  }, []);
-
-  const prevStep = useCallback(() => {
-    dispatch(scheduleSlice.actions.prevStep());
-  }, []);
 
   const openGoBackModal = useCallback(() => {
     dispatch(scheduleSlice.actions.openGoBackModal());
@@ -63,16 +54,14 @@ const EditSchedule = () => {
       default:
         return <Step1 />;
     }
-  }, []);
+  }, [step]);
 
   return (
     <>
       <h1>step:: {step}</h1>
       <>{stepRender()}</>
       <div>
-        <button onClick={prevStep}>이전</button>
-        <button onClick={nextStep}>다음</button>
-        <button onClick={resetSchedule}>리셋</button>
+        <button onClick={resetSchedule}>처음으로 돌아가기</button>
       </div>
       {showGoBackModal ? <GoBackModal /> : null}
     </>
