@@ -7,28 +7,26 @@ import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 const GymListSection = () => {
-  const { ownerMyData } = useOwner();
+  const { reverseGymList } = useOwner();
   const [searchParams] = useSearchParams();
   const [gymList, setGymList] = useState<GymType[]>([]);
 
   const sliceGymList = (page: number) => {
     const start = (page - 1) * GYMCARD_LIST_LENGTH;
     const end = start + GYMCARD_LIST_LENGTH;
-    setGymList(() => ownerMyData?.gymList.slice(start, end) ?? []);
+    setGymList(() => reverseGymList.slice(start, end) ?? []);
   };
 
   const totalPage = useMemo(() => {
-    const gymListLength = ownerMyData?.gymList.length || 0;
+    const gymListLength = reverseGymList.length || 0;
     return Math.ceil(gymListLength / GYMCARD_LIST_LENGTH);
-  }, [ownerMyData]);
+  }, [reverseGymList]);
 
   useEffect(() => {
     const page = Number(searchParams.get('page')) || 1;
     sliceGymList(page);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
-
-  if (!ownerMyData) return null;
 
   return (
     <section>

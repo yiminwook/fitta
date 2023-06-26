@@ -51,8 +51,13 @@ export const useOwner = () => {
     refetchOwnerMyAllData();
   };
 
+  const reverseGymList = useMemo(() => {
+    return ownerMyData?.gymList.slice().reverse() || [];
+  }, [ownerMyData]);
+
   return {
     ownerMyAllData,
+    reverseGymList,
     errorOwnerMyAllData,
     isLoadingOwnerMyAllData,
     ownerMyData,

@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom';
 
 const OwnerGymSection = () => {
   const { myData } = useUser();
-  const { ownerMyAllData, ownerMyData } = useOwner();
+  const { ownerMyAllData, ownerMyData, reverseGymList } = useOwner();
 
   if (!(myData && ownerMyData)) return null;
 
   return (
     <section className={ownerHome['gymSection']}>
       <GymCardList
-        gymData={ownerMyData.gymList.slice(0, 6) ?? []}
+        gymData={reverseGymList.slice(0, 6) ?? []}
         linkElement={<Link to={`/${myData.role}/${myData.id}/gym`}>+더보기</Link>}
       />
     </section>
