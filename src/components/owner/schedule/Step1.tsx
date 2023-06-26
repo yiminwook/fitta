@@ -1,55 +1,53 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import Calendar from '@/components/common/calendar/Calendar';
 import scheduleSlice from '@/redux/slicers/schedule';
-import { useDispatch, useSelector } from '@/redux/store';
-import dayjs from 'dayjs';
-import { useCallback, useEffect, useState } from 'react';
+import { useDispatch } from '@/redux/store';
+import { ChangeEvent, useCallback, useState } from 'react';
+import schedule from '@/components/owner/schedule/Schedule.module.scss';
+import TextareaAutosize from 'react-textarea-autosize';
 import { toast } from 'react-toastify';
 
 const Step1 = () => {
   const dispatch = useDispatch();
-  const initialSelect = useSelector((state) => state.schedule.selected);
-  const [selected, setSelected] = useState<string[]>(initialSelect);
-  const [schedule, setSchedule] = useState<string[]>([]);
-
-  const generateSchedule = useCallback(() => {
-    const temp: string[] = [];
-    if (selected.length !== 2) return;
-    let start = dayjs(selected[0]);
-
-    while (start.format('YYYY-MM-DD') !== selected[1]) {
-      temp.push(start.format('YYYY-MM-DD'));
-      start = start.add(1, 'day');
-    }
-
-    temp.push(start.format('YYYY-MM-DD'));
-    setSchedule(() => temp);
-  }, [selected]);
+  const [description, setDescription] = useState('');
+  const [throttle, setThrottle] = useState(false);
 
   const saveSchedule = useCallback(() => {
-    console.log(selected);
-    if (selected.length < 2) {
-      toast.warning('시작일과 종료일을 선택해주세요');
-      return;
-    }
-    dispatch(scheduleSlice.actions.saveSchedule({ selected, schedule }));
     dispatch(scheduleSlice.actions.nextStep());
-  }, [selected, schedule]);
-
-  const prevStep = useCallback(() => {
-    dispatch(scheduleSlice.actions.prevStep());
   }, []);
 
-  useEffect(() => {
-    generateSchedule();
-  }, [selected]);
+  const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const lineCount = e.target.value.match(/[^\n]*\n[^\n]*/gi)?.length ?? 1;
+    const textCount = e.target.value.length;
+    if (textCount >= 700) {
+      if (throttle === true) return;
+      setThrottle(() => true);
+      toast.warning('700자까지 입력가능합니다.');
+      setTimeout(() => {
+        setThrottle(() => false);
+      }, 3000);
+      return;
+    }
+
+    if (lineCount >= 10) {
+      if (throttle === true) return;
+      setThrottle(() => true);
+      toast.warning('10줄까지 입력가능합니다.');
+      setTimeout(() => {
+        setThrottle(() => false);
+      }, 3000);
+      return;
+    }
+
+    setDescription(() => e.target.value);
+  };
 
   return (
-    <section>
-      <h2>시작일과 종료일을 선택해주세요</h2>
-      <Calendar selected={selected} setSelected={setSelected} />
+    <section className={schedule['step1']}>
+      <h2>제목과 설명을 입력해주세요</h2>
       <div>
-        <button onClick={prevStep}>이전</button>
+        <input type="text" />
+        <TextareaAutosize minRows={5} onChange={onChange} value={description} style={{ resize: 'none' }} />
+      </div>
+      <div>
         <button onClick={saveSchedule}>다음</button>
       </div>
     </section>

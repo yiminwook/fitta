@@ -3,6 +3,7 @@ import Step1 from '@/components/owner/schedule/Step1';
 import Step2 from '@/components/owner/schedule/Step2';
 import Step3 from '@/components/owner/schedule/Step3';
 import Step4 from '@/components/owner/schedule/Step4';
+import Step5 from '@/components/owner/schedule/Step5';
 import { useUser } from '@/hooks/useAPI';
 import scheduleSlice from '@/redux/slicers/schedule';
 import { useDispatch, useSelector } from '@/redux/store';
@@ -51,6 +52,8 @@ const EditSchedule = () => {
         return <Step3 />;
       case 4:
         return <Step4 />;
+      case 5:
+        return <Step5 />;
       default:
         return <Step1 />;
     }
@@ -60,9 +63,7 @@ const EditSchedule = () => {
     <>
       <h1>step:: {step}</h1>
       <>{stepRender()}</>
-      <div>
-        <button onClick={resetSchedule}>처음으로 돌아가기</button>
-      </div>
+      <div>{step === 1 ? null : <button onClick={resetSchedule}>처음으로 돌아가기</button>}</div>
       {showGoBackModal ? <GoBackModal /> : null}
     </>
   );
