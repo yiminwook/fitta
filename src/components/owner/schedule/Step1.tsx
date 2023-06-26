@@ -8,37 +8,49 @@ import { toast } from 'react-toastify';
 const Step1 = () => {
   const dispatch = useDispatch();
   const [description, setDescription] = useState('');
-  const [throttle, setThrottle] = useState(false);
+  const [isThrottle, setIsThrottle] = useState(false);
 
   const saveSchedule = useCallback(() => {
     dispatch(scheduleSlice.actions.nextStep());
   }, []);
 
-  const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const lineCount = e.target.value.match(/[^\n]*\n[^\n]*/gi)?.length ?? 1;
-    const textCount = e.target.value.length;
-    if (textCount >= 700) {
-      if (throttle === true) return;
-      setThrottle(() => true);
-      toast.warning('700자까지 입력가능합니다.');
-      setTimeout(() => {
-        setThrottle(() => false);
-      }, 3000);
-      return;
-    }
+  const onThrottle = useCallback(() => {
+    setIsThrottle(() => true);
+  }, []);
 
-    if (lineCount >= 10) {
-      if (throttle === true) return;
-      setThrottle(() => true);
-      toast.warning('10줄까지 입력가능합니다.');
-      setTimeout(() => {
-        setThrottle(() => false);
-      }, 3000);
-      return;
-    }
+  const clearThrottle = useCallback(() => {
+    setIsThrottle(() => false);
+  }, []);
 
-    setDescription(() => e.target.value);
-  };
+  const onChange = useCallback(
+    (e: ChangeEvent<HTMLTextAreaElement>) => {
+      const lineCount = e.target.value.match(/[^\n]*\n[^\n]*/gi)?.length ?? 1;
+      const textCount = e.target.value.length;
+      if (textCount >= 700) {
+        if (isThrottle === true) return;
+        onThrottle();
+        toast.warning('700자까지 입력가능합니다.');
+        setTimeout(() => {
+          clearThrottle();
+        }, 3000);
+        return;
+      }
+
+      if (lineCount >= 10) {
+        if (isThrottle === true) return;
+        onThrottle();
+        toast.warning('10줄까지 입력가능합니다.');
+        setTimeout(() => {
+          clearThrottle();
+        }, 3000);
+        return;
+      }
+
+      setDescription(() => e.target.value);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isThrottle],
+  );
 
   return (
     <section className={schedule['step1']}>
