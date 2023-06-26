@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 interface ScheduleInitialStateType {
   step: 1 | 2 | 3 | 4;
+  showGoBackModal: boolean;
   startDate: string;
   endDate: string;
   days: (1 | 2 | 3 | 4 | 5 | 6 | 7)[]; //요일 배열
@@ -13,6 +14,7 @@ interface ScheduleInitialStateType {
 
 const scheduleInitialState: ScheduleInitialStateType = {
   step: 1,
+  showGoBackModal: false,
   startDate: dayjs().format('YYYY-MM-DD'),
   endDate: dayjs().format('YYYY-MM-DD'),
   days: [],
@@ -28,6 +30,12 @@ const scheduleSlice = createSlice({
     //동기
     reset: () => {
       return scheduleInitialState;
+    },
+    openGoBackModal: (prev) => {
+      prev.showGoBackModal = true;
+    },
+    closeGoBackModal: (prev) => {
+      prev.showGoBackModal = false;
     },
     nextStep: (prev) => {
       if (prev.step === 4) return prev;

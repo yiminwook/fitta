@@ -1,3 +1,4 @@
+import GoBackModal from '@/components/owner/schedule/GoBackModal';
 import Step1 from '@/components/owner/schedule/Step1';
 import Step2 from '@/components/owner/schedule/Step2';
 import Step3 from '@/components/owner/schedule/Step3';
@@ -5,7 +6,7 @@ import Step4 from '@/components/owner/schedule/Step4';
 import { useUser } from '@/hooks/useAPI';
 import scheduleSlice from '@/redux/slicers/schedule';
 import { useDispatch, useSelector } from '@/redux/store';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -14,8 +15,13 @@ const EditSchedule = () => {
   const { myData } = useUser();
 
   const step = useSelector((state) => state.schedule.step);
+  const showGoBackModal = useSelector((state) => state.schedule.showGoBackModal);
 
   const dispatch = useDispatch();
+
+  const resetSchedule = () => {
+    dispatch(scheduleSlice.actions.reset());
+  };
 
   const nextStep = useCallback(() => {
     dispatch(scheduleSlice.actions.nextStep());
@@ -25,11 +31,26 @@ const EditSchedule = () => {
     dispatch(scheduleSlice.actions.prevStep());
   }, []);
 
-  useEffect(() => {
-    dispatch(scheduleSlice.actions.reset());
+  const openGoBackModal = useCallback(() => {
+    dispatch(scheduleSlice.actions.openGoBackModal());
   }, []);
 
-  const stepRender = () => {
+  const preventGoBack = () => {
+    openGoBackModal();
+    window.history.pushState(null, '', window.location.href);
+  };
+
+  useEffect(() => {
+    resetSchedule();
+    window.history.pushState(null, '', window.location.href);
+    window.addEventListener('popstate', preventGoBack);
+
+    return () => {
+      window.removeEventListener('popstate', preventGoBack);
+    };
+  }, []);
+
+  const stepRender = useCallback(() => {
     switch (step) {
       case 1:
         return <Step1 />;
@@ -42,7 +63,7 @@ const EditSchedule = () => {
       default:
         return <Step1 />;
     }
-  };
+  }, []);
 
   return (
     <>
@@ -51,8 +72,9 @@ const EditSchedule = () => {
       <div>
         <button onClick={prevStep}>이전</button>
         <button onClick={nextStep}>다음</button>
-        <button onClick={() => dispatch(scheduleSlice.actions.reset())}>리셋</button>
+        <button onClick={resetSchedule}>리셋</button>
       </div>
+      {showGoBackModal ? <GoBackModal /> : null}
     </>
   );
 };
