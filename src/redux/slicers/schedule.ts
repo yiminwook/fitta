@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface ScheduleInitialStateType {
-  step: 1 | 2 | 3 | 4;
+  step: 1 | 2 | 3 | 4 | 5;
   showGoBackModal: boolean;
   selected: string[];
   schedule: string[];
-  holidays: string[]; //휴일 배열
+  title: string;
+  description: string;
   staffId: null | number;
   price: number;
 }
@@ -15,7 +16,8 @@ const scheduleInitialState: ScheduleInitialStateType = {
   showGoBackModal: false,
   selected: [],
   schedule: [],
-  holidays: [],
+  title: '',
+  description: '',
   staffId: null,
   price: 0,
 };
@@ -35,7 +37,7 @@ const scheduleSlice = createSlice({
       prev.showGoBackModal = false;
     },
     nextStep: (prev) => {
-      if (prev.step === 4) return prev;
+      if (prev.step === 5) return prev;
       prev.step++;
     },
     prevStep: (prev) => {
@@ -43,19 +45,9 @@ const scheduleSlice = createSlice({
       prev.step--;
     },
     saveSchedule: (prev, action: PayloadAction<{ selected: string[]; schedule: string[] }>) => {
+      if (action.payload.selected.length < 2) throw new Error('must select start and end date');
       prev.selected = action.payload.selected;
-      if (action.payload.schedule.length >= 2) {
-        prev.schedule = action.payload.schedule;
-      }
-    },
-    resetHolidays: (prev) => {
-      prev.holidays = [];
-    },
-    addHolidays: (prev, action) => {
-      prev.holidays.push(action.payload);
-    },
-    removeHoliday: (prev, action) => {
-      prev.holidays.filter((day) => day !== action.payload);
+      prev.schedule = action.payload.schedule;
     },
     setStaff: (prev, action) => {
       if (action.payload === null || (typeof action.payload === 'number' && Number.isNaN(action.payload) === false)) {
