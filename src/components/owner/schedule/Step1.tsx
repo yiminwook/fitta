@@ -1,16 +1,21 @@
 import scheduleSlice from '@/redux/slicers/schedule';
-import { useDispatch } from '@/redux/store';
+import { useDispatch, useSelector } from '@/redux/store';
 import { ChangeEvent, useCallback, useState } from 'react';
 import schedule from '@/components/owner/schedule/Schedule.module.scss';
 import TextareaAutosize from 'react-textarea-autosize';
 import { toast } from 'react-toastify';
+import { useInput } from '@/hooks/useInput';
 
 const Step1 = () => {
   const dispatch = useDispatch();
-  const [description, setDescription] = useState('');
+  const initialTitle = useSelector((state) => state.schedule.title);
+  const initialDescription = useSelector((state) => state.schedule.description);
+  const [title, _setTitle, onChangeTitle] = useInput(initialTitle);
+  const [description, setDescription] = useState(initialDescription);
   const [isThrottle, setIsThrottle] = useState(false);
 
   const saveSchedule = useCallback(() => {
+    // dispatch
     dispatch(scheduleSlice.actions.nextStep());
   }, []);
 
@@ -54,14 +59,29 @@ const Step1 = () => {
 
   return (
     <section className={schedule['step1']}>
-      <h2>제목과 설명을 입력해주세요</h2>
-      <div>
-        <input type="text" />
-        <TextareaAutosize minRows={5} onChange={onChange} value={description} style={{ resize: 'none' }} />
+      <h2>스케줄 제목과 설명을 입력해주세요</h2>
+      <div className={schedule['interface']}>
+        <label htmlFor="schedule-title">제목</label>
+        <input
+          type="text"
+          id="schedule-title"
+          placeholder="제목을 입력해주세요"
+          value={title}
+          onChange={onChangeTitle}
+        />
+        <label htmlFor="schedule-description">상세정보</label>
+        <TextareaAutosize
+          minRows={1}
+          onChange={onChange}
+          value={description}
+          style={{ resize: 'none' }}
+          id="schedul-description"
+          placeholder="상세정보를 입력해주세요"
+        />
       </div>
-      <div>
+      <footer>
         <button onClick={saveSchedule}>다음</button>
-      </div>
+      </footer>
     </section>
   );
 };

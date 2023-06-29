@@ -1,3 +1,42 @@
 @import '@/styles/mixin.scss';
 @import '@/styles/var.scss';
 @import '@/styles/placeholder.scss';
+
+.step1 {
+  // background-color: red;
+  margin: 0 auto;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .interface {
+    label {
+      padding: 0.5rem;
+    }
+
+    input {
+      @extend %input-underline;
+      margin-bottom: 1rem;
+    }
+
+    textArea {
+      display: block;
+      @extend %input-underline;
+    }
+  }
+
+  footer {
+    display: flex;
+    justify-content: end;
+
+    button {
+      @extend %button-black;
+      padding: 0.5rem 1rem;
+    }
+  }
+}

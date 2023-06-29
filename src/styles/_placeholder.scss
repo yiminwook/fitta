@@ -34,11 +34,22 @@
   padding: 0.5rem;
   border: 1.5px solid map-get($colors, gray);
   border-radius: 10px;
+  background-color: inherit;
   @include box-shadow();
 
   // &::placeholder {
   //   text-align: center;
   // }
+}
+
+%input-underline {
+  padding: 0.5rem;
+  background-color: inherit;
+  border: none;
+  border-bottom: 1.5px solid map-get($colors, gray);
+  width: calc(100%);
+  box-sizing: border-box;
+  font-size: inherit;
 }
 
 %caution-letter {

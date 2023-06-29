@@ -44,6 +44,7 @@ ul,
 li,
 span,
 input,
+textarea,
 label,
 button {
   display: block;
@@ -80,10 +81,6 @@ button {
     color: red;
     cursor: default;
   }
-}
-
-input {
-  background-color: var(--fitta-background-color);
 }
 
 .blind {
