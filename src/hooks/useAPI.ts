@@ -3,7 +3,29 @@ import fetcher from '@/hooks/fetcher';
 import axios, { AxiosError } from 'axios';
 import { GymType, MyDataType, OwnerMyAllDataType, OwnerMyDataType } from '@/types/fittaApi';
 import { useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { handleToastError } from '@/utils/handleToast';
+
+export const useSignOut = () => {
+  const navigate = useNavigate();
+  const { refetchMyData } = useUser();
+
+  const signOut = async () => {
+    try {
+      const responese = await axios.post('/signout');
+      if (responese.status === 200) {
+        navigate('/');
+        toast.success('로그아웃 성공');
+        refetchMyData();
+      }
+    } catch (error) {
+      handleToastError(error);
+    }
+  };
+
+  return { signOut };
+};
 
 export const useUser = () => {
   const {
