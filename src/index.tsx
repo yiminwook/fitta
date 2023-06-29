@@ -38,6 +38,7 @@ export const app = (
 export const root = document.getElementById('root') as HTMLElement;
 
 if (root.hasChildNodes()) {
+  console.log('hydrate');
   hydrateRoot(root, app);
 } else {
   createRoot(root).render(app);

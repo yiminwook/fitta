@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable react-hooks/rules-of-hooks */
 const { alias, configPaths } = require('react-app-rewire-alias');
 const { override, useBabelRc, addWebpackPlugin, addWebpackExternals } = require('customize-cra');
