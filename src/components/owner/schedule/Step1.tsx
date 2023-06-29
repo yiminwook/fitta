@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import scheduleSlice from '@/redux/slicers/schedule';
 import { useDispatch, useSelector } from '@/redux/store';
-import { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeEvent, useCallback, useMemo, useState } from 'react';
 import schedule from '@/components/owner/schedule/Schedule.module.scss';
 import TextareaAutosize from 'react-textarea-autosize';
 import { toast } from 'react-toastify';
@@ -12,50 +13,40 @@ const Step1 = () => {
   const initialDescription = useSelector((state) => state.schedule.description);
   const [title, _setTitle, onChangeTitle] = useInput(initialTitle);
   const [description, setDescription] = useState(initialDescription);
-  const [isThrottle, setIsThrottle] = useState(false);
 
   const saveSchedule = useCallback(() => {
     // dispatch
     dispatch(scheduleSlice.actions.nextStep());
   }, []);
 
-  const onThrottle = useCallback(() => {
-    setIsThrottle(() => true);
-  }, []);
+  const onChange = useMemo(() => {
+    let timer: NodeJS.Timeout | null = null;
 
-  const clearThrottle = useCallback(() => {
-    setIsThrottle(() => false);
-  }, []);
-
-  const onChange = useCallback(
-    (e: ChangeEvent<HTMLTextAreaElement>) => {
+    return (e: ChangeEvent<HTMLTextAreaElement>) => {
       const lineCount = e.target.value.match(/[^\n]*\n[^\n]*/gi)?.length ?? 1;
       const textCount = e.target.value.length;
+
       if (textCount >= 700) {
-        if (isThrottle === true) return;
-        onThrottle();
+        if (timer) return;
         toast.warning('700자까지 입력가능합니다.');
-        setTimeout(() => {
-          clearThrottle();
+        timer = setTimeout(() => {
+          timer = null;
         }, 3000);
         return;
       }
 
       if (lineCount >= 10) {
-        if (isThrottle === true) return;
-        onThrottle();
+        if (timer) return;
         toast.warning('10줄까지 입력가능합니다.');
-        setTimeout(() => {
-          clearThrottle();
+        timer = setTimeout(() => {
+          timer = null;
         }, 3000);
         return;
       }
 
       setDescription(() => e.target.value);
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [isThrottle],
-  );
+    };
+  }, []);
 
   return (
     <section className={schedule['step1']}>

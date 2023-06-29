@@ -1,10 +1,11 @@
 import Head from '@/components/layout/Head';
-import { Navigate, Route, Routes, useParams } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom';
 import loadable from '@loadable/component';
 import OwnerSidebar from '@/components/owner/Sidebar';
 import owner from '@/components/owner/Owner.module.scss';
 import Loading from '@/components/common/loading/Loading';
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
+import { useUser } from '@/hooks/useAPI';
 
 const OwnerHome = loadable(() => import('@/pages/Owner/Home'));
 const OwnerGym = loadable(() => import('@/pages/Owner/Gym'));
@@ -17,6 +18,14 @@ const OwnerEditStaff = loadable(() => import('@/pages/Owner/Staff/Edit'));
 const OwnerEditMember = loadable(() => import('@/pages/Owner/Member/Edit'));
 
 const Owner = () => {
+  const { pathname } = useLocation();
+  const { ownerId } = useParams<{ ownerId: string }>();
+  const { myData } = useUser();
+
+  useEffect(() => {
+    // console.log(ownerId === myData?.id.toString());
+  }, [pathname]);
+
   return (
     <>
       <Head title="Owner" />
