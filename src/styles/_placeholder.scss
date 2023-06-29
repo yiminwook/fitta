@@ -50,6 +50,10 @@
   width: calc(100%);
   box-sizing: border-box;
   font-size: inherit;
+
+  &:focus-visible {
+    outline: none;
+  }
 }
 
 %caution-letter {

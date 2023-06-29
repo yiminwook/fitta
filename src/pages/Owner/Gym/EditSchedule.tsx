@@ -1,3 +1,4 @@
+import DisplayStep from '@/components/owner/schedule/DisplayStep';
 import GoBackModal from '@/components/owner/schedule/GoBackModal';
 import Step1 from '@/components/owner/schedule/Step1';
 import Step2 from '@/components/owner/schedule/Step2';
@@ -61,7 +62,7 @@ const EditSchedule = () => {
 
   return (
     <>
-      <h1>step:: {step}</h1>
+      <DisplayStep />
       <>{stepRender()}</>
       <div>{step === 1 ? null : <button onClick={resetSchedule}>처음으로 돌아가기</button>}</div>
       {showGoBackModal ? <GoBackModal /> : null}
