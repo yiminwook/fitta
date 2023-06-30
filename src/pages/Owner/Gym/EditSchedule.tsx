@@ -1,5 +1,6 @@
 import DisplayStep from '@/components/owner/schedule/DisplayStep';
 import GoBackModal from '@/components/owner/schedule/GoBackModal';
+import ResetModal from '@/components/owner/schedule/ResetModal';
 import Step1 from '@/components/owner/schedule/Step1';
 import Step2 from '@/components/owner/schedule/Step2';
 import Step3 from '@/components/owner/schedule/Step3';
@@ -17,16 +18,16 @@ const EditSchedule = () => {
 
   const step = useSelector((state) => state.schedule.step);
   const showGoBackModal = useSelector((state) => state.schedule.showGoBackModal);
-
+  const showResetModal = useSelector((state) => state.schedule.showResetModal);
   const dispatch = useDispatch();
 
-  const resetSchedule = () => {
-    dispatch(scheduleSlice.actions.reset());
+  const openResetModal = () => {
+    dispatch(scheduleSlice.actions.openResetModal());
   };
 
-  const openGoBackModal = useCallback(() => {
+  const openGoBackModal = () => {
     dispatch(scheduleSlice.actions.openGoBackModal());
-  }, []);
+  };
 
   const preventGoBack = () => {
     openGoBackModal();
@@ -34,13 +35,14 @@ const EditSchedule = () => {
   };
 
   useEffect(() => {
-    resetSchedule();
+    dispatch(scheduleSlice.actions.reset());
     window.history.pushState(null, '', window.location.href);
     window.addEventListener('popstate', preventGoBack);
 
     return () => {
       window.removeEventListener('popstate', preventGoBack);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const stepRender = useCallback(() => {
@@ -64,8 +66,9 @@ const EditSchedule = () => {
     <>
       <DisplayStep />
       <>{stepRender()}</>
-      <div>{step === 1 ? null : <button onClick={resetSchedule}>처음으로 돌아가기</button>}</div>
+      <div>{step === 1 ? null : <button onClick={openResetModal}>처음으로 돌아가기</button>}</div>
       {showGoBackModal ? <GoBackModal /> : null}
+      {showResetModal ? <ResetModal /> : null}
     </>
   );
 };

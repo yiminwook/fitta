@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface ScheduleInitialStateType {
   step: 1 | 2 | 3 | 4 | 5;
   showGoBackModal: boolean;
+  showResetModal: boolean;
   selected: string[];
   schedule: string[];
   title: string;
@@ -14,6 +15,7 @@ interface ScheduleInitialStateType {
 const scheduleInitialState: ScheduleInitialStateType = {
   step: 1,
   showGoBackModal: false,
+  showResetModal: false,
   selected: [],
   schedule: [],
   title: '',
@@ -30,7 +32,15 @@ const scheduleSlice = createSlice({
     reset: () => {
       return scheduleInitialState;
     },
+    openResetModal: (prev) => {
+      if (prev.showGoBackModal === true) return prev;
+      prev.showResetModal = true;
+    },
+    closeResetModal: (prev) => {
+      prev.showResetModal = false;
+    },
     openGoBackModal: (prev) => {
+      if (prev.showResetModal === true) return prev;
       prev.showGoBackModal = true;
     },
     closeGoBackModal: (prev) => {
@@ -43,6 +53,10 @@ const scheduleSlice = createSlice({
     prevStep: (prev) => {
       if (prev.step === 1) return prev;
       prev.step--;
+    },
+    saveTitleDesc: (prev, action: PayloadAction<{ title: string; description: string }>) => {
+      prev.title = action.payload.title;
+      prev.description = action.payload.description;
     },
     saveSchedule: (prev, action: PayloadAction<{ selected: string[]; schedule: string[] }>) => {
       if (action.payload.selected.length < 2) throw new Error('must select start and end date');

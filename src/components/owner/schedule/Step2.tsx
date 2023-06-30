@@ -12,7 +12,11 @@ const Step2 = () => {
   const initialSelect = useSelector((state) => state.schedule.selected);
   const [selected, setSelected] = useState<string[]>(initialSelect);
 
-  const saveSchedule = useCallback(() => {
+  const handlePrevStep = useCallback(() => {
+    dispatch(scheduleSlice.actions.prevStep());
+  }, []);
+
+  const handleNextStep = useCallback(() => {
     if (selected.length !== 2) {
       toast.warning('시작일과 종료일을 선택해주세요');
       return;
@@ -27,7 +31,8 @@ const Step2 = () => {
       <h2>시작일과 종료일을 선택해주세요</h2>
       <Calendar selected={selected} setSelected={setSelected} />
       <div>
-        <button onClick={saveSchedule}>다음</button>
+        <button onClick={handlePrevStep}>이전</button>
+        <button onClick={handleNextStep}>다음</button>
       </div>
     </section>
   );

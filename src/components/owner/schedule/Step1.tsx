@@ -14,11 +14,6 @@ const Step1 = () => {
   const [title, _setTitle, onChangeTitle] = useInput(initialTitle);
   const [description, setDescription] = useState(initialDescription);
 
-  const saveSchedule = useCallback(() => {
-    // dispatch
-    dispatch(scheduleSlice.actions.nextStep());
-  }, []);
-
   const onChange = useMemo(() => {
     let timer: NodeJS.Timeout | null = null;
 
@@ -48,6 +43,23 @@ const Step1 = () => {
     };
   }, []);
 
+  const handleNextStep = useCallback(() => {
+    const trimedTitle = title.trim();
+    const trimedDescription = description.trim();
+    if (!(trimedTitle && trimedDescription)) {
+      toast.warning('입력되지않은 정보가 있습니다.');
+      return;
+    }
+    dispatch(
+      scheduleSlice.actions.saveTitleDesc({
+        title: trimedTitle,
+        description: trimedDescription,
+      }),
+    );
+    dispatch(scheduleSlice.actions.nextStep());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [title, description]);
+
   return (
     <section className={schedule['step1']}>
       <h2>스케줄 제목과 설명을 입력해주세요</h2>
@@ -71,7 +83,7 @@ const Step1 = () => {
         />
       </div>
       <footer>
-        <button onClick={saveSchedule}>다음</button>
+        <button onClick={handleNextStep}>다음</button>
       </footer>
     </section>
   );
