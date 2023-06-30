@@ -9,6 +9,9 @@ const Step5 = () => {
   const dispatch = useDispatch();
   const initialSelected = useSelector((state) => state.schedule.schedule);
   const title = useSelector((state) => state.schedule.title);
+  const description = useSelector((state) => state.schedule.description);
+  const startTime = useSelector((state) => state.schedule.startTime);
+  const endTime = useSelector((state) => state.schedule.endTime);
   const price = useSelector((state) => state.schedule.price);
   const staff = useSelector((state) => state.schedule.staff);
   const [selected, setSelected] = useState(initialSelected);
@@ -21,13 +24,13 @@ const Step5 = () => {
   const handleNextStep = () => {
     // post to server
     console.log({
-      schedule: selected,
       title,
+      description,
+      startTime,
+      endTime,
+      schedule: selected,
       price,
-      staff,
-      ownerId,
-      gymId,
-      teamId: 0,
+      staffId: staff?.id,
     });
   };
 
@@ -36,8 +39,13 @@ const Step5 = () => {
       <h2>Step5. 입력된 정보를 확인하고 제출 해주세요</h2>
       <Calendar selected={selected} setSelected={setSelected} userSelect={false} />
       <div>{title}</div>
-      <div>{price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' 원'}</div>
+      <div>{description}</div>
       {staff ? <div>{staff.name}</div> : null}
+      <div>
+        <div>시작시간 {startTime}</div>
+        <div>종료시간 {endTime}</div>
+        <div>{price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' 원'}</div>
+      </div>
       <footer>
         <button className={schedule['prevButton']} onClick={handlePrevStep}>
           이전

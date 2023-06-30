@@ -14,7 +14,7 @@ const Step3 = () => {
   const [title, _setTitle, onChangeTitle] = useInput(initialTitle);
   const [description, setDescription] = useState(initialDescription);
 
-  const onChange = useMemo(() => {
+  const onChangeDescription = useMemo(() => {
     let timer: NodeJS.Timeout | null = null;
 
     return (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -79,7 +79,7 @@ const Step3 = () => {
         <label htmlFor="schedule-description">세부설명</label>
         <TextareaAutosize
           minRows={1}
-          onChange={onChange}
+          onChange={onChangeDescription}
           value={description}
           style={{ resize: 'none' }}
           id="schedul-description"

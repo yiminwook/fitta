@@ -5,6 +5,8 @@ interface ScheduleInitialStateType {
   step: 1 | 2 | 3 | 4 | 5;
   showGoBackModal: boolean;
   showResetModal: boolean;
+  startTime: string;
+  endTime: string;
   startEnd: string[];
   schedule: string[];
   title: string;
@@ -17,6 +19,8 @@ const scheduleInitialState: ScheduleInitialStateType = {
   step: 1,
   showGoBackModal: false,
   showResetModal: false,
+  startTime: '',
+  endTime: '',
   startEnd: [],
   schedule: [],
   title: '',
@@ -64,10 +68,15 @@ const scheduleSlice = createSlice({
       prev.startEnd = action.payload.startEnd;
       prev.schedule = action.payload.schedule;
     },
-    setStaffAndPrice: (prev, action: PayloadAction<{ staff: StaffType; price: string }>) => {
+    setStaffAndPriceAndTime: (
+      prev,
+      action: PayloadAction<{ staff: StaffType; price: string; startTime: string; endTime: string }>,
+    ) => {
       const price = Number(action.payload.price.split(',').join(''));
       if (Number.isNaN(price) === true) throw new Error('incurrect string price');
       prev.staff = action.payload.staff;
+      prev.startTime = action.payload.startTime;
+      prev.endTime = action.payload.endTime;
       prev.price = price;
     },
   },
