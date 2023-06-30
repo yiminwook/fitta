@@ -119,23 +119,45 @@
 
   .interface {
     .staff {
-      p {
-        display: inline-block;
-        margin-right: 1rem;
-        font-size: 1.5rem;
+      margin-bottom: 2rem;
+
+      & > div {
+        margin-bottom: 1rem;
+
+        label {
+          display: inline-block;
+          margin-right: 1rem;
+          font-size: 1.5rem;
+          vertical-align: middle;
+        }
+
+        button {
+          display: inline-block;
+          @extend %button-black;
+          padding: 0.5rem 0.5rem;
+        }
       }
-      button {
-        display: inline-block;
-        @extend %button-black;
-        padding: 0.5rem 0.5rem;
+
+      & > div:not(:first-child) {
+        font-size: 1.25rem;
       }
     }
+
     .price {
+      label {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
       input {
         @extend %input-underline;
       }
     }
   }
+}
+
+.step5 {
+  @extend %step-base;
 }
 
 .reset {

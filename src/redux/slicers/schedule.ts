@@ -5,7 +5,7 @@ interface ScheduleInitialStateType {
   step: 1 | 2 | 3 | 4 | 5;
   showGoBackModal: boolean;
   showResetModal: boolean;
-  selected: string[];
+  startEnd: string[];
   schedule: string[];
   title: string;
   description: string;
@@ -14,10 +14,10 @@ interface ScheduleInitialStateType {
 }
 
 const scheduleInitialState: ScheduleInitialStateType = {
-  step: 4,
+  step: 1,
   showGoBackModal: false,
   showResetModal: false,
-  selected: [],
+  startEnd: [],
   schedule: [],
   title: '',
   description: '',
@@ -55,24 +55,20 @@ const scheduleSlice = createSlice({
       if (prev.step === 1) return prev;
       prev.step--;
     },
-    saveTitleDesc: (prev, action: PayloadAction<{ title: string; description: string }>) => {
+    setTitleAndDesc: (prev, action: PayloadAction<{ title: string; description: string }>) => {
       prev.title = action.payload.title;
       prev.description = action.payload.description;
     },
-    saveSchedule: (prev, action: PayloadAction<{ selected: string[]; schedule: string[] }>) => {
-      if (action.payload.selected.length < 2) throw new Error('must select start and end date');
-      prev.selected = action.payload.selected;
+    setSchedule: (prev, action: PayloadAction<{ startEnd: string[]; schedule: string[] }>) => {
+      if (action.payload.startEnd.length < 2) throw new Error('must select start and end date');
+      prev.startEnd = action.payload.startEnd;
       prev.schedule = action.payload.schedule;
     },
-    setStaff: (prev, action: PayloadAction<StaffType>) => {
-      if (action.payload.id && action.payload.name) {
-        prev.staff = action.payload;
-      }
-    },
-    setPrice: (prev, action) => {
-      if (typeof action.payload === 'number' && Number.isNaN(action.payload) === false) {
-        prev.price = action.payload;
-      }
+    setStaffAndPrice: (prev, action: PayloadAction<{ staff: StaffType; price: string }>) => {
+      const price = Number(action.payload.price.split(',').join(''));
+      if (Number.isNaN(price) === true) throw new Error('incurrect string price');
+      prev.staff = action.payload.staff;
+      prev.price = price;
     },
   },
   extraReducers: (builder) => {

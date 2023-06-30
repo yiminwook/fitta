@@ -1,18 +1,46 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import Calendar from '@/components/common/calendar/Calendar';
-import { useCallback, useState } from 'react';
-import { useDispatch, useSelector } from '@/redux/store';
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import scheduleSlice from '@/redux/slicers/schedule';
+import { useDispatch, useSelector } from '@/redux/store';
+import { ChangeEvent, useCallback, useMemo, useState } from 'react';
 import schedule from '@/components/owner/schedule/Schedule.module.scss';
+import TextareaAutosize from 'react-textarea-autosize';
+import { toast } from 'react-toastify';
+import { useInput } from '@/hooks/useInput';
 
 const Step3 = () => {
   const dispatch = useDispatch();
-  const initialSelect = useSelector((state) => state.schedule.selected);
-  const initialSchedule = useSelector((state) => state.schedule.schedule);
-  const [selected, setSelected] = useState<string[]>(initialSchedule);
+  const initialTitle = useSelector((state) => state.schedule.title);
+  const initialDescription = useSelector((state) => state.schedule.description);
+  const [title, _setTitle, onChangeTitle] = useInput(initialTitle);
+  const [description, setDescription] = useState(initialDescription);
 
-  const resetSelect = useCallback(() => {
-    setSelected(() => initialSchedule);
+  const onChange = useMemo(() => {
+    let timer: NodeJS.Timeout | null = null;
+
+    return (e: ChangeEvent<HTMLTextAreaElement>) => {
+      const lineCount = e.target.value.match(/[^\n]*\n[^\n]*/gi)?.length ?? 1;
+      const textCount = e.target.value.length;
+
+      if (textCount >= 700) {
+        if (timer) return;
+        toast.warning('700자까지 입력가능합니다.');
+        timer = setTimeout(() => {
+          timer = null;
+        }, 3000);
+        return;
+      }
+
+      if (lineCount >= 10) {
+        if (timer) return;
+        toast.warning('10줄까지 입력가능합니다.');
+        timer = setTimeout(() => {
+          timer = null;
+        }, 3000);
+        return;
+      }
+
+      setDescription(() => e.target.value);
+    };
   }, []);
 
   const handlePrevStep = useCallback(() => {
@@ -20,16 +48,44 @@ const Step3 = () => {
   }, []);
 
   const handleNextStep = useCallback(() => {
-    dispatch(scheduleSlice.actions.saveSchedule({ selected: initialSelect, schedule: selected }));
+    const trimedTitle = title.trim();
+    const trimedDescription = description.trim();
+    if (!(trimedTitle && trimedDescription)) {
+      toast.warning('입력되지않은 정보가 있습니다.');
+      return;
+    }
+    dispatch(
+      scheduleSlice.actions.setTitleAndDesc({
+        title: trimedTitle,
+        description: trimedDescription,
+      }),
+    );
     dispatch(scheduleSlice.actions.nextStep());
-  }, [selected]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [title, description]);
 
   return (
-    <section className={schedule['step3']}>
-      <h2>Step3. 휴일과 보강일을 선택해주세요</h2>
-      <Calendar multiSelect={true} selected={selected} setSelected={setSelected} />
-      <button onClick={resetSelect}>선택 초기화</button>
-
+    <section className={schedule['step1']}>
+      <h2>Step3. 스케줄 제목과 세부설명을 입력해주세요</h2>
+      <div className={schedule['interface']}>
+        <label htmlFor="schedule-title">제목</label>
+        <input
+          type="text"
+          id="schedule-title"
+          placeholder="제목을 입력해주세요"
+          value={title}
+          onChange={onChangeTitle}
+        />
+        <label htmlFor="schedule-description">세부설명</label>
+        <TextareaAutosize
+          minRows={1}
+          onChange={onChange}
+          value={description}
+          style={{ resize: 'none' }}
+          id="schedul-description"
+          placeholder="상세정보를 입력해주세요"
+        />
+      </div>
       <footer>
         <button className={schedule['prevButton']} onClick={handlePrevStep}>
           이전

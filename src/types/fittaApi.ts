@@ -9,7 +9,7 @@ export interface EssentialBaseType {
 
 export interface PersonalBaseType extends EssentialBaseType {
   address: string | null;
-  bithdate: string;
+  birthdate: string;
   gender: GenderType;
 }
 

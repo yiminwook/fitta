@@ -1,35 +1,35 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Calendar from '@/components/common/calendar/Calendar';
-import scheduleSlice from '@/redux/slicers/schedule';
-import { useDispatch, useSelector } from '@/redux/store';
-import { generateSchedule } from '@/utils/generateSchedule';
 import { useCallback, useState } from 'react';
-import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from '@/redux/store';
+import scheduleSlice from '@/redux/slicers/schedule';
 import schedule from '@/components/owner/schedule/Schedule.module.scss';
 
 const Step2 = () => {
   const dispatch = useDispatch();
-  const initialSelect = useSelector((state) => state.schedule.selected);
-  const [selected, setSelected] = useState<string[]>(initialSelect);
+  const initialSelect = useSelector((state) => state.schedule.startEnd);
+  const initialSchedule = useSelector((state) => state.schedule.schedule);
+  const [selected, setSelected] = useState<string[]>(initialSchedule);
+
+  const resetSelect = useCallback(() => {
+    setSelected(() => initialSchedule);
+  }, []);
 
   const handlePrevStep = useCallback(() => {
     dispatch(scheduleSlice.actions.prevStep());
   }, []);
 
   const handleNextStep = useCallback(() => {
-    if (selected.length !== 2) {
-      toast.warning('시작일과 종료일을 선택해주세요');
-      return;
-    }
-    const schedule = generateSchedule(selected);
-    dispatch(scheduleSlice.actions.saveSchedule({ selected, schedule }));
+    dispatch(scheduleSlice.actions.setSchedule({ startEnd: initialSelect, schedule: selected }));
     dispatch(scheduleSlice.actions.nextStep());
   }, [selected]);
 
   return (
-    <section className={schedule['step2']}>
-      <h2>Step2. 시작일과 종료일을 선택해주세요</h2>
-      <Calendar selected={selected} setSelected={setSelected} />
+    <section className={schedule['step3']}>
+      <h2>Step2. 휴일과 보강일을 선택해주세요</h2>
+      <Calendar multiSelect={true} selected={selected} setSelected={setSelected} />
+      <button onClick={resetSelect}>선택 초기화</button>
+
       <footer>
         <button className={schedule['prevButton']} onClick={handlePrevStep}>
           이전
