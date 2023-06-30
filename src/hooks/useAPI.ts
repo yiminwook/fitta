@@ -59,11 +59,13 @@ export const useOwner = () => {
         queryKey: [`/owners/${myData?.id}`],
         queryFn: fetcher,
         enabled: !!myData,
+        suspense: false,
       },
       {
         queryKey: [`/owners/${myData?.id}/all-view`],
         queryFn: fetcher,
         enabled: !!myData,
+        suspense: false,
       },
     ],
   });

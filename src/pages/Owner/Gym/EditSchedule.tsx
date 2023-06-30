@@ -6,7 +6,6 @@ import Step2 from '@/components/owner/schedule/Step2';
 import Step3 from '@/components/owner/schedule/Step3';
 import Step4 from '@/components/owner/schedule/Step4';
 import Step5 from '@/components/owner/schedule/Step5';
-import { useUser } from '@/hooks/useAPI';
 import scheduleSlice from '@/redux/slicers/schedule';
 import { useDispatch, useSelector } from '@/redux/store';
 import { useCallback, useEffect } from 'react';
@@ -15,7 +14,6 @@ import schedule from '@/components/owner/schedule/Schedule.module.scss';
 
 const EditSchedule = () => {
   const navigate = useNavigate();
-  const { myData } = useUser();
 
   const step = useSelector((state) => state.schedule.step);
   const showGoBackModal = useSelector((state) => state.schedule.showGoBackModal);

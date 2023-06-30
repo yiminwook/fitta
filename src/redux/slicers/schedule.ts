@@ -1,3 +1,4 @@
+import { StaffType } from '@/types/fittaApi';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface ScheduleInitialStateType {
@@ -8,19 +9,19 @@ interface ScheduleInitialStateType {
   schedule: string[];
   title: string;
   description: string;
-  staffId: null | number;
+  staff: null | StaffType;
   price: number;
 }
 
 const scheduleInitialState: ScheduleInitialStateType = {
-  step: 1,
+  step: 4,
   showGoBackModal: false,
   showResetModal: false,
   selected: [],
   schedule: [],
   title: '',
   description: '',
-  staffId: null,
+  staff: null,
   price: 0,
 };
 
@@ -63,9 +64,9 @@ const scheduleSlice = createSlice({
       prev.selected = action.payload.selected;
       prev.schedule = action.payload.schedule;
     },
-    setStaff: (prev, action) => {
-      if (action.payload === null || (typeof action.payload === 'number' && Number.isNaN(action.payload) === false)) {
-        prev.staffId = action.payload;
+    setStaff: (prev, action: PayloadAction<StaffType>) => {
+      if (action.payload.id && action.payload.name) {
+        prev.staff = action.payload;
       }
     },
     setPrice: (prev, action) => {

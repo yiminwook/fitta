@@ -7,14 +7,12 @@ import SidebarButton from '@/components/layout/header/SidebarButton';
 import Sidebar from '@/components/layout/header/Sidebar';
 import { useUser } from '@/hooks/useAPI';
 import DarkMode from '@/components/layout/header/DarkMode';
-interface HeaderProps {}
 
-const Header = ({}: HeaderProps) => {
+const Header = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const { myData, refetchMyData } = useUser();
-  console.log('loginUserData >>>', myData);
+  const { myData } = useUser();
 
   const toggleSidebar = () => {
     setShowSidebar((pre) => !pre);
@@ -26,6 +24,7 @@ const Header = ({}: HeaderProps) => {
 
   useEffect(() => {
     closeSidebar();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [myData, pathname]);
 
   return (

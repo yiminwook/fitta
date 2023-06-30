@@ -16,6 +16,8 @@ export interface PersonalBaseType extends EssentialBaseType {
 export interface MemberType extends PersonalBaseType {}
 
 export interface StaffType extends PersonalBaseType {
+  id: number;
+  name: string;
   phoneNumber: string;
 }
 
@@ -25,7 +27,7 @@ export interface GymType extends EssentialBaseType {
   phoneNumber: string;
   genderDivision: GenderDivisionType;
   // members: MemberType[];
-  // staffs: StaffType[];
+  staffs: StaffType[];
 }
 
 export interface MyDataType extends EssentialBaseType {

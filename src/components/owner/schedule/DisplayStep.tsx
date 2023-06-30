@@ -5,7 +5,6 @@ import { useEffect, useRef } from 'react';
 const DisplayStep = () => {
   const step = useSelector((store) => store.schedule.step);
   const ref = useRef<HTMLDivElement>(null);
-  console.log(step);
 
   useEffect(() => {
     ref.current?.childNodes.forEach((el) => {

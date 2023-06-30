@@ -29,6 +29,8 @@
 }
 
 .staffModal {
+  @extend %schedule-modal-base;
+
   ul {
     li {
       padding: 0.5rem;
@@ -38,6 +40,12 @@
         background-color: var(--fitta-background-color-hover);
         color: var(--fitta-text-color-reverse);
       }
+    }
+  }
+
+  footer {
+    a {
+      padding: 0.5rem;
     }
   }
 }

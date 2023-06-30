@@ -1,7 +1,8 @@
 import Modal from '@/components/layout/Modal';
 import scheduleModal from '@/components/owner/schedule/ScheduleModal.module.scss';
 import { Dispatch, MouseEvent, SetStateAction } from 'react';
-import { Scrollbars } from 'react-custom-scrollbars';
+import StaffList from '@/components/owner/schedule/StaffList';
+import { StaffType } from '@/types/fittaApi';
 
 const STAFFS = [
   { id: 1, name: '트레이너1' },
@@ -26,28 +27,22 @@ const STAFFS = [
 
 interface StaffModalProps {
   onClose: () => void;
-  setStaffId: Dispatch<SetStateAction<number | null>>;
+  staffs: StaffType[];
+  setStaff: Dispatch<SetStateAction<StaffType | null>>;
 }
 
-const StaffModal = ({ onClose, setStaffId }: StaffModalProps) => {
-  const selectStaff = (e: MouseEvent<HTMLLIElement>) => {
+const StaffModal = ({ onClose, staffs, setStaff }: StaffModalProps) => {
+  const onClick = (e: MouseEvent<HTMLLIElement>) => {
     const target = e.target as EventTarget & HTMLLIElement;
-    if (!target || target.value === undefined || target.value === null) return;
-    setStaffId(() => target.value);
+    if (target.value === undefined || target.value === null) return;
+    const selectedStaff = { ...staffs[target.value] };
+    setStaff(() => selectedStaff);
     onClose();
   };
 
   return (
     <Modal title="트레이너 선택" onClose={onClose} className={scheduleModal['staffModal']}>
-      <Scrollbars autoHeight autoHeightMax={'20rem'}>
-        <ul>
-          {STAFFS.map(({ id, name }) => (
-            <li key={`staff-modal-li-${id}`} onClick={selectStaff} value={id}>
-              {name}
-            </li>
-          ))}
-        </ul>
-      </Scrollbars>
+      <StaffList staffs={staffs} onClick={onClick} />
     </Modal>
   );
 };
