@@ -28,12 +28,16 @@ const Step2 = () => {
 
   return (
     <section className={schedule['step2']}>
-      <h2>시작일과 종료일을 선택해주세요</h2>
+      <h2>Step2. 시작일과 종료일을 선택해주세요</h2>
       <Calendar selected={selected} setSelected={setSelected} />
-      <div>
-        <button onClick={handlePrevStep}>이전</button>
-        <button onClick={handleNextStep}>다음</button>
-      </div>
+      <footer>
+        <button className={schedule['prevButton']} onClick={handlePrevStep}>
+          이전
+        </button>
+        <button className={schedule['nextButton']} onClick={handleNextStep}>
+          다음
+        </button>
+      </footer>
     </section>
   );
 };

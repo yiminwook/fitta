@@ -80,7 +80,10 @@
   .sidebar {
     position: relative;
     padding: 0.5rem;
-    border-right: 1px solid map-get($colors, gray);
+
+    @include min-width(map-get($points, ss)) {
+      border-right: 1px solid map-get($colors, gray);
+    }
 
     & > a {
       font-weight: 600;

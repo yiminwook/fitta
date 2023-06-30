@@ -37,18 +37,18 @@
         }
 
         &.saturday {
-          background-color: #d0efff;
+          background-color: var(--fitta-calendar-saturday-color);
         }
 
         &.sunday {
-          background-color: #ffd6d6;
+          background-color: var(--fitta-calendar-sunday-color);
         }
       }
     }
   }
 
   tbody {
-    background-color: rgb(255, 251, 245);
+    background-color: var(--fitta-calendar-background-color);
     tr {
       td {
         position: relative;
@@ -59,7 +59,7 @@
         }
 
         &.surround {
-          background-color: rgba(155, 190, 202, 0.103);
+          background-color: var(--fitta-calendar-surround-color);
         }
 
         &.selected {

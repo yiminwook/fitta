@@ -62,7 +62,7 @@ const Step1 = () => {
 
   return (
     <section className={schedule['step1']}>
-      <h2>스케줄 제목과 설명을 입력해주세요</h2>
+      <h2>Step1. 스케줄 제목과 세부설명을 입력해주세요</h2>
       <div className={schedule['interface']}>
         <label htmlFor="schedule-title">제목</label>
         <input
@@ -72,7 +72,7 @@ const Step1 = () => {
           value={title}
           onChange={onChangeTitle}
         />
-        <label htmlFor="schedule-description">상세정보</label>
+        <label htmlFor="schedule-description">세부설명</label>
         <TextareaAutosize
           minRows={1}
           onChange={onChange}
@@ -83,7 +83,9 @@ const Step1 = () => {
         />
       </div>
       <footer>
-        <button onClick={handleNextStep}>다음</button>
+        <button className={schedule['nextButton']} onClick={handleNextStep}>
+          다음
+        </button>
       </footer>
     </section>
   );

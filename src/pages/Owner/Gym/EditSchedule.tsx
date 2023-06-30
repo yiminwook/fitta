@@ -11,6 +11,7 @@ import scheduleSlice from '@/redux/slicers/schedule';
 import { useDispatch, useSelector } from '@/redux/store';
 import { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import schedule from '@/components/owner/schedule/Schedule.module.scss';
 
 const EditSchedule = () => {
   const navigate = useNavigate();
@@ -66,7 +67,9 @@ const EditSchedule = () => {
     <>
       <DisplayStep />
       <>{stepRender()}</>
-      <div>{step === 1 ? null : <button onClick={openResetModal}>처음으로 돌아가기</button>}</div>
+      <div className={schedule['reset']}>
+        {step === 1 ? null : <button onClick={openResetModal}>처음으로 돌아가기</button>}
+      </div>
       {showGoBackModal ? <GoBackModal /> : null}
       {showResetModal ? <ResetModal /> : null}
     </>

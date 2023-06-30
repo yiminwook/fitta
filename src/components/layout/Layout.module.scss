@@ -41,7 +41,7 @@
     width: 90%;
     transform: translateX(-50%) translateY(-60%);
     border-radius: 5px;
-    background-color: map-get($colors, white);
+    background-color: var(--fitta-background-color);
     display: flex;
     flex-direction: column;
     cursor: default;
@@ -58,6 +58,7 @@
       border-bottom: 1px solid map-get($colors, gray);
 
       h1 {
+        line-height: 2rem;
         font-size: 1.5rem;
         font-weight: 600;
       }

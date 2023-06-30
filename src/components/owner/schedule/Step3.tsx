@@ -15,22 +15,29 @@ const Step3 = () => {
     setSelected(() => initialSchedule);
   }, []);
 
-  const prevStep = useCallback(() => {
+  const handlePrevStep = useCallback(() => {
     dispatch(scheduleSlice.actions.prevStep());
   }, []);
 
-  const saveSchedule = useCallback(() => {
+  const handleNextStep = useCallback(() => {
     dispatch(scheduleSlice.actions.saveSchedule({ selected: initialSelect, schedule: selected }));
     dispatch(scheduleSlice.actions.nextStep());
   }, [selected]);
 
   return (
     <section className={schedule['step3']}>
-      <h2>휴일을 선택해주세요</h2>
+      <h2>Step3. 휴일과 보강일을 선택해주세요</h2>
       <Calendar multiSelect={true} selected={selected} setSelected={setSelected} />
-      <button onClick={prevStep}>이전</button>
-      <button onClick={saveSchedule}>다음</button>
-      <button onClick={resetSelect}>다시선택</button>
+      <button onClick={resetSelect}>선택 초기화</button>
+
+      <footer>
+        <button className={schedule['prevButton']} onClick={handlePrevStep}>
+          이전
+        </button>
+        <button className={schedule['nextButton']} onClick={handleNextStep}>
+          다음
+        </button>
+      </footer>
     </section>
   );
 };

@@ -7,7 +7,12 @@
   --fitta-text-color-light: #c0c0c0;
   --fitta-text-color-reverse: #fff;
   --fitta-background-color: #fff;
+  --fitta-background-color-hover: #5c5c5c;
   --fitta-box-shadow-color: #7c7c7c;
+  --fitta-calendar-background-color: #fffbf5;
+  --fitta-calendar-surround-color: #9bbeca1a;
+  --fitta-calendar-saturday-color: #d0efff;
+  --fitta-calendar-sunday-color: #ffd6d6;
 }
 
 :root[color-mode='dark'] {
@@ -15,7 +20,12 @@
   --fitta-text-color-light: #c0c0c0;
   --fitta-text-color-reverse: #1c1c1c;
   --fitta-background-color: #5c5c5c;
+  --fitta-background-color-hover: #fff;
   --fitta-box-shadow-color: #fff;
+  --fitta-calendar-background-color: #979797;
+  --fitta-calendar-surround-color: #313131e3;
+  --fitta-calendar-saturday-color: #58a9d1;
+  --fitta-calendar-sunday-color: #b96060;
 }
 
 html,

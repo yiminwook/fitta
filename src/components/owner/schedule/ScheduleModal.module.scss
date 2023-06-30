@@ -1,0 +1,43 @@
+@import '@/styles/mixin.scss';
+@import '@/styles/var.scss';
+@import '@/styles/placeholder.scss';
+
+%schedule-modal-base {
+  h2 {
+    height: 8rem;
+    font-size: 1.5rem;
+    @include flex-center();
+  }
+
+  footer {
+    display: flex;
+    flex-direction: row-reverse;
+
+    button {
+      @extend %button-black;
+      padding: 0.5rem 1rem;
+    }
+  }
+}
+
+.goBackModal {
+  @extend %schedule-modal-base;
+}
+
+.resetModal {
+  @extend %schedule-modal-base;
+}
+
+.staffModal {
+  ul {
+    li {
+      padding: 0.5rem;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: var(--fitta-background-color-hover);
+        color: var(--fitta-text-color-reverse);
+      }
+    }
+  }
+}
