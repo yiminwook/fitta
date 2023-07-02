@@ -1,0 +1,90 @@
+@import '@/styles/mixin.scss';
+@import '@/styles/var.scss';
+@import '@/styles/placeholder.scss';
+
+.calendar {
+  text-align: center;
+
+  td {
+    cursor: default;
+    padding: 0.5rem;
+  }
+
+  thead {
+    position: relative;
+    &::before {
+      top: 0;
+      left: 0;
+      display: block;
+      position: absolute;
+      content: '';
+      background-color: #4e5180;
+      width: 100%;
+      height: 3px;
+    }
+
+    tr {
+      td {
+        button {
+          display: flex;
+          border-radius: 5px;
+          padding: 0.25rem;
+          @include transition(background-color, 0.1s, ease);
+
+          &:hover {
+            background-color: rgba(0.2, 0.2, 0.2, 0.2);
+          }
+        }
+
+        &.saturday {
+          background-color: var(--fitta-calendar-saturday-color);
+        }
+
+        &.sunday {
+          background-color: var(--fitta-calendar-sunday-color);
+        }
+      }
+    }
+  }
+
+  tbody {
+    background-color: var(--fitta-calendar-background-color);
+    tr {
+      td {
+        position: relative;
+        cursor: pointer;
+        @include transition(scale, 0.1s, ease);
+        &:hover {
+          scale: 1.2;
+        }
+
+        &.surround {
+          background-color: var(--fitta-calendar-surround-color);
+        }
+
+        &.selected {
+          &::before {
+            @include absolute-center();
+            content: '';
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+            background-color: #4e51804f;
+          }
+        }
+
+        &.start {
+          &::before {
+            background-color: #1cf7ff4f;
+          }
+        }
+
+        &.end {
+          &::before {
+            background-color: #11ff304f;
+          }
+        }
+      }
+    }
+  }
+}

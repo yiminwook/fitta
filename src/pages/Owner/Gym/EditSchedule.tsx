@@ -1,40 +1,50 @@
+import DisplayStep from '@/components/owner/schedule/DisplayStep';
+import GoBackModal from '@/components/owner/schedule/GoBackModal';
+import ResetModal from '@/components/owner/schedule/ResetModal';
 import Step1 from '@/components/owner/schedule/Step1';
 import Step2 from '@/components/owner/schedule/Step2';
 import Step3 from '@/components/owner/schedule/Step3';
 import Step4 from '@/components/owner/schedule/Step4';
-import { useUser } from '@/hooks/useAPI';
-import { useEffect, useState } from 'react';
+import Step5 from '@/components/owner/schedule/Step5';
+import scheduleSlice from '@/redux/slicers/schedule';
+import { useDispatch, useSelector } from '@/redux/store';
+import { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import schedule from '@/components/owner/schedule/Schedule.module.scss';
 
 const EditSchedule = () => {
-  const [step, setStep] = useState(1);
   const navigate = useNavigate();
-  const { myData } = useUser();
 
-  const resetStep = () => {
-    setStep(() => 1);
+  const step = useSelector((state) => state.schedule.step);
+  const showGoBackModal = useSelector((state) => state.schedule.showGoBackModal);
+  const showResetModal = useSelector((state) => state.schedule.showResetModal);
+  const dispatch = useDispatch();
+
+  const openResetModal = () => {
+    dispatch(scheduleSlice.actions.openResetModal());
   };
 
-  const beforeStep = () => {
-    if (step === 1) return;
-    setStep((pre) => pre + 1);
+  const openGoBackModal = () => {
+    dispatch(scheduleSlice.actions.openGoBackModal());
   };
 
-  const afterStep = () => {
-    const { role, id } = myData!;
-    if (step === 4) {
-      toast.success('등록되었습니다.');
-      navigate(`/${role}/${id}`);
-    }
-    setStep((pre) => pre + 1);
+  const preventGoBack = () => {
+    openGoBackModal();
+    window.history.pushState(null, '', window.location.href);
   };
 
   useEffect(() => {
-    resetStep();
+    dispatch(scheduleSlice.actions.reset());
+    window.history.pushState(null, '', window.location.href);
+    window.addEventListener('popstate', preventGoBack);
+
+    return () => {
+      window.removeEventListener('popstate', preventGoBack);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const stepRender = () => {
+  const stepRender = useCallback(() => {
     switch (step) {
       case 1:
         return <Step1 />;
@@ -44,19 +54,22 @@ const EditSchedule = () => {
         return <Step3 />;
       case 4:
         return <Step4 />;
+      case 5:
+        return <Step5 />;
       default:
         return <Step1 />;
     }
-  };
+  }, [step]);
 
   return (
     <>
-      <h1>step:: {step}</h1>
+      <DisplayStep />
       <>{stepRender()}</>
-      <div>
-        <button onClick={beforeStep}>이전</button>
-        <button onClick={afterStep}>다음</button>
+      <div className={schedule['reset']}>
+        {step === 1 ? null : <button onClick={openResetModal}>처음으로 돌아가기</button>}
       </div>
+      {showGoBackModal ? <GoBackModal /> : null}
+      {showResetModal ? <ResetModal /> : null}
     </>
   );
 };

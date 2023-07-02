@@ -9,6 +9,7 @@ export const useInput = (
       if (!e.target) return;
       setInpuValue(() => e.target.value);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [inputValue],
   );
 

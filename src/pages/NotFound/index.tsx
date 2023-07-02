@@ -11,9 +11,6 @@ const NotFound = () => {
     <section>
       <h1>NotFound</h1>
       <time>{dayjs().format('YY MM DD ddd A hh:mm')}</time>
-      <section>
-        <Calendar />
-      </section>
       <br />
       <button onClick={() => setIsShow(true)}>모달 오픈 버튼</button>
       <br />

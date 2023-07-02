@@ -59,6 +59,7 @@ const GymCard = ({ name, id, address, currentIndex, lastContentsIndex, handleInf
         </div>
         <div>
           <h3>{name}</h3>
+          <span>{id}</span>
           <ul>
             <li>{address}</li>
           </ul>

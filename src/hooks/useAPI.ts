@@ -3,7 +3,29 @@ import fetcher from '@/hooks/fetcher';
 import axios, { AxiosError } from 'axios';
 import { GymType, MyDataType, OwnerMyAllDataType, OwnerMyDataType } from '@/types/fittaApi';
 import { useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { handleToastError } from '@/utils/handleToast';
+
+export const useSignOut = () => {
+  const navigate = useNavigate();
+  const { refetchMyData } = useUser();
+
+  const signOut = async () => {
+    try {
+      const responese = await axios.post('/signout');
+      if (responese.status === 200) {
+        navigate('/');
+        toast.success('로그아웃 성공');
+        refetchMyData();
+      }
+    } catch (error) {
+      handleToastError(error);
+    }
+  };
+
+  return { signOut };
+};
 
 export const useUser = () => {
   const {
@@ -37,11 +59,13 @@ export const useOwner = () => {
         queryKey: [`/owners/${myData?.id}`],
         queryFn: fetcher,
         enabled: !!myData,
+        suspense: false,
       },
       {
         queryKey: [`/owners/${myData?.id}/all-view`],
         queryFn: fetcher,
         enabled: !!myData,
+        suspense: false,
       },
     ],
   });
@@ -51,8 +75,13 @@ export const useOwner = () => {
     refetchOwnerMyAllData();
   };
 
+  const reverseGymList = useMemo(() => {
+    return ownerMyData?.gymList.slice().reverse() || [];
+  }, [ownerMyData]);
+
   return {
     ownerMyAllData,
+    reverseGymList,
     errorOwnerMyAllData,
     isLoadingOwnerMyAllData,
     ownerMyData,

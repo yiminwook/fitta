@@ -10,6 +10,20 @@
 6. yarn dev //locahost:3000서버 구동
 
 ```
+esLint 오류 발생시
+
+.eslintrc 파일로 이동
+
+아래와 같이변경
+{
+  "extends": ["react-app", "react-app/jest"],
+  "rules": {
+    "no-unused-vars": "off",
+  }
+}
+```
+
+```
 
 > env
 

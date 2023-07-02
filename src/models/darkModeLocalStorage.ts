@@ -9,7 +9,7 @@ class DarkModeLocalStorage {
 
   /** os prefer color scheme 반환 */
   private getWindowColorScheme() {
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false;
   }
 
   /** this.data를 localStorage에 저장 */

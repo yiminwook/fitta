@@ -1,0 +1,197 @@
+@import '@/styles/mixin.scss';
+@import '@/styles/var.scss';
+@import '@/styles/placeholder.scss';
+
+.displayStep {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.5rem 1.5rem;
+
+  @include min-width(map-get($points, ss)) {
+    justify-content: start;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  div {
+    position: relative;
+    padding: 0.5rem 1rem;
+    color: var(--fitta-text-color-default);
+    z-index: 0;
+
+    &::before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) skew(30deg);
+      width: 3rem;
+      height: 1.5rem;
+      background-color: var(--fitta-text-color-reverse);
+      transition: all 2s ease;
+      content: '';
+      z-index: -1;
+      @include box-shadow(--fitta-background-color);
+    }
+  }
+
+  .current {
+    color: var(--fitta-text-color-reverse);
+
+    &::before {
+      background-color: var(--fitta-text-color-default);
+    }
+  }
+}
+
+%step-base {
+  margin: 0 auto;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  @include min-width(map-get($points, md)) {
+    padding: 1rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    word-break: keep-all;
+  }
+
+  input {
+    @extend %input-underline;
+  }
+
+  table {
+    margin: auto;
+
+    @include min-width(map-get($points, md)) {
+      scale: 1.5;
+      margin: 3rem auto;
+    }
+  }
+
+  footer {
+    display: flex;
+    justify-content: end;
+    gap: 1rem;
+    margin-top: 3rem;
+
+    @include min-width(map-get($points, md)) {
+      padding: 0 3rem;
+    }
+
+    .prevButton {
+      @extend %button-white;
+      padding: 0.5rem 1rem;
+    }
+
+    .nextButton {
+      @extend %button-black;
+      padding: 0.5rem 1rem;
+    }
+  }
+}
+
+.step1 {
+  @extend %step-base;
+
+  .interface {
+    label {
+      padding: 0.5rem;
+    }
+
+    input {
+      margin-bottom: 4rem;
+    }
+
+    textArea {
+      display: block;
+      @extend %input-underline;
+    }
+  }
+}
+
+.step2 {
+  @extend %step-base;
+}
+
+.step3 {
+  @extend %step-base;
+}
+
+.step4 {
+  @extend %step-base;
+
+  .staff {
+    & > div {
+      margin-bottom: 1rem;
+
+      label {
+        display: inline-block;
+        margin-right: 1rem;
+        font-size: 1.5rem;
+        vertical-align: middle;
+      }
+
+      button {
+        display: inline-block;
+        @extend %button-black;
+        padding: 0.5rem 0.5rem;
+      }
+    }
+
+    & > div:not(:first-child) {
+      font-size: 1.25rem;
+    }
+  }
+
+  .interface {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 2rem;
+
+    & > div {
+      label {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      input {
+        width: 8rem;
+        height: 2.5rem;
+
+        &:not([type='time']) {
+          width: 18rem;
+          text-align: right;
+        }
+      }
+    }
+  }
+}
+
+.step5 {
+  @extend %step-base;
+}
+
+.reset {
+  display: flex;
+  flex-direction: row-reverse;
+
+  @include min-width(map-get($points, md)) {
+    padding: 0 3.75rem;
+
+    button {
+      padding: 0.5rem;
+      color: var(--fitta-text-color-light);
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: var(--fitta-text-color-default);
+      }
+    }
+  }
+}
